@@ -1,11 +1,11 @@
 /*
-jquery.animate-enhanced plugin v1.11
+jquery.animate-enhanced plugin v1.05
 ---
 http://github.com/benbarnett/jQuery-Animate-Enhanced
 http://benbarnett.net
 @benpbarnett
 ---
-Copyright (c) 2013 Ben Barnett
+Copyright (c) 2012 Ben Barnett
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,24 +44,6 @@ Usage (exactly the same as it would be normally):
 	});
 
 Changelog:
-	1.11 (08/07/2014):
-	- Merging PR #157, fixes #156 for animating with 0
-
-	1.10 (09/04/2014):
-		- Merging PR #153 Don't try to restore values which weren't saved
-
-	1.09 (09/04/2014):
-		- Merging PR #154 Added support of AMD and Node.js (via browserify) environments
-
-	1.08 (16/01/2014):
-		- Merging PR #147 Access element tag name appropriately
-
-	1.07 (06/12/2013):
-		- Merging PR #139 Other units, beside '%' should also be kept
-
-	1.06 (06/12/2013):
-		- Merging PR #140 Do not change a user defined display mode for elements, after show/hide
-
 	1.05 (14/08/2013):
 		- Merging PR #124 fix for highcharts clash. Thanks @bensonc!
 
@@ -85,7 +67,7 @@ Changelog:
 
 	0.99 (5/12/2012):
 		- PR #109 Added support for list-item nodes. FadeIn on tags was omitting the list-style support. (thx @SeanCannon)
-
+		
 	0.98 (12/11/2012):
 		- Merging pull request #106 thx @gboysko - checking for ownerDocument before using getComputedStyle
 
@@ -98,7 +80,7 @@ Changelog:
 	0.96 (20/08/2012):
 		- Fixes for context, all elements returned as context (issue #84)
 		- Reset position with leaveTransforms !== true fixes (issue #93)
-
+		
 
 	0.95 (20/08/2012):
 		- If target opacity == current opacity, pass back to jquery native to get callback firing (#94)
@@ -258,22 +240,7 @@ Changelog:
 		- Less need for leaveTransforms = true due to better position detections
 */
 
-(function (window, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], function(){
-            return factory.apply(window, arguments);
-        });
-    } else if (typeof module === 'object' && module.exports) {
-        // NodeJS.
-        module.exports = factory.call(window, require('jquery'));
-    } else {
-        // Browser globals
-        factory.call(window, window.jQuery);
-    }
-}(typeof global === 'object' ? global : this, function (jQuery) {
-    var originalAnimateMethod = jQuery.fn.animate,
-        originalStopMethod = jQuery.fn.stop;
+(function(jQuery, originalAnimateMethod, originalStopMethod) {
 
 	// ----------
 	// Plugin variables
@@ -352,7 +319,7 @@ Changelog:
 		// this is a nasty fix, but we check for prop == 'd' to see if we're dealing with SVG, and abort
 		if (prop == "d") return;
 		if (!_isValidElement(e)) return;
-
+		
 		var parts = rfxnum.exec(val),
 			start = e.css(prop) === 'auto' ? 0 : e.css(prop),
 			cleanCSSStart = typeof start == 'string' ? _cleanValue(start) : start,
@@ -369,31 +336,8 @@ Changelog:
 		// deal with shortcuts
 		if (!parts && val == 'show') {
 			cleanStart = 1;
-			if (hidden) {
-				elem = e[0];
-				if (elem.style) {
-					display = elem.style.display;
-
-					// Reset the inline display of this element to learn if it is
-					// being hidden by cascaded rules or not
-					if (!jQuery._data(elem, 'olddisplay') && display === 'none') {
-						display = elem.style.display = '';
-					}
-
-					// Set elements which have been overridden with display: none
-					// in a stylesheet to whatever the default browser style is
-					// for such an element
-					if ( display === '' && jQuery.css(elem, 'display') === 'none' ) {
-						jQuery._data(elem, 'olddisplay', _domElementVisibleDisplayValue(elem.tagName));
-					}
-
-					if (display === '' || display === 'none') {
-						elem.style.display = jQuery._data(elem, 'olddisplay') || '';
-					}
-				}
-				e.css('opacity', 0);
-			}
-		} else if (!parts && val == 'hide') {
+			if (hidden) e.css({'display': _domElementVisibleDisplayValue(e.context.tagName), 'opacity': 0});
+		} else if (!parts && val == "hide") {
 			cleanStart = 0;
 		}
 
@@ -404,7 +348,7 @@ Changelog:
 			if (parts[1]) end = ((parts[1] === '-=' ? -1 : 1) * end) + parseInt(cleanStart, 10);
 
 			// check for unit  as per issue #69
-			if (parts[3] && parts[3] != 'px') end = end + parts[3];
+			if (parts[3] == '%') end = end + '%';
 
 			return end;
 		} else {
@@ -618,7 +562,7 @@ Changelog:
 		}
 
 		var is = jQuery.inArray(prop, cssTransitionProperties) > -1;
-		if ((prop == 'width' || prop == 'height' || prop == 'opacity' || prop == 'left' || prop == 'top') && (parseFloat(value) === parseFloat(element.css(prop)))) is = false;
+		if ((prop == 'width' || prop == 'height' || prop == 'opacity') && (parseFloat(value) === parseFloat(element.css(prop)))) is = false;
 		return is;
 	}
 
@@ -633,8 +577,8 @@ Changelog:
 		toggle3DByDefault: function() {
 			return use3DByDefault = !use3DByDefault;
 		},
-
-
+		
+		
 		/**
 			@public
 			@name toggleDisabledByDefault
@@ -743,11 +687,8 @@ Changelog:
 						}
 						if (isTranslatable && typeof selfCSSData.meta !== 'undefined') {
 							for (var j = 0, dir; (dir = directions[j]); ++j) {
-								var stashedProperty = selfCSSData.meta[dir + '_o'];
-								if (typeof stashedProperty !== 'undefined') {
-									restore[dir] = stashedProperty + valUnit;
-									jQuery(this).css(dir, restore[dir]);
-								}
+								restore[dir] = selfCSSData.meta[dir + '_o'] + valUnit;
+								jQuery(this).css(dir, restore[dir]);
 							}
 						}
 					}
@@ -761,17 +702,7 @@ Changelog:
 
 					// if we used the fadeOut shortcut make sure elements are display:none
 					if (prop.opacity === 'hide') {
-						elem = self[0];
-						if (elem.style) {
-							display = jQuery.css(elem, 'display');
-
-							if (display !== 'none' && !jQuery._data(elem, 'olddisplay')) {
-								jQuery._data(elem, 'olddisplay', display);
-							}
-							elem.style.display = 'none';
-						}
-
-						self.css('opacity', '');
+						self.css({'display': 'none', 'opacity': ''});
 					}
 
 					// run the main callback function
@@ -958,4 +889,4 @@ Changelog:
 
 		return this;
 	};
-}));
+})(jQuery, jQuery.fn.animate, jQuery.fn.stop);

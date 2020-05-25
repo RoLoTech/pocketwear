@@ -1,54 +1,142 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>MobileUI</title>
-    <meta name="viewport" content="minimal-ui, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="format-detection" content="telephone=no" />
+	<title>MobileUI template</title>
+	<meta name="viewport" content="minimal-ui, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<meta name="format-detection" content="telephone=no" />
 
 	<link rel="stylesheet" href="mobileui/mui.min.css" type="text/css">
-    <link rel="stylesheet" href="custom/custom.css" type="text/css">
+	<link rel="stylesheet" href="custom/custom.css" type="text/css">
 
-    <script src="cordova.js"></script>	
- 	<!--<script src="vendors/fastclick.min.js" type="text/javascript"></script>-->    	 	
-    	
-    <script src="vendors/jquery.min.js" type="text/javascript"></script>
-    <script src="vendors/jquery.animate-enhanced.js" type="text/javascript"></script>
-	<script src="vendors/jqwait/jquery.wait.min.js" type="text/javascript"></script>   
-    <!-- <script src="vendors/iscroll-min.js" type="text/javascript"></script> -->
-    
+	<script src="phonegap.js"></script>
+	<script src="vendors/fastclick.min.js" type="text/javascript"></script>
+
+	<script src="vendors/jquery.min.js" type="text/javascript"></script>
+	<script src="vendors/jquery.animate-enhanced.js" type="text/javascript"></script>
+	<script src="vendors/jqwait/jquery.wait.min.js" type="text/javascript"></script>
+	<script src="vendors/iscroll-min.js" type="text/javascript"></script>
+
 	<script src="mobileui/mui.min.js" type="text/javascript"></script>
-    <script src="custom/custom.js" type="text/javascript"></script>
+	<script src="custom/custom.js" type="text/javascript"></script>
 </head>
+
 <body>
 	<!-- Main wrapper. Importantly, think carefully before you change it or remove it. Do not recommend it. -->
 	<!-- Main wrapper. Importante, Piénselo bien antes de cambiarlo o quitarlo. No se lo recomiendo. -->
-    <div id="mui-screen" class="mui-viewport">
+	<div id="mui-screen" class="mui-viewport">
 		<div id="mui-screen-page" class="mui-page">
 			<!-- Ddefault viewport. Do not remove. It will make your life simpler and happy. -->
 			<!-- ViewPort por defecto. No lo elimines. Hará tu vida más simple y feliz. -->
 			<div id="mui-viewport" class="mui-viewport">
-			
-				<div id='template-page' class="mui-page">
+
+				<div id='home-page' class="mui-page">
 					<div class="mui-page-header">
-						<!-- <a class="mui-backarrow" href="#"></a>  -->
-						<!-- Logo and/or title -->	
+						<div class="mui-page-logo"></div>
+						<a class="mui-headmenu" href="#"></a>
 					</div>
 					<div class="mui-page-body mui-scrollable" id="home-body">
-						<div id='click'> <!-- important for scroll! -->
-							<!-- your code here -->
+						<div>
+							<!-- important for scroll! -->
+							<ul class="tilesWrap">
+								<li>
+									<h2 id="title1">01</h2>
+									<h3>Blindspot</h3>
+									<p>
+										Blindspot is an American crime drama television series created by Martin Gero,
+										starring Sullivan Stapleton and Jaimie Alexander.
+									</p>
+									<button>Read more</button>
+								</li>
+								<li>
+									<h2 id="title2">02</h2>
+									<h3>Peaky Blinders</h3>
+									<p>
+										Peaky Blinders is a British period crime drama television series created by Steven Knight. 
+									</p>
+									<button>Read more</button>
+								</li>
+								<li>
+									<h2 id="title3">03</h2>
+									<h3>Sherlock</h3>
+									<p>
+										Sherlock is a British crime television series based on Sir Arthur Conan Doyle's Sherlock Holmes detective stories.
+									</p>
+									<button>Read more</button>
+								</li>
+								<li>
+									<h2 id="title4">04</h2>
+									<h3>The Good Place</h3>
+									<p>
+										The Good Place is an American fantasy comedy television series created by Michael Schur.
+									</p>
+									<button>Read more</button>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
-				
+
+				<div id='template-page' class="mui-page">
+					<div class="mui-page-header">
+						<div class='mui-page-title'>Page 2</div>
+						<a class="mui-headmenu" href="#"></a>
+					</div>
+					<div class="mui-page-body mui-scrollable" id="second-body">
+						<div>
+							<!-- important for scroll! -->
+							<div style="margin: 50px; text-align: center; color: #808080;">
+								<!-- inline style only for demo -->
+								Press back arrow or swipe to the right
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<!-- Copy the code of "template-page" to add more pages -->
 				<!-- Copie el código de template-plage para agregar más páginas -->
-				
-			</div>	
-		</div>	
-    </div>
+
+			</div>
+
+			<!-- Optional.Toolbar out of mui-viewport to be omnipresent. Remove if not needed. -->
+			<!-- Opcional. Barra de herramientas fuera de mui-viewport para ser omnipresente. Elimínalo si no lo necesitas. -->
+			<div class="mui-tabbar" id="footer">
+				<ul class="mui-tabbar-list">
+					<li class="mui-tabbar-button"><a href="#" id="tabbar-button1">Home</a></li>
+					<li class="mui-tabbar-button"><a href="#" id="tabbar-button2">Tab2</a></li>
+					<li class="mui-tabbar-button"><a href='#' id="tabbar-button3">Tab3</a></li>
+					<li class="mui-tabbar-button"><a href="#" id="tabbar-button4">Tab4</a></li>
+					<li class="mui-tabbar-button"><a href="#" id="tabbar-button5">Tab5</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- mui-screen level panel -->
+		<!-- Panel a nivel de mui-screen -->
+		<div id="menu-panel" class="mui-panel">
+			<div class="mui-panel-body">
+				<div>
+					<ul id='menuoptions' class='mui-list side-menu-list' >
+						<li><a class="side-menu" id='option1' href="#">Home</a></li>
+						<li><a class="side-menu" id='option2' href="#">My Collection</a></li>
+						<li><a class="side-menu" id='option3' href="#">Browse Titles</a></li>
+						<li><a class="side-menu" id='option4' href="#">Page 4</a></li>
+						<li><a class="side-menu" id='option5' href="#">Page 5</a></li>
+						<li><a class="side-menu" id='option5' href="#">Page 6</a></li>
+						<li><a class="side-menu" id='option5' href="#">Page 7</a></li>
+						<li><a class="side-menu" id='option5' href="#">Page 8</a></li>
+						<li><a class="side-menu" id='option5' href="#">Page 9</a></li>
+						<li><a class="side-menu" id='option5' href="#">Page 10</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </body>
+
 </html>

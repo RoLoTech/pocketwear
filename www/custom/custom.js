@@ -12,7 +12,8 @@ function deviceReady() {
 		}
 		
 		//Install events, clicks, resize, online/offline, etc. 
-		installEvents();
+		installEvents();	//Events installation using MobileUI's method.
+		//isntallEvents2();	//Example of traditional events installation.
 
 		//Hide splash.
 		//Ocultar el splash.
@@ -27,8 +28,8 @@ function deviceReady() {
 }
 
 /**
- * Install events, clicks, resize, online/offline, etc., on differents HTML elements.
- * Instala eventos, clicks, resize, online/offline, etc., sobre diferentes elementos HTML.
+ * Example of Install events using MobileUI methods, clicks, resize, online/offline, etc., on differents HTML elements.
+ * Ejemplo de instalación de eventos usando métodos de MobileUI, clicks, resize, online/offline, etc., sobre diferentes elementos HTML.
  */
 function installEvents() {
 	
@@ -46,7 +47,7 @@ function installEvents() {
 			ev: 'click',	//If not, it assumes click
 			fn: () => {
 				//ATTENTION!!! mui.screen instead of mui.viewport
-				mui.screen.showPanel("menu-panel", "SLIDE_RIGHT");
+				mui.screen.showPanel("menu-panel", "SLIDE_LEFT");
 				return false;
 			}
 		},
@@ -80,7 +81,7 @@ function installEvents() {
 		{
 			id: '#tabbar-button1',
 			fn: () => {
-				mui.viewport.showPage("home-page", "DEF");
+				mui.alert("tab 1","Selected");
 				return false;
 			}
 		},
@@ -160,6 +161,15 @@ function installEvents() {
 	]);
 }
 
+/**
+ /**
+ * Example of traditional event installation, clicks, resize, online/offline, etc., on differents HTML elements.
+ * Use the previous or this. Delete the unused one.
+ * 
+ * Ejemplo de instalación de eventos en forma tradicional, clicks, resize, online/offline, etc., sobre diferentes elementos HTML.
+ * Usar el anterior o este. Elimine el que no use.
+ * @returns
+ */
 function installEvents2() {
 
 	//It's a good idea to consider what happens when the device is switched on and off the internet.

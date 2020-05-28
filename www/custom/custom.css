@@ -25,7 +25,7 @@ a {
 }
 /*Page sample  ------------------------------------------------------------------ */
 .mui-page-header {
-	background-color: rgb(247, 214, 224);
+	background-color: #FF9970;
 }
 .mui-page-logo {
 	width: 40px;
@@ -59,7 +59,7 @@ a {
 	font-family: FontAwesome;
 	content: '\f104';
 	font-size: 35px;
-	color: #1A7EFA;
+	color: #fff;
 }
 /* Menu button ------------------------------------------------------------------ */
 .mui-headmenu {
@@ -76,7 +76,7 @@ a {
 	height: 48px;
 	position: absolute;
 	bottom: 0px;
-	background-color: rgb(247, 214, 224);
+	background-color: #FF9970;
 }
 .mui-tabbar ul {
 	padding: 0px;

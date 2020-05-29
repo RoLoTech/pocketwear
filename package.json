@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RoLoTech/pocketwear#readme",
   "dependencies": {
+    "cordova": "^9.0.0",
     "express": "^4.17.1"
   }
 }

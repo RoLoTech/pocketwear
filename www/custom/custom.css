@@ -47,20 +47,6 @@ a {
 .mui-page-body-content {
 	padding: 10px;
 }
-/* GoBack button ------------------------------------------------------------------ */
-.mui-backarrow {
-	position: absolute;
-	top: 4px;
-	left: 10px;
-	width: 40px;
-	height: 37px;
-}
-.mui-backarrow:after {
-	font-family: FontAwesome;
-	content: '\f104';
-	font-size: 35px;
-	color: #fff;
-}
 /* Menu button ------------------------------------------------------------------ */
 .mui-headmenu {
 	position: absolute;

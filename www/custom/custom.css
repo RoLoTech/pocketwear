@@ -131,21 +131,21 @@ a {
 }
 
 .flex-item:nth-of-type(1) {
-	background-image: url("images/home-icon-100.png");
+	background-image: url("images/home-solid.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 }
 
 .flex-item:nth-of-type(2) {
-	background-image: url("images/search-icon-100.png");
+	background-image: url("images/search-solid.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 }
 
 .flex-item:nth-of-type(3) {
-	background-image: url("images/camera-icon-100.png");
+	background-image: url("images/camera-solid.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -159,7 +159,7 @@ a {
 }
 
 .flex-item:nth-of-type(5) {
-	background-image: url("images/social-network-icon-100.png");
+	background-image: url("images/users-solid.svg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;

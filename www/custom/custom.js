@@ -132,7 +132,7 @@ function installEvents() {
 		//MobileUI viewport specific event.
 		{
 			vp: mui.viewport,
-			ev: 'swiperight',
+			ev: 'swiperight', // todo Gabuarab pa mi se parte con este
 			fn: () => {
 				if (!mui.viewport.panelIsOpen()) {
 					mui.history.back();
@@ -242,7 +242,7 @@ function installEvents2() {
 	//Evento de desplazamiento tactil. Buenisimo para una óptima experiencia de usuario en App!
 	mui.viewport.on("swiperight", function (currentPageId, originalTarget, event, startX, startY, endX, endY) {
 		if (!mui.viewport.panelIsOpen()) {
-			mui.history.back();
+			mui.history.back(); // todo Gabuaarb o aca
 		}
 	});
 }

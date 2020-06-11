@@ -17,17 +17,17 @@ a {
 	color: inherit;
 	display: block;
 }
-/* Add tabbar need bottom space  ------------------------------------------------------------------ */
-/* Agregar tabbar neceista espacio abajo */
+
 #mui-viewport {
 	top: 0px;
 	bottom: 48px; 
 }
-/*Page sample  ------------------------------------------------------------------ */
+
 .mui-page-header {
 	background-color: #ffffff;
 	box-shadow: 0px 1px 20px 4px rgba(0,0,0,0.50);
 }
+
 .mui-page-logo {
 	width: 40px;
 	height: 40px;
@@ -36,18 +36,17 @@ a {
 	background-image: url(images/logo-40.png);
 	background-repeat: no-repeat;
 }
+
 .mui-page-title {
 	width: 100%;
     text-align: center;
     font-size: 20px;
 }
 
-/* .mui-page-body {} */
-
 .mui-page-body-content {
 	padding: 10px;
 }
-/* Menu button ------------------------------------------------------------------ */
+
 .mui-headmenu {
 	position: absolute;
 	top: 10px;
@@ -56,7 +55,7 @@ a {
 	height: 37px;
 	text-align: right;
 }
-/* Tabbar sample ------------------------------------------------------------------ */
+
 .mui-tabbar {
 	width: 100%;
 	height: 48px;
@@ -71,12 +70,14 @@ a {
 	margin: 0px;
 	list-style: none;
 }
+
 .mui-tabbar ul li {
 	width: 20%;
 	height: 48px;
 	float: left;
 	position: relative;
 }
+
 .mui-tabbar ul li:before {
 	font-family: 'FontAwesome';
 	font-size: 27px;
@@ -90,8 +91,6 @@ a {
 	margin-top: 5px;
 }
 
-/* .mui-tabbar ul li:hover:before {} */
-
 .mui-tabbar ul li a {
 	font-size: 12px;
     text-align: center;
@@ -103,7 +102,6 @@ a {
     padding-top: 33px;
 }
 
-/* Menu sample ------------------------------------------------------------------ */
 #menu-panel {
 	top: 0px;
 	left: 100%;
@@ -113,6 +111,7 @@ a {
 	background-color: #575757;
 	color: #fff;
 }
+
 .mui-panel-header {
 	display: none;
 }
@@ -215,9 +214,9 @@ a {
 	color: white;
 	perspective: 1000px;
 	transform-origin: center;
-  }
+}
 
-  .icon-cards__content {
+.icon-cards__content {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -225,11 +224,13 @@ a {
 	transform-style: preserve-3d;
 	transform: translateZ(-30vw) rotateY(0);
 	animation: carousel 5s infinite cubic-bezier(0.77, 0, 0.175, 1) forwards;
-  }
-  .icon-cards__content.step-animation {
+}
+
+.icon-cards__content.step-animation {
 	animation: carousel 8s infinite steps(1) forwards;
-  }
-  .icon-cards__item {
+}
+
+.icon-cards__item {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -242,29 +243,33 @@ a {
 	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
 	transform-origin: center;
-  }
-  .icon-cards__item:nth-child(1) {
+}
+
+.icon-cards__item:nth-child(1) {
 	background-image: url("images/tshirt-1.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 	transform: rotateY(0) translateZ(35vw);
-  }
-  .icon-cards__item:nth-child(2) {
+}
+
+.icon-cards__item:nth-child(2) {
 	background-image: url("images/tshirt-2.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 	transform: rotateY(120deg) translateZ(35vw);
-  }
-  .icon-cards__item:nth-child(3) {
+}
+
+.icon-cards__item:nth-child(3) {
 	background-image: url("images/tshirt-3.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 	transform: rotateY(240deg) translateZ(35vw);
-  }
-  @keyframes carousel {
+}
+
+@keyframes carousel {
 	0%, 17.5% {
 	  transform: translateZ(-35vw) rotateY(0);
 	}
@@ -277,16 +282,17 @@ a {
 	82.5%, 100% {
 	  transform: translateZ(-35vw) rotateY(-360deg);
 	}
-  }
+}
 
-  .mui-page-body > body {
+.mui-page-body > body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	background: #110F15;
-  }
-  .checkbox {
+}
+
+.checkbox {
 	position: relative;
 	margin-top: 2rem;
 	font-size: 0.9rem;
@@ -295,11 +301,13 @@ a {
 	color: #F47956;
 	transition: color 0.3s ease;
 	user-select: none;
-  }
-  .checkbox:hover {
+}
+
+.checkbox:hover {
 	color: #F7A95A;
-  }
-  .checkbox__checkbox {
+}
+
+.checkbox__checkbox {
 	position: relative;
 	top: 0;
 	width: 1.0625rem;
@@ -310,8 +318,9 @@ a {
 	vertical-align: middle;
 	transition: background 0.1s ease;
 	cursor: pointer;
-  }
-  .checkbox__checkbox::after {
+}
+
+.checkbox__checkbox::after {
 	content: '';
 	position: absolute;
 	top: 1px;
@@ -324,22 +333,26 @@ a {
 	border-bottom: 2px solid #fff;
 	transition: all 0.3s ease;
 	transition-delay: 0.15s;
-  }
-  .checkbox__label {
+}
+
+.checkbox__label {
 	margin-left: 5px;
 	vertical-align: middle;
 	cursor: pointer;
-  }
-  .checkbox > input:checked ~ .checkbox__checkbox {
+}
+
+.checkbox > input:checked ~ .checkbox__checkbox {
 	border-color: transparent;
 	background: #F47956;
 	animation: jelly 0.6s ease;
-  }
-  .checkbox > input:checked ~ .checkbox__checkbox:after {
+}
+
+.checkbox > input:checked ~ .checkbox__checkbox:after {
 	opacity: 1;
 	transform: rotate(45deg) scale(1);
-  }
-  @keyframes jelly {
+}
+
+@keyframes jelly {
 	from {
 	  transform: scale(1, 1);
 	}
@@ -363,7 +376,6 @@ a {
 	}
 }
   
-
 .grid {
 	/* Grid Fallback */
 	display: flex;
@@ -407,9 +419,9 @@ a {
 }
 
 #tienda-1 {
-	  background-image: url("images/zara-logo.png");
-	  background-size: contain;
-	  background-repeat: no-repeat;
+	background-image: url("images/zara-logo.png");
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 #tienda-2 {
@@ -483,13 +495,15 @@ a {
 }
 		
 #last-seen-header {
-	margin-top: 0px;
+	margin-top: 10px;
 	margin-left: 5%;
-	font-size: 10vh;
+	font-size: xx-large;
 }
 
 #collection-page-title {
 	margin-top: auto;
+	height: 100%;
+	font-size: xx-large;
 }
 
 .details-container {
@@ -499,7 +513,7 @@ a {
 }
 
 .details-title {
-	font-size: xx-large;
+	font-size: x-large;
 	width: 100%;
 	height: 50%;
 	padding-left: 5%;
@@ -512,3 +526,146 @@ a {
 	height: 50%;
 	padding-left: 5%;
 }
+
+#end-of-recent {
+	color: #575756;
+	text-align: center;
+	width: 100%;
+	height: 20px;
+}
+
+#filter-section {	
+	width: 100%;
+	height:20%;
+	position: absolute;
+	z-index: 1000;
+}
+
+#filter-title {
+	font-size: xx-large;
+	padding-left: 5%;
+}
+
+.filter-dropdown {
+	border: 1px solid #e6e6e6;
+	background-color: #f7f7f7;
+	border-radius: 13px;
+	width: 40%;
+	height: 50%;
+	font-size: large;
+}
+
+.select-box {
+	position: relative;
+	display: block;
+	width: 100%;
+	padding: 5% 10%;
+	font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+	font-size: 18px;
+	color: #60666d;
+	width: 50%;
+}
+
+@media (min-width: 768px) {
+	.select-box {
+	  width: 70%;
+	}
+}
+  
+@media (min-width: 992px) {
+	.select-box {
+	  width: 50%;
+	}
+}
+  
+@media (min-width: 1200px) {
+	.select-box {
+	  width: 30%;
+	}
+}
+  
+.select-box__current {
+	position: relative;
+	box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	outline: none;
+}
+  
+.select-box__current:focus + .select-box__list {
+	opacity: 1;
+	animation-name: none;
+}
+  
+.select-box__current:focus + .select-box__list .select-box__option {
+	cursor: pointer;
+}
+  
+.select-box__current:focus .select-box__icon {
+	transform: translateY(-50%) rotate(180deg);  
+}
+  
+.select-box__icon {
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	transform: translateY(-50%);
+	width: 20px;
+	opacity: 0.3;
+	transition: 0.2s ease;
+}
+  
+.select-box__value {
+	display: flex;
+}
+  
+.select-box__input {
+	display: none;
+}
+  
+.select-box__input:checked + .select-box__input-text {
+	display: block;
+}
+  
+.select-box__input-text {
+	display: none;
+	width: 100%;
+	margin: 0;
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 13px;
+  
+}
+  
+.select-box__list {
+	position: absolute;
+	width: 100%;
+	padding: 0;
+	list-style: none;
+	opacity: 0;
+	animation-name: HideList;
+	animation-duration: 0.5s;
+	animation-delay: 0.5s;
+	animation-fill-mode: forwards;
+	animation-timing-function: step-start;
+	box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+}
+  
+.select-box__option {
+	display: block;
+	padding: 15px;
+	background-color: #fff;
+}
+  
+.select-box__option:hover, .select-box__option:focus {
+	color: #546c84;
+	background-color: #fbfbfb;  
+}
+  
+@keyframes HideList {
+	from {
+	  transform: scaleY(1);
+	}
+	to {
+	  transform: scaleY(0);
+	}
+}  

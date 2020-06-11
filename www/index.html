@@ -14,24 +14,18 @@
 	<link rel="stylesheet" href="custom/custom.css" type="text/css">
 
 	<script src="cordova.js"></script>
-	<!--<script src="vendors/fastclick.min.js" type="text/javascript"></script>-->
 
 	<script src="vendors/jquery.min.js" type="text/javascript"></script>
 	<script src="vendors/jquery.animate-enhanced.js" type="text/javascript"></script>
 	<script src="vendors/jqwait/jquery.wait.min.js" type="text/javascript"></script>
-	<!-- <script src="vendors/iscroll-min.js" type="text/javascript"></script> -->
 
 	<script src="mobileui/mui.min.js" type="text/javascript"></script>
 	<script src="custom/custom.js" type="text/javascript"></script>
 </head>
 
 <body>
-	<!-- Main wrapper. Importantly, think carefully before you change it or remove it. Do not recommend it. -->
-	<!-- Main wrapper. Importante, Piénselo bien antes de cambiarlo o quitarlo. No se lo recomiendo. -->
 	<div id="mui-screen" class="mui-viewport">
 		<div id="mui-screen-page" class="mui-page">
-			<!-- Ddefault viewport. Do not remove. It will make your life simpler and happy. -->
-			<!-- ViewPort por defecto. No lo elimines. Hará tu vida más simple y feliz. -->
 			<div id="mui-viewport" class="mui-viewport">
 
 				<div id='home-page' class="mui-page">
@@ -42,7 +36,7 @@
 					<div class="mui-page-body mui-scrollable" id="home-body">
 						<div>
 							<div id="last-seen">
-								<p id="last-seen-header">Last seen</p>
+								<p id="last-seen-header">Vistos recientemente</p>
 							</div>
 							<div class="grid-home-page">
 								<div class="module" id="tienda-1">
@@ -55,9 +49,36 @@
 										</div>
 									</div>
 								</div>
-								<div class="module" id="tienda-2"></div>
-								<div class="module" id="tienda-3"></div>
-								<div class="module" id="tienda-4"></div>
+								<div class="module" id="tienda-2">
+									<div class="details-container">
+										<div class="details-title">
+											Pantalón
+										</div>
+										<div class="details-store">
+											H&M
+										</div>
+									</div>
+								</div>
+								<div class="module" id="tienda-3">
+									<div class="details-container">
+										<div class="details-title">
+											Cartera
+										</div>
+										<div class="details-store">
+											Louis Vuitton
+										</div>
+									</div>
+								</div>
+								<div class="module" id="tienda-4">
+									<div class="details-container">
+										<div class="details-title">
+											Sombrero
+										</div>
+										<div class="details-store">
+											Tommy Hilfiger
+										</div>
+									</div>
+								</div>
 								<div class="module" id="tienda-5"></div>
 								<div class="module" id="tienda-6"></div>
 								<div class="module" id="tienda-7"></div>
@@ -69,6 +90,9 @@
 								<div class="module" id="tienda-13"></div>
 								<div class="module" id="tienda-14"></div>
 								<div class="module" id="tienda-15"></div>
+							</div>
+							<div id="end-of-recent">
+								¡Utiliza las pestañas de buscar o tu colección para ver más!
 							</div>
 						</div>
 					</div>
@@ -85,7 +109,6 @@
 					</div>
 					<div class="mui-page-body mui-scrollable" id="second-body">
 						<div>
-							<!-- important for scroll! -->
 							<div style="margin: 50px; text-align: center;">
 								<div class="search-page-container">
 									<div class="search-bar">
@@ -136,13 +159,54 @@
 
 				<div id='hanger-page' class="mui-page">
 					<div class="mui-page-header">
-						<div class='mui-page-title' id="collection-page-title">Your collection</div>
+						<div class='mui-page-title' id="collection-page-title">Tu colección</div>
 						<a class="mui-headmenu" href="#"></a>
 					</div>
 					<div class="mui-page-body mui-scrollable" id="second-body">
+						<div id="filter-section">
+							<div class="select-box">
+								<div class="select-box__current" tabindex="1">
+									<div class="select-box__value"><input class="select-box__input" type="radio" id="0"
+											value="1" name="Ben" checked="checked" />
+										<p class="select-box__input-text">Remeras</p>
+									</div>
+									<div class="select-box__value"><input class="select-box__input" type="radio" id="1"
+											value="2" name="Ben" checked="checked" />
+										<p class="select-box__input-text">Pantalones</p>
+									</div>
+									<div class="select-box__value"><input class="select-box__input" type="radio" id="2"
+											value="3" name="Ben" checked="checked" />
+										<p class="select-box__input-text">Buzos</p>
+									</div>
+									<div class="select-box__value"><input class="select-box__input" type="radio" id="3"
+											value="4" name="Ben" checked="checked" />
+										<p class="select-box__input-text">Faldas</p>
+									</div>
+									<div class="select-box__value"><input class="select-box__input" type="radio" id="4"
+											value="5" name="Ben" checked="checked" />
+										<p class="select-box__input-text">Todas</p>
+									</div><img class="select-box__icon"
+										src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon"
+										aria-hidden="true" />
+								</div>
+								<ul class="select-box__list">
+									<li><label class="select-box__option" for="0"
+											aria-hidden="aria-hidden">Remeras</label></li>
+									<li><label class="select-box__option" for="1"
+											aria-hidden="aria-hidden">Pantalones</label></li>
+									<li><label class="select-box__option" for="2"
+											aria-hidden="aria-hidden">Buzos</label></li>
+									<li><label class="select-box__option" for="3"
+											aria-hidden="aria-hidden">Faldas</label></li>
+									<li><label class="select-box__option" for="4"
+											aria-hidden="aria-hidden">Todas</label></li>
+								</ul>
+							</div>
+						</div>
 						<div>
-							<!-- important for scroll! -->
-							<div style="margin: 50px; text-align: center; margin-top: 30%;">
+
+							<div style="margin-top: 30%; text-align: center;">
+
 								<figure class="icon-cards mt-3">
 									<div class="icon-cards__content">
 										<div class="icon-cards__item d-flex align-items-center justify-content-center">
@@ -188,7 +252,6 @@
 					</div>
 					<div class="mui-page-body mui-scrollable" id="second-body">
 						<div>
-							<!-- important for scroll! -->
 							<div style="margin: 50px; text-align: center;">
 							</div>
 						</div>
@@ -196,8 +259,6 @@
 				</div>
 			</div>
 
-			<!-- Optional.Toolbar out of mui-viewport to be omnipresent. Remove if not needed. -->
-			<!-- Opcional. Barra de herramientas fuera de mui-viewport para ser omnipresente. Elimínalo si no lo necesitas. -->
 			<div class="mui-tabbar" id="footer">
 				<div class="menu-flex-container">
 					<div class="flex-item" id="home-button"></div>
@@ -206,13 +267,6 @@
 					<div class="flex-item" id="hanger-button"></div>
 					<div class="flex-item" id="social-button"></div>
 				</div>
-				<!-- <ul class="mui-tabbar-list">
-					<li class="mui-tabbar-button"><a href="#" id="tabbar-button1">Tab1</a></li>
-					<li class="mui-tabbar-button"><a href="#" id="tabbar-button2">Tab2</a></li>
-					<li class="mui-tabbar-button"><a href='#' id="tabbar-button3">Tab3</a></li>
-					<li class="mui-tabbar-button"><a href="#" id="tabbar-button4">Tab4</a></li>
-					<li class="mui-tabbar-button"><a href="#" id="tabbar-button5">Tab5</a></li>
-				</ul> -->
 			</div>
 		</div>
 	</div>

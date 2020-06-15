@@ -16,7 +16,7 @@ function deviceReady() {
 		//isntallEvents2();	//Example of traditional events installation.
 
 		prepareCamera();
-
+		 logVistosRecientes();
 		//Hide splash.
 		//Ocultar el splash.
 		if (navigator.splashscreen) {
@@ -251,3 +251,60 @@ function classToggle() {
 	var el = document.querySelector('.icon-cards__content');
 	el.classList.toggle('step-animation');
 }
+
+function logVistosRecientes(){
+	$.ajax({
+		method: 'GET',
+		url: 'http://localhost:3002/getAll',
+		crossDomain: true,
+		dataType: 'json'
+	})
+			.done(function (data) {// supongo que me falto otro get pero si alguien lo hubiera hecho bien de primera no tendria que hacer trabajo extra
+		for (i = 0; i < data.length ; i++) { // todo Gabuarab
+			var post = data[i];
+			var modulo = document.createElement("div")
+				modulo.setAttribute("class","module");
+			modulo.setAttribute("id", "UltimaVisitada"+i);
+
+			// todo gabuarab
+			modulo.style.backgroundImage= "url('custom/images/zara-logo.png')"; // El url tiene que va desde la carpeta root del Proeycto
+			modulo.style.backgroundSize="contain";
+			modulo.style.backgroundRepeat="no-repeat";
+
+			var contenedorDetalles = document.createElement("div")
+				contenedorDetalles.setAttribute("class","details-container");
+			var detalleTitulo = document.createElement("div")
+				detalleTitulo.setAttribute("class","details-title");
+			var detalleTienda = document.createElement("div")
+				detalleTienda.setAttribute("class","details-store"); // Todo si queres que las tiendan sean desde una api Cambias esto
+			//todo Gabuarab cambiar por la data que venga el get
+			detalleTitulo.appendChild(document.createTextNode("Campera"));
+			detalleTienda.appendChild(document.createTextNode("HyM"));
+			modulo.appendChild(contenedorDetalles);
+			contenedorDetalles.appendChild(detalleTitulo);
+			contenedorDetalles.appendChild(detalleTienda);
+			document.querySelector("#grid-home-page").appendChild(modulo);
+		}
+	})
+		.error(function (error) {
+		// todo Handele
+	});
+	// get fotos
+	// get id
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+//todo Gabuarab buscar en wpp donde Serrana pregunto en como hacer las consultas  6/14/2020
+

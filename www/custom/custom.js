@@ -258,6 +258,70 @@ function classToggle() {
     el.classList.toggle('step-animation');
 }
 
+function saveCollection(){
+    $.ajax({
+        method: 'POST',
+        url:'http://localhost:3002/getAll', // poner el url correspondiente 
+        crossDomain: true,
+        data:{
+            //ver que atributos poner 
+        }
+    }).done(function(data){
+        $.ajax({
+            method: 'POST',
+            url: 'http://localhost:3002/getAll', // poner el url correspondiente 
+            crossDomain: true,
+            data: {
+                //ver que poner 
+            }
+        }).done(function(data){
+            alert ('Collection successfully saved')
+        }).fail(function(jqXHR, textStatus, errorThrown){
+
+            switch (jqXHR.status){
+                case 0:
+                    alert('Not Connected: verify your connection')
+                    break;
+                case 500:
+                    alert('Internal server error [500]')
+                    break;
+                default:
+                    switch (textStatus) {
+                        case 'timeout':
+                            alert('Time out error')
+                            break;
+                        case 'parsererror':
+                            alert('Requested JSON parse failed')
+                            break;    
+                    }
+                break;   
+    
+            }
+        })
+    }).fail(function(jqXHR, textStatus, errorThrown){
+
+        switch (jqXHR.status){
+            case 0:
+                alert('Not Connected: verify your connection')
+                break;
+            case 500:
+                alert('Internal server error [500]')
+                break;
+            default:
+                switch (textStatus) {
+                    case 'timeout':
+                        alert('Time out error')
+                        break;
+                    case 'parsererror':
+                        alert('Requested JSON parse failed')
+                        break;    
+                }
+            break;   
+
+        }
+    })
+}
+
 function logVistosRecientes() {
     document.querySelector('#spinner1').style.display="block"
     $.ajax({

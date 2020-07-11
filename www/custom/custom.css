@@ -269,20 +269,7 @@ a {
 	transform: rotateY(240deg) translateZ(35vw);
 }
 
-@keyframes carousel {
-	0%, 17.5% {
-	  transform: translateZ(-35vw) rotateY(0);
-	}
-	27.5%, 45% {
-	  transform: translateZ(-35vw) rotateY(-120deg);
-	}
-	55%, 72.5% {
-	  transform: translateZ(-35vw) rotateY(-240deg);
-	}
-	82.5%, 100% {
-	  transform: translateZ(-35vw) rotateY(-360deg);
-	}
-}
+
 
 .mui-page-body > body {
 	display: flex;

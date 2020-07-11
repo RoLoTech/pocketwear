@@ -120,6 +120,7 @@ function installEvents() {
             fn: () => {
                 mui.screen.closePanel(function () {
                     mui.viewport.showPage("hanger-page", "DEF");
+                    spinner();
                 });
                 return false;
             }
@@ -425,6 +426,73 @@ function logVistosRecientes() {
 
 }
 
+function spinner(){
+    var rotate1 = 0
 
+    $('#card-container1').on('touchstart', function(event){
+        switch (event.target.id){
+            case 'card1':
+                rotate1 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate1+'deg)'
+                break;
+            case 'card2':
+                rotate1 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate1+'deg)'
+                break;
+            case 'card3':
+                rotate1 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate1+'deg)'
+                break;        
+        }
+    })
+
+    var rotate2 = 0
+
+    $('#card-container2').on('touchstart', function(event){
+        switch (event.target.id){
+            case 'card4':
+                rotate2 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate2+'deg)'
+                break;
+            case 'card5':
+                rotate2 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate2+'deg)'
+                break;
+            case 'card6':
+                rotate2 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate2+'deg)'
+                break;        
+        }
+    })
+
+    var rotate3 = 0
+
+    $('#card-container3').on('touchstart', function(event){
+        switch (event.target.id){
+            case 'card7':
+                rotate3 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate3+'deg)'
+                break;
+            case 'card8':
+                rotate3 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate3+'deg)'
+                break;
+            case 'card9':
+                rotate3 -= 120
+                event.target.parentElement.style.transition = 'all 1s '
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate3+'deg)'
+                break;        
+        }
+    })
+ };
+ 
 //todo Gabuarab buscar en wpp donde Serrana pregunto en como hacer las consultas  6/14/2020
 

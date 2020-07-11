@@ -96,15 +96,23 @@
 					</div>
 					<div class="mui-page-body mui-scrollable" id="second-body">
 						<div>
-							<div id="camera">
+							<div id="camara">
 								<!-- Camera sensor -->
 								<canvas id="camera-sensor"></canvas>
-								<!-- Camera view -->
-								<input type="file" accept="image/*" capture="camera" id="camera">
+								<form action='#' id = 'form'>
+									<label for ='camera'>Capture Media</label>
+									<!-- Camera view -->
+									<br/>
+									<input type="file" accept="image/*" capture id='camera'>
 
+									<br/>
+									<input type = 'submit' value = 'Process'>
+
+								 </form>
 								<!--video-- id="camera-view" autoplay playsinline></video-->
 								<!-- Camera output -->
-								<img src="//:0" alt="" id="camera-output">
+								<!--<img src="//:0" alt="" id="camera-output"> -->
+								<p><img id = 'imagen' src="" alt = 'from phone' max-width = '90%'> </p>
 								<!-- Camera trigger -->
 								<button id="camera-trigger">Take a picture</button>
 							</div>

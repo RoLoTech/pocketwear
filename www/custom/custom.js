@@ -40,13 +40,26 @@ function prepareCamera() {
     // Set constraints for the video stream
     let constraints = {video: {facingMode: "user"}, audio: false};
     // Define constants
-    const cameraView = document.querySelector("#camera-view"),
+    const cameraView = document.querySelector('#camera'),
         cameraOutput = document.querySelector("#camera-output"),
         cameraSensor = document.querySelector("#camera-sensor"),
         cameraTrigger = document.querySelector("#camera-trigger")
-
+    
+    let input = $('#camera')
+    
+    input.change(function(event){
+        
+        console.dir(event.target.files[0]);
+        if(event.target.files[0].type.indexOf("image/")>-1){
+            let img = $('#imagen');
+            console.log(img)
+            img.src = URL.createObjectURL(event.target.files[0])
+        }
+    })
+    
     // Access the device camera and stream to cameraView
-    function cameraStart() {
+    
+   // function cameraStart() {
         navigator.mediaDevices
             .getUserMedia(constraints)
             .then(function (stream) {
@@ -56,18 +69,19 @@ function prepareCamera() {
             .catch(function (error) {
                 console.error("Oops. Something is broken.", error);
             });
-    }
+    //}
 
     // Take a picture when cameraTrigger is tapped
     cameraTrigger.onclick = function () {
         cameraSensor.width = cameraView.videoWidth;
-        cameraSensor.height = cameraView.videoHeight;
+        cameraSensor.height = cameraView.videoHeight/2;
         cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
         cameraOutput.src = cameraSensor.toDataURL("image/webp");
         cameraOutput.classList.add("taken");
-    };
+    };  
     // Start the video stream when the window loads
     window.addEventListener("load", cameraStart, false);
+    
 }
 
 function installEvents() {

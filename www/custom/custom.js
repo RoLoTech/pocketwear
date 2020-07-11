@@ -423,7 +423,7 @@ function logVistosRecientes() {
 function spinner(){
     var rotate1 = 0
 
-    document.querySelector('#card-container1').addEventListener('touchstart', function(event){
+    $('#card-container1').on('touchstart', function(event){
         switch (event.target.id){
             case 'card1':
                 rotate1 -= 120
@@ -445,7 +445,7 @@ function spinner(){
 
     var rotate2 = 0
 
-    document.querySelector('#card-container2').addEventListener('touchstart', function(event){
+    $('#card-container2').on('touchstart', function(event){
         switch (event.target.id){
             case 'card4':
                 rotate2 -= 120
@@ -467,7 +467,7 @@ function spinner(){
 
     var rotate3 = 0
 
-    document.querySelector('#card-container3').addEventListener('touchstart', function(event){
+    $('#card-container3').on('touchstart', function(event){
         switch (event.target.id){
             case 'card7':
                 rotate3 -= 120

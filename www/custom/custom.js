@@ -38,7 +38,7 @@ function deviceReady() {
 
 function prepareCamera() {
     // Set constraints for the video stream
-    let constraints = {video: {facingMode: "user"}, audio: false};
+    let constraints = { video: { facingMode: "user" }, audio: false };
     // Define constants
     const cameraView = document.querySelector("#camera-view"),
         cameraOutput = document.querySelector("#camera-output"),
@@ -252,21 +252,27 @@ function installEvents2() {
     });
 }
 
+function userLogin() {
+    $.ajax({
+        method: 'POST',
+        url: ''
+    })
+}
 
 function classToggle() {
     var el = document.querySelector('.icon-cards__content');
     el.classList.toggle('step-animation');
 }
 
-function saveCollection(){
+function saveCollection() {
     $.ajax({
         method: 'POST',
-        url:'http://localhost:3002/getAll', // poner el url correspondiente 
+        url: 'http://localhost:3002/getAll', // poner el url correspondiente 
         crossDomain: true,
-        data:{
+        data: {
             //ver que atributos poner 
         }
-    }).done(function(data){
+    }).done(function (data) {
         $.ajax({
             method: 'POST',
             url: 'http://localhost:3002/getAll', // poner el url correspondiente 
@@ -274,11 +280,11 @@ function saveCollection(){
             data: {
                 //ver que poner 
             }
-        }).done(function(data){
-            alert ('Collection successfully saved')
-        }).fail(function(jqXHR, textStatus, errorThrown){
+        }).done(function (data) {
+            alert('Collection successfully saved')
+        }).fail(function (jqXHR, textStatus, errorThrown) {
 
-            switch (jqXHR.status){
+            switch (jqXHR.status) {
                 case 0:
                     alert('Not Connected: verify your connection')
                     break;
@@ -292,15 +298,15 @@ function saveCollection(){
                             break;
                         case 'parsererror':
                             alert('Requested JSON parse failed')
-                            break;    
+                            break;
                     }
-                break;   
-    
+                    break;
+
             }
         })
-    }).fail(function(jqXHR, textStatus, errorThrown){
+    }).fail(function (jqXHR, textStatus, errorThrown) {
 
-        switch (jqXHR.status){
+        switch (jqXHR.status) {
             case 0:
                 alert('Not Connected: verify your connection')
                 break;
@@ -314,16 +320,16 @@ function saveCollection(){
                         break;
                     case 'parsererror':
                         alert('Requested JSON parse failed')
-                        break;    
+                        break;
                 }
-            break;   
+                break;
 
         }
     })
 }
 
 function logVistosRecientes() {
-    document.querySelector('#spinner1').style.display="block"
+    document.querySelector('#spinner1').style.display = "block"
     $.ajax({
         method: 'GET',
         url: 'http://localhost:3002/item/date', // todo poner el Url Correspondientee
@@ -331,20 +337,20 @@ function logVistosRecientes() {
         dataType: 'json'
     })
         .done(function (data) {
-			//  data deberia ser una lista con los articulos (id,tipo,tienda,...)
-			for (i = 0; i < data.length; i++) {
-				var post = data[i];
+            //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
+            for (i = 0; i < data.length; i++) {
+                var post = data[i];
                 $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
-					method: 'GET',
-					url: 'http://localhost:3002/itemImage/'+post.id, // todo poner el Url Correspondientee con post.id (usando ´´)
-					crossDomain: true,
-					dataType: 'text'                     //todo no creo que sea si
-				}).done(function (foto) {
-                    document.querySelector('#spinner1').style.display="none"
+                    method: 'GET',
+                    url: 'http://localhost:3002/itemImage/' + post.id, // todo poner el Url Correspondientee con post.id (usando ´´)
+                    crossDomain: true,
+                    dataType: 'text'                     //todo no creo que sea si
+                }).done(function (foto) {
+                    document.querySelector('#spinner1').style.display = "none"
                     var modulo = document.createElement("div")
                     modulo.setAttribute("class", "module");
                     modulo.setAttribute("id", "UltimaVisitada" + i);
-                    modulo.style.backgroundImage = foto ; // Todo cambiarlo por la foto del get
+                    modulo.style.backgroundImage = foto; // Todo cambiarlo por la foto del get
                     modulo.style.backgroundSize = "contain";
                     modulo.style.backgroundRepeat = "no-repeat";
 
@@ -355,11 +361,11 @@ function logVistosRecientes() {
                     var detalleTienda = document.createElement("div")
                     detalleTienda.setAttribute("class", "details-store");
                     // todo Gabuarab cambiar por la data que venga el get
-					//var tienda = post.tienda
-					//var titulo = post.titulo
-					// todo borrar los de abajo
-					var titulo="Campera";
-					var tienda="HyM";
+                    //var tienda = post.tienda
+                    //var titulo = post.titulo
+                    // todo borrar los de abajo
+                    var titulo = "Campera";
+                    var tienda = "HyM";
                     detalleTitulo.appendChild(document.createTextNode(titulo));
                     detalleTienda.appendChild(document.createTextNode(tienda));
                     modulo.appendChild(contenedorDetalles);

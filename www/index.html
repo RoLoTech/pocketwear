@@ -39,7 +39,8 @@
 								<p id="last-seen-header">Vistos recientemente</p>
 							</div>
 							<div id="spinner1" class="loader" style="display: none">Loading...</div>
-							<div class="grid-home-page" id="grid-home-page"><!--Todo make dinamic Gabuarab -->
+							<div class="grid-home-page" id="grid-home-page">
+								<!--Todo make dinamic Gabuarab -->
 
 
 							</div>
@@ -99,7 +100,9 @@
 								<!-- Camera sensor -->
 								<canvas id="camera-sensor"></canvas>
 								<!-- Camera view -->
-								<video id="camera-view" autoplay playsinline></video>
+								<input type="file" accept="image/*" capture="camera" id="camera">
+
+								<!--video-- id="camera-view" autoplay playsinline></video-->
 								<!-- Camera output -->
 								<img src="//:0" alt="" id="camera-output">
 								<!-- Camera trigger -->
@@ -199,12 +202,19 @@
 
 				<div id='social-page' class="mui-page">
 					<div class="mui-page-header">
-						<div class='mui-page-title'>Page 5</div>
+						<div class='mui-page-title'>Inicia Sesión</div>
 						<a class="mui-headmenu" href="#"></a>
 					</div>
 					<div class="mui-page-body mui-scrollable" id="second-body">
-						<div>
-							<div style="margin: 50px; text-align: center;">
+						<div id="login-screen">
+							<div id="login-overlay">
+								<p style="padding-top: 20%; text-align: left; margin-left: 15%;">Usuario</p>
+								<input type="text" id="user" class="login-field">
+								<p style="text-align: left; margin-left: 15%;">Contraseña</p>
+								<input type="password" id="password" class="login-field">
+								<button class="user-area-button user-select" id="login-social-button">Iniciar Sesión</button>
+								<br>
+								<button class="user-area-button user-select" id="register-social-button">Registrarse</button>
 							</div>
 						</div>
 					</div>

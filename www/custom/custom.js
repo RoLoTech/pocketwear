@@ -327,25 +327,25 @@ function logVistosRecientes() {
     document.querySelector('#spinner1').style.display="block"
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:3002/getAll', // todo poner el Url Correspondientee
+        url: 'http://localhost:3002/item/date', // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
     })
         .done(function (data) {
-			//  data deberia ser una lista con los articulos (id,tipo,tienda,...)supongo que me falto otro get pero si alguien lo hubiera hecho bien de primera no tendria que hacer trabajo extra
+			//  data deberia ser una lista con los articulos (id,tipo,tienda,...)
 			for (i = 0; i < data.length; i++) {
 				var post = data[i];
                 $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
 					method: 'GET',
-					url: 'http://localhost:3002/getAll', // todo poner el Url Correspondientee con post.id (usando ´´)
+					url: 'http://localhost:3002/itemImage/'+post.id, // todo poner el Url Correspondientee con post.id (usando ´´)
 					crossDomain: true,
-					dataType: 'json'                     //todo no creo que sea si
+					dataType: 'text'                     //todo no creo que sea si
 				}).done(function (foto) {
                     document.querySelector('#spinner1').style.display="none"
                     var modulo = document.createElement("div")
                     modulo.setAttribute("class", "module");
                     modulo.setAttribute("id", "UltimaVisitada" + i);
-                    modulo.style.backgroundImage = "url('custom/images/zara-logo.png')"; // Todo cambiarlo por la foto del get
+                    modulo.style.backgroundImage = foto ; // Todo cambiarlo por la foto del get
                     modulo.style.backgroundSize = "contain";
                     modulo.style.backgroundRepeat = "no-repeat";
 
@@ -392,7 +392,7 @@ function logVistosRecientes() {
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-			console.log("hola")
+
             switch (jqXHR.status) {
                 case 0:
                     alert('Not connect: Verify Network.');

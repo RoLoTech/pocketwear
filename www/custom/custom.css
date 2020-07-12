@@ -809,6 +809,8 @@ a {
 	padding-top: 5%;
 	width: auto;
 	border-radius: 5px;
+	object-fit: contain;
+	max-width: 100%;
 }
 
 #camara {

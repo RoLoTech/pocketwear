@@ -836,3 +836,7 @@ a {
     height: 100%;
     font-size: xx-large;
 }
+
+.movement {
+	z-index: 10;
+}

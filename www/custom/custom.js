@@ -53,44 +53,44 @@ function prepareCamera() {
         }
     })
     */
-   /*
-   $('#camera-trigger').click(function(event){
+    /*
+    $('#camera-trigger').click(function(event){
+ 
+         function onSuccess(imgData){
+             alert('exito')
+             var imagen = $('#imagen')
+             imagen.src = imgData
+         }
+ 
+         function onFailure(message){
+             alert(message)
+         }
+         console.log(navigator.camera)
+         alert(navigator.camera)
+ 
+ 
+        navigator.camera.getPicture(onSuccess, onFailure,
+        {
+         quality: 80,
+         destinationType: Camera.DestinationType.FILE_URI,
+         sourceType: Camera.MediaType.PICTURE,
+         encodingType: Camera.EncodingType.JPEG,
+         cameraDirection: Camera.Direction.BACK,
+         targetWidth: 300,
+         targetHeight: 400
+     })
+    })*/
 
-        function onSuccess(imgData){
-            alert('exito')
-            var imagen = $('#imagen')
-            imagen.src = imgData
+    let form = document.getElementById('form');
+    //get the captured media file
+    let input = document.getElementById('camera');
+
+    input.addEventListener('change', (ev) => {
+        console.dir(input.files[0]);
+        if (input.files[0].type.indexOf("image/") > -1) {
+            let img = document.getElementById('imagen');
+            img.src = window.URL.createObjectURL(input.files[0]);
         }
-
-        function onFailure(message){
-            alert(message)
-        }
-        console.log(navigator.camera)
-        alert(navigator.camera)
-
-
-       navigator.camera.getPicture(onSuccess, onFailure,
-       {
-        quality: 80,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.MediaType.PICTURE,
-        encodingType: Camera.EncodingType.JPEG,
-        cameraDirection: Camera.Direction.BACK,
-        targetWidth: 300,
-        targetHeight: 400
-    })
-   })*/
-   
-   let form = document.getElementById('form');
-   //get the captured media file
-   let input = document.getElementById('camera');
-
-   input.addEventListener('change', (ev)=>{
-       console.dir( input.files[0] );
-       if(input.files[0].type.indexOf("image/") > -1){
-           let img = document.getElementById('imagen');
-           img.src = window.URL.createObjectURL(input.files[0]);
-       }
     });
 
     /*
@@ -144,7 +144,7 @@ function prepareCamera() {
 
 function installEvents() {
 
-    $("#shutter").click(function() {
+    $("#shutter").click(function () {
         $("#camera").click()
     })
 
@@ -154,7 +154,7 @@ function installEvents() {
             id: '#card-container1',
             ev: 'click',	//Important!
             fn: () => {
-                spinner()
+                spinnerTest()
                 return false;
             }
         },
@@ -499,70 +499,80 @@ function logVistosRecientes() {
 
 }
 
-function spinner(){
+function spinnerTest() {
+    rotationAngle = 120
+    currentRotation = 0
+    $("#left-button1").click(function () {
+        currentRotation -= rotationAngle
+        $("#card-container1").style.transition = "all 1s"
+        $("#card-container1").style.transform = "translateZ(-35vw) rotateY(" + currentRotation + "deg)"
+    })
+}
+
+function spinner() {
     var rotate1 = 0
 
-    $('#card-container1').on('swipeLeft', function(event){
-        switch (event.target.id){
+    $('#card-container1').on('swipeLeft', function (event) {
+        switch (event.target.id) {
             case 'card1':
                 rotate1 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate1+'deg)'
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
                 break;
             case 'card2':
                 rotate1 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate1+'deg)'
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
                 break;
             case 'card3':
                 rotate1 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate1+'deg)'
-                break;        
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
+                break;
         }
     })
 
     var rotate2 = 0
 
-    $('#card-container2').on('touchstart', function(event){
-        switch (event.target.id){
+    $('#card-container2').on('touchstart', function (event) {
+        switch (event.target.id) {
             case 'card4':
                 rotate2 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate2+'deg)'
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
                 break;
             case 'card5':
                 rotate2 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate2+'deg)'
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
                 break;
             case 'card6':
                 rotate2 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate2+'deg)'
-                break;        
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
+                break;
         }
     })
 
     var rotate3 = 0
 
-    $('#card-container3').on('touchstart', function(event){
-        switch (event.target.id){
+    $('#card-container3').on('touchstart', function (event) {
+        switch (event.target.id) {
             case 'card7':
                 rotate3 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate3+'deg)'
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
                 break;
             case 'card8':
                 rotate3 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate3+'deg)'
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
                 break;
             case 'card9':
                 rotate3 -= 120
                 event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY('+rotate3+'deg)'
-                break;        
+                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                break;
         }
     })
- };
+};

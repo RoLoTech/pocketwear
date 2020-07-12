@@ -65,7 +65,7 @@ function prepareCamera() {
            img.src = window.URL.createObjectURL(input.files[0]);
        }
     });*/
-
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     var player = document.getElementById('player'); 
     var snapshotCanvas = document.getElementById('snapshot');
     var captureButton = document.getElementById('capture');
@@ -84,6 +84,9 @@ function prepareCamera() {
     
       navigator.mediaDevices.getUserMedia({video: true})
           .then(handleSuccess);
+    }else{
+        alert('Fail');
+    }
 
     // Access the device camera and stream to cameraView
     /*

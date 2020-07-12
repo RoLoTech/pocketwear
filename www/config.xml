@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget id="your.app.id" versionCode="1" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">    
 	  
-    <name>MobileUI tabbar-menu App template</name>
+    <name>Pocket Wear</name>
     
     <description>
-        MobileUI
+        Take your wardrobe everywhere.
     </description>
 
     <author href="http://www.mobileui.org" email="gustavo.gretter@mobileui.org">
-        Gustavo Gretter
+        UrcoSoft
     </author>
   
 	<!-- Customize your app and platform with the preference element. -->
@@ -73,36 +73,36 @@
 		<!-- Icons -->
 		<!-- iOS 8.0+ -->
 		<!-- iPhone 6 Plus  -->
-		<icon src="pgbomit/icons/ios/icon-60@3x.png" width="180" height="180" />
+		<icon src="pgbomit/icons/android/pw-logo" width="180" height="180" />
 		<!-- iOS 7.0+ -->
 		<!-- iPhone / iPod Touch  -->
-		<icon src="pgbomit/icons/ios/icon-60.png" width="60" height="60" />
-		<icon src="pgbomit/icons/ios/icon-60@2x.png" width="120" height="120" />
+		<icon src="pgbomit/icons/android/pw-logo" width="60" height="60" />
+		<icon src="pgbomit/icons/android/pw-logo" width="120" height="120" />
 		<!-- iPad -->
-		<icon src="pgbomit/icons/ios/icon-76.png" width="76" height="76" />
-		<icon src="pgbomit/icons/ios/icon-76@2x.png" width="152" height="152" />
+		<icon src="pgbomit/icons/android/pw-logo" width="76" height="76" />
+		<icon src="pgbomit/icons/android/pw-logo" width="152" height="152" />
 		<!-- Spotlight Icon -->
-		<icon src="pgbomit/icons/ios/icon-40.png" width="40" height="40" />
-		<icon src="pgbomit/icons/ios/icon-40@2x.png" width="80" height="80" />
+		<icon src="pgbomit/icons/android/pw-logo" width="40" height="40" />
+		<icon src="pgbomit/icons/android/pw-logo" width="80" height="80" />
 		<!-- iOS 6.1 -->
 		<!-- iPhone / iPod Touch -->
-		<icon src="pgbomit/icons/ios/icon.png" width="57" height="57" />
-		<icon src="pgbomit/icons/ios/icon@2x.png" width="114" height="114" />
+		<icon src="pgbomit/icons/android/pw-logo" width="57" height="57" />
+		<icon src="pgbomit/icons/android/pw-logo" width="114" height="114" />
 		<!-- iPad -->
-		<icon src="pgbomit/icons/ios/icon-72.png" width="72" height="72" />
-		<icon src="pgbomit/icons/ios/icon-72@2x.png" width="144" height="144" />
+		<icon src="pgbomit/icons/android/pw-logo" width="72" height="72" />
+		<icon src="pgbomit/icons/android/pw-logo" width="144" height="144" />
 		<!-- iPad Pro -->
-		<icon src="pgbomit/icons/ios/icon-167.png" width="167" height="167" />
+		<icon src="pgbomit/icons/android/pw-logo" width="167" height="167" />
 		<!-- iPhone Spotlight and Settings Icon -->
-		<icon src="pgbomit/icons/ios/icon-small.png" width="29" height="29" />
-		<icon src="pgbomit/icons/ios/icon-small@2x.png" width="58" height="58" />
+		<icon src="pgbomit/icons/android/pw-logo" width="29" height="29" />
+		<icon src="pgbomit/icons/android/pw-logo" width="58" height="58" />
 		<!-- iPad Spotlight and Settings Icon -->
-		<icon src="pgbomit/icons/ios/icon-50.png" width="50" height="50" />
-		<icon src="pgbomit/icons/ios/icon-50@2x.png" width="100" height="100" />
+		<icon src="pgbomit/icons/android/pw-logo" width="50" height="50" />
+		<icon src="pgbomit/icons/android/pw-logo" width="100" height="100" />
 		<!-- iPad Pro -->
-		<icon src="pgbomit/icons/ios/icon-83.5@2x.png" width="167" height="167" />
+		<icon src="pgbomit/icons/android/pw-logo" width="167" height="167" />
 		<!-- Legacy -->
-		<icon width="1024" height="1024" src="pgbomit/icons/ios/icon-1024.png" />
+		<icon width="1024" height="1024" src="pgbomit/icons/android/pw-logo" />
 		<!--Splash - Storyboard method (supports all devices): -->
 		<splash src="pgbomit/splash/ios/Default@2x~iphone~anyany.png" /> <!-- 1334x1334 -->
 		<splash src="pgbomit/splash/ios/Default@2x~iphone~comany.png" /> <!-- 750x1334 -->
@@ -120,12 +120,12 @@
 			<application android:usesCleartextTraffic="true" />
 		</edit-config>
 		<!-- Icons -->
-		<icon src="pgbomit/icons/android/ldpi.png" density="ldpi" /> <!-- 36x36 -->
-		<icon src="pgbomit/icons/android/mdpi.png" density="mdpi" /> <!-- 48x48 -->
-		<icon src="pgbomit/icons/android/hdpi.png" density="hdpi" /> <!-- 72x72 -->
-		<icon src="pgbomit/icons/android/xhdpi.png" density="xhdpi" /> <!-- 96x96 -->
-		<icon src="pgbomit/icons/android/xxhdpi.png" density="xxhdpi" /> <!-- 144x144 -->
-		<icon src="pgbomit/icons/android/xxxhdpi.png" density="xxxhdpi" /> <!-- 192x192 -->
+		<icon src="pgbomit/icons/android/pw-logo" density="ldpi" /> <!-- 36x36 -->
+		<icon src="pgbomit/icons/android/pw-logo" density="mdpi" /> <!-- 48x48 -->
+		<icon src="pgbomit/icons/android/pw-logo" density="hdpi" /> <!-- 72x72 -->
+		<icon src="pgbomit/icons/android/pw-logo" density="xhdpi" /> <!-- 96x96 -->
+		<icon src="pgbomit/icons/android/pw-logo" density="xxhdpi" /> <!-- 144x144 -->
+		<icon src="pgbomit/icons/android/pw-logo" density="xxxhdpi" /> <!-- 192x192 -->
 	 	<!-- Splash  -->
 		<splash src="pgbomit/splash/android/ldpi.png" density="hdpi" /> <!-- 200x320 : 320x426 -->
 		<splash src="pgbomit/splash/android/mdpi.png" density="mdpi" /> <!-- 320x480 : 320x470 -->

@@ -53,7 +53,7 @@ function prepareCamera() {
         }
     })
     */
-   /* galeria   
+    
    let form = document.getElementById('form');
    //get the captured media file
    let input = document.getElementById('camera');
@@ -64,7 +64,9 @@ function prepareCamera() {
            let img = document.getElementById('imagen');
            img.src = window.URL.createObjectURL(input.files[0]);
        }
-    });*/
+    });
+
+    /*
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         
         var player = document.getElementById('player'); 
@@ -109,29 +111,7 @@ function prepareCamera() {
     }else{
         alert('Fail');
     }
-
-    // Access the device camera and stream to cameraView
-    /*
-   // function cameraStart() {
-        navigator.mediaDevices
-            .getUserMedia(constraints)
-            .then(function (stream) {
-                track = stream.getTracks()[0];
-                cameraView.srcObject = stream;
-            })
-            .catch(function (error) {
-                console.error("Oops. Something is broken.", error);
-            });
-    //}
-
-    // Take a picture when cameraTrigger is tapped
-    cameraTrigger.onclick = function () {
-        cameraSensor.width = cameraView.videoWidth;
-        cameraSensor.height = cameraView.videoHeight/2;
-        cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
-        cameraOutput.src = cameraSensor.toDataURL("image/webp");
-        cameraOutput.classList.add("taken");
-    };  */
+*/
     // Start the video stream when the window loads
 }
 

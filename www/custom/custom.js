@@ -150,14 +150,22 @@ function installEvents() {
 
     mui.util.installEvents([
         //Mail list click/touch events. See that if the event is not specified, click is assumed.
-        {
-            id: '#card-container1',
+       /*{
+            id: '#left-button1',
             ev: 'click',	//Important!
             fn: () => {
                 spinnerTest()
                 return false;
             }
         },
+        {
+            id: 'right-button1',
+            ev: 'click',
+            fn: ()=>{
+                spinnerTest()
+                return false;
+            }
+        },*/
         {
             id: '.mui-headmenu',
             ev: 'click',	//If not, it assumes click
@@ -502,30 +510,61 @@ function logVistosRecientes() {
 function spinnerTest() {
     rotationAngle = 120
     currentRotation = 0
+    
     $("#left-button1").click(function () {
+        console.log('izquierda')
         currentRotation -= rotationAngle
         $("#card-container1").style.transition = "all 1s"
         $("#card-container1").style.transform = "translateZ(-35vw) rotateY(" + currentRotation + "deg)"
     })
+    $('#right-button1').click(function(){
+        console.log('derecha')
+        currentRotation += rotationAngle
+        container=$('#card-container1')
+        console.log(container)
+        container.style.transition = "all 1s"
+        container.style.transform = "translateZ(-35vw) rotateY(" + currentRotation + "deg)"
+    })
 }
 
-function spinner() {
-    var rotate1 = 0
 
-    $('#card-container1').on('swipeLeft', function (event) {
+function spinner() {
+    var angleRotate = 120
+    var rotate1 = 0
+    var mouse1 = new Array(2);
+
+    $('#card-container1').on('touchstart', function(event){
+        mouse1[0] = event.originalEvent.touches[0].pageX
+    })
+
+    $('#card-container1').on('touchend', function (event) {
+        mouse1[1] = event.changedTouches[0].pageX
+        console.log(mouse1)
         switch (event.target.id) {
             case 'card1':
-                rotate1 -= 120
+                if(mouse1[0] < mouse1[1]){
+                    rotate1 += angleRotate
+                }else{
+                    rotate1 -= angleRotate
+                }
                 event.target.parentElement.style.transition = 'all 1s '
                 event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
                 break;
             case 'card2':
-                rotate1 -= 120
+                if(mouse1[0] < mouse1[1]){
+                    rotate1 += angleRotate
+                }else{
+                    rotate1 -= angleRotate
+                }
                 event.target.parentElement.style.transition = 'all 1s '
                 event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
                 break;
             case 'card3':
-                rotate1 -= 120
+                if(mouse1[0] < mouse1[1]){
+                    rotate1 += angleRotate
+                }else{
+                    rotate1 -= angleRotate
+                }
                 event.target.parentElement.style.transition = 'all 1s '
                 event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
                 break;

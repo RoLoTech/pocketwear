@@ -65,6 +65,7 @@ function prepareCamera() {
             alert(message)
         }
         console.log(navigator.camera)
+        alert(navigator.camera)
 
 
        navigator.camera.getPicture(onSuccess, onFailure,

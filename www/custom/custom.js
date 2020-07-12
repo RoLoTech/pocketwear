@@ -15,9 +15,9 @@ function deviceReady() {
         //Install events, clicks, resize, online/offline, etc.
         installEvents();	//Events installation using MobileUI's method.
         //isntallEvents2();	//Example of traditional events installation.
-
-        prepareCamera();
         logVistosRecientes();
+        prepareCamera();
+
         //Hide splash.
         //Ocultar el splash.
         if (navigator.splashscreen) {
@@ -38,17 +38,12 @@ function deviceReady() {
 
 function prepareCamera() {
     // Set constraints for the video stream
-    let constraints = { video: { facingMode: "user" }, audio: false };
     // Define constants
-    const cameraView = document.querySelector('#camera'),
-        cameraOutput = document.querySelector("#camera-output"),
-        cameraSensor = document.querySelector("#camera-sensor"),
-        cameraTrigger = document.querySelector("#camera-trigger")
-    
+
     /*let input = $('#camera')
-    
+
     input.change(function(event){
-        
+
         console.dir(event.target.files[0]);
 
         if(event.target.files[0].type.indexOf("image/")>-1){
@@ -62,7 +57,7 @@ function prepareCamera() {
    let form = document.getElementById('form');
    //get the captured media file
    let input = document.getElementById('camera');
-   
+
    input.addEventListener('change', (ev)=>{
        console.dir( input.files[0] );
        if(input.files[0].type.indexOf("image/") > -1){
@@ -91,7 +86,7 @@ function prepareCamera() {
           .then(handleSuccess);
 
     // Access the device camera and stream to cameraView
-    
+    /*
    // function cameraStart() {
         navigator.mediaDevices
             .getUserMedia(constraints)
@@ -111,10 +106,8 @@ function prepareCamera() {
         cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
         cameraOutput.src = cameraSensor.toDataURL("image/webp");
         cameraOutput.classList.add("taken");
-    };  
+    };  */
     // Start the video stream when the window loads
-    window.addEventListener("load", cameraStart, false);
-    
 }
 
 function installEvents() {
@@ -380,7 +373,7 @@ function logVistosRecientes() {
     document.querySelector('#spinner1').style.display = "block"
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:3002/item/date', // todo poner el Url Correspondientee
+        url: 'http://localhost:3001/item/date', // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
     })
@@ -388,38 +381,33 @@ function logVistosRecientes() {
             //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
             for (i = 0; i < data.length; i++) {
                 var post = data[i];
+                console.log(post)
+                var contenedorDetalles = document.createElement("div")
+                contenedorDetalles.setAttribute("class", "details-container");
+                var detalleTitulo = document.createElement("div")
+                detalleTitulo.setAttribute("class", "details-title");
+                var detalleTienda = document.createElement("div")
+                detalleTienda.setAttribute("class", "details-store");
+                var tienda = post.store;
+                var titulo = post.type;
+
+                detalleTitulo.appendChild(document.createTextNode(titulo));
+                detalleTienda.appendChild(document.createTextNode(tienda));
+                contenedorDetalles.appendChild(detalleTitulo);
+                contenedorDetalles.appendChild(detalleTienda);
+                var modulo = document.createElement("div")
+                modulo.setAttribute("class", "module");
+                modulo.setAttribute("id", "UltimaVisitada" + i);
+                modulo.appendChild(contenedorDetalles);
                 $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
                     method: 'GET',
-                    url: 'http://localhost:3002/itemImage/' + post.id, // todo poner el Url Correspondientee con post.id (usando ´´)
+                    url: 'http://localhost:3001/itemImage/' + post._id,
                     crossDomain: true,
-                    dataType: 'text'                     //todo no creo que sea si
+                    dataType: 'text'
                 }).done(function (foto) {
-                    document.querySelector('#spinner1').style.display = "none"
-                    var modulo = document.createElement("div")
-                    modulo.setAttribute("class", "module");
-                    modulo.setAttribute("id", "UltimaVisitada" + i);
-                    modulo.style.backgroundImage = foto; // Todo cambiarlo por la foto del get
+                    modulo.style.backgroundImage = foto;
                     modulo.style.backgroundSize = "contain";
                     modulo.style.backgroundRepeat = "no-repeat";
-
-                    var contenedorDetalles = document.createElement("div")
-                    contenedorDetalles.setAttribute("class", "details-container");
-                    var detalleTitulo = document.createElement("div")
-                    detalleTitulo.setAttribute("class", "details-title");
-                    var detalleTienda = document.createElement("div")
-                    detalleTienda.setAttribute("class", "details-store");
-                    // todo Gabuarab cambiar por la data que venga el get
-                    //var tienda = post.tienda
-                    //var titulo = post.titulo
-                    // todo borrar los de abajo
-                    var titulo = "Campera";
-                    var tienda = "HyM";
-                    detalleTitulo.appendChild(document.createTextNode(titulo));
-                    detalleTienda.appendChild(document.createTextNode(tienda));
-                    modulo.appendChild(contenedorDetalles);
-                    contenedorDetalles.appendChild(detalleTitulo);
-                    contenedorDetalles.appendChild(detalleTienda);
-                    document.querySelector("#grid-home-page").appendChild(modulo);
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     switch (jqXHR.status) {
                         case 0:
@@ -442,6 +430,8 @@ function logVistosRecientes() {
                             break;
                     }
                 });
+                document.querySelector('#spinner1').style.display = "none"
+                document.querySelector("#grid-home-page").appendChild(modulo);
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -540,6 +530,3 @@ function spinner(){
         }
     })
  };
- 
-//todo Gabuarab buscar en wpp donde Serrana pregunto en como hacer las consultas  6/14/2020
-

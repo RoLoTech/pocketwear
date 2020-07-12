@@ -147,9 +147,10 @@ function installEvents() {
     mui.util.installEvents([
         //Mail list click/touch events. See that if the event is not specified, click is assumed.
         {
-            id: '.mui-backarrow',	//Important!
+            id: '#card-container1',
+            ev: 'click',	//Important!
             fn: () => {
-                mui.history.back();
+                spinner()
                 return false;
             }
         },
@@ -221,8 +222,7 @@ function installEvents() {
             ev: 'swipeleftdiscover',
             fn: () => {
                 if (!mui.viewport.panelIsOpen()) {
-                    mui.screen.showPanel('menu-panel', 'SLIDE_LEFT');	//ATENTION!!! mui.screen instead mui.viewport
-                    return false;
+                    mui.history.back();
                 }
             }
         },
@@ -498,7 +498,7 @@ function logVistosRecientes() {
 function spinner(){
     var rotate1 = 0
 
-    $('#card-container1').on('touchstart', function(event){
+    $('#card-container1').on('swipeLeft', function(event){
         switch (event.target.id){
             case 'card1':
                 rotate1 -= 120

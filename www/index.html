@@ -90,40 +90,45 @@
 
 				<div id='camera-page' class="mui-page">
 					<div class="mui-page-header">
-						<div class='mui-page-title'>Page 3</div>
+						<div class='mui-page-title' id="camera-title">Subir una foto</div>
 						<a class="mui-headmenu" href="#"></a>
 					</div>
-					<div class="mui-page-body mui-scrollable" id="second-body">
+					<div class="mui-page-body mui-scrollable" id="second-body" style="text-align: center;">
 						<div>
 							<div id="camara">
 								<!-- Camera sensor -->
 								<canvas id="camera-sensor"></canvas>
-								<form action='#' id = 'form'>
-									<label for ='camera'>Capture Media</label>
-									 Camera view 
-									<br/>
-									<input type="file"
-										   id="camera"
-										   accept="image/*,video/*,audio/*"
-										   capture
-										   multiple />
-									<br/>
+								<form action='#' id='form'>
+									<label for='camera'>Capture Media</label>
+									Camera view
+									<div style="height: 0px; overflow: hidden;">
+										<input type="file" id="camera" accept="image/*,video/*,audio/*" capture
+											multiple />
+									</div>
+									<br />
 
 
-								 </form>
+									<br />
+
+
+								</form>
 								<!--video-- id="camera-view" autoplay playsinline></video-->
 								<!-- Camera output -->
 								<!--<img src="//:0" alt="" id="camera-output"> -->
-								<p><img id = 'imagen' src='' alt = 'from phone' max-width = '50%'> </p>
+
 								<!-- Camera trigger -->
 								<!--<video id="player" controls autoplay></video>
 								<button id="capture">Capturar</button>
 								<canvas id="snapshot" width=320 height=240></canvas>-->
 
-								
-								<button id="camera-trigger">Take a picture</button>
+
+								<!-- <button id="camera-trigger">Take a picture</button> -->
 							</div>
 						</div>
+						<div id="camera-image-container">
+							<img id='imagen' src='' alt='' max-width='50%'>
+						</div>
+						<button id="shutter" class="user-area-button">+</button>
 					</div>
 				</div>
 
@@ -178,34 +183,43 @@
 							<div style="margin-top: 30%; text-align: center;">
 
 								<figure class="icon-cards mt-3">
-									<div id = 'card-container1' class="icon-cards__content">
-										<div id ='card1' class="icon-cards__item d-flex align-items-center justify-content-center">
+									<div id='card-container1' class="icon-cards__content">
+										<div id='card1'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
 										</div>
-										<div id = 'card2' class="icon-cards__item d-flex align-items-center justify-content-center">
+										<div id='card2'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
 										</div>
-										<div id = 'card3' class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-									</div>
-								</figure>
-
-								<figure class="icon-cards mt-3">
-									<div id = 'card-container2' class="icon-cards__content">
-										<div id = 'card4' class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id ='card5' class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id = 'card6' class="icon-cards__item d-flex align-items-center justify-content-center">
+										<div id='card3'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
 										</div>
 									</div>
 								</figure>
 
 								<figure class="icon-cards mt-3">
-									<div id = 'card-container3' class="icon-cards__content">
-										<div id = 'card7' class="icon-cards__item d-flex align-items-center justify-content-center">
+									<div id='card-container2' class="icon-cards__content">
+										<div id='card4'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
 										</div>
-										<div id = 'card8' class="icon-cards__item d-flex align-items-center justify-content-center">
+										<div id='card5'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
 										</div>
-										<div id = 'card9' class="icon-cards__item d-flex align-items-center justify-content-center">
+										<div id='card6'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
+										</div>
+									</div>
+								</figure>
+
+								<figure class="icon-cards mt-3">
+									<div id='card-container3' class="icon-cards__content">
+										<div id='card7'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
+										</div>
+										<div id='card8'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
+										</div>
+										<div id='card9'
+											class="icon-cards__item d-flex align-items-center justify-content-center">
 										</div>
 									</div>
 								</figure>
@@ -217,7 +231,7 @@
 
 				<div id='social-page' class="mui-page">
 					<div class="mui-page-header">
-						<div class='mui-page-title'>Inicia Sesión</div>
+						<div class='mui-page-title' id="session-title">Inicia Sesión</div>
 						<a class="mui-headmenu" href="#"></a>
 					</div>
 					<div class="mui-page-body mui-scrollable" id="second-body">
@@ -227,9 +241,11 @@
 								<input type="text" id="user" class="login-field">
 								<p style="text-align: left; margin-left: 15%;">Contraseña</p>
 								<input type="password" id="password" class="login-field">
-								<button class="user-area-button user-select" id="login-social-button">Iniciar Sesión</button>
+								<button class="user-area-button user-select" id="login-social-button">Iniciar
+									Sesión</button>
 								<br>
-								<button class="user-area-button user-select" id="register-social-button">Registrarse</button>
+								<button class="user-area-button user-select"
+									id="register-social-button">Registrarse</button>
 							</div>
 						</div>
 					</div>

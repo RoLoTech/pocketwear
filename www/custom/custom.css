@@ -33,7 +33,8 @@ a {
 	height: 40px;
 	margin: auto;
 	background-position: center;
-	background-image: url(images/logo-40.png);
+	background-image: url(images/pwlogo.png);
+	background-size: contain;
 	background-repeat: no-repeat;
 }
 
@@ -168,9 +169,8 @@ a {
 }
 
 #camera, #camera-view, #camera-sensor, #camera-output{
-    position: fixed;
-    height: 100%;
-    width: 100%;
+    height: 40%;
+    width: 80%;
     object-fit: cover;
 }
 
@@ -789,3 +789,50 @@ a {
    -ms-user-select: none;
 }
 
+#camera-image-container {
+	margin-top: 10%;
+	text-align: center;
+	margin-left: 10%;
+	width: 80%;
+	height: 40%;
+	border-radius: 60px 60px 60px 60px;
+	-moz-border-radius: 60px 60px 60px 60px;
+	-webkit-border-radius: 60px 60px 60px 60px;
+	border: 0px solid #000000;
+	-webkit-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.75);
+}
+
+#imagen {
+	height: 90%;
+	padding-top: 5%;
+	width: auto;
+	border-radius: 5px;
+}
+
+#camara {
+	width: 100%;
+	height: 100%;
+	background-color: #F47956;
+}
+
+#shutter {
+	width: 20%;
+	height: 10%;
+	margin: 10% auto;
+	font-size: xx-large;
+	border-radius: 1000px;
+}
+
+#session-title {
+	margin-top: auto;
+    height: 100%;
+    font-size: xx-large;
+}
+
+#camera-title {
+	margin-top: auto;
+    height: 100%;
+    font-size: xx-large;
+}

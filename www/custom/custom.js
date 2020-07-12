@@ -144,6 +144,10 @@ function prepareCamera() {
 
 function installEvents() {
 
+    $("#shutter").click(function() {
+        $("#camera").click()
+    })
+
     mui.util.installEvents([
         //Mail list click/touch events. See that if the event is not specified, click is assumed.
         {

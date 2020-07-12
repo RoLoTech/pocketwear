@@ -37,110 +37,133 @@ function deviceReady() {
 
 
 function prepareCamera() {
-    // Set constraints for the video stream
-    // Define constants
-
-    /*let input = $('#camera')
-
-    input.change(function(event){
-
-        console.dir(event.target.files[0]);
-
-        if(event.target.files[0].type.indexOf("image/")>-1){
-            let img = $('#imagen');
-            img.src = window.URL.createObjectURL(event.target.files[0])
-            console.log(img)
-        }
-    })
-    */
-    /*
-    $('#camera-trigger').click(function(event){
- 
-         function onSuccess(imgData){
-             alert('exito')
-             var imagen = $('#imagen')
-             imagen.src = imgData
-         }
- 
-         function onFailure(message){
-             alert(message)
-         }
-         console.log(navigator.camera)
-         alert(navigator.camera)
- 
- 
-        navigator.camera.getPicture(onSuccess, onFailure,
-        {
-         quality: 80,
-         destinationType: Camera.DestinationType.FILE_URI,
-         sourceType: Camera.MediaType.PICTURE,
-         encodingType: Camera.EncodingType.JPEG,
-         cameraDirection: Camera.Direction.BACK,
-         targetWidth: 300,
-         targetHeight: 400
-     })
-    })*/
-
     let form = document.getElementById('form');
     //get the captured media file
     let input = document.getElementById('camera');
-
+    let botonContinuar = document.getElementById('camera-trigger');
+    //defaults to post
+    var type = "";
+    var store = "";
+    var season = "Otoño";
+    var color = "";
     input.addEventListener('change', (ev) => {
         console.dir(input.files[0]);
         if (input.files[0].type.indexOf("image/") > -1) {
             let img = document.getElementById('imagen');
             img.src = window.URL.createObjectURL(input.files[0]);
+            botonContinuar.style.display = "block";
+            $("#camera-trigger").on("click", function (e) {
+                mui.prompt('Indique el Tipo de prenda es esta', promptCallbackTipo, 'Atención');
+
+                function promptCallbackTipo(tipo) {
+                    if (tipo.buttonIndex == 2) {
+                        mui.toast('No se guardo su prenda', 'center', 'short');
+                    } else if (tipo.buttonIndex == 1) {
+                        if (tipo.input1 == "" || tipo.input1 == null) {
+                            mui.toast('Debe indicar un Tipo de prenda', 'center', 'short');
+                            mui.prompt('Indique el Tipo de prenda', promptCallbackTipo, 'Atención');
+                        } else {
+                            type = tipo.input1;
+                            mui.prompt('Indique la Tienda de la prenda', promptCallbackTienda, 'Atención');
+
+                            function promptCallbackTienda(tienda) {
+                                if (tienda.buttonIndex == 2) {
+                                    mui.toast('No se guardo su prenda', 'center', 'short');
+                                } else if (tienda.buttonIndex == 1) {
+                                    if (tienda.input1 == "" || tienda.input1 == null) {
+                                        mui.toast('Debe indicar una Tienda para la prenda', 'center', 'short');
+                                        mui.prompt('Indique la Tienda de la prenda', promptCallbackTienda, 'Atención');
+                                    } else {
+                                        store = tienda.input1;
+                                        mui.prompt('Indique el Color de la prenda', promptCallbackColor, 'Atención');
+
+                                        function promptCallbackColor(color1) {
+                                            if (color1.buttonIndex == 2) {
+                                                mui.toast('No se guardo su prenda', 'center', 'short');
+                                            } else if (color1.buttonIndex == 1) {
+                                                if (color1.input1 == "" || color1.input1 == null) {
+                                                    mui.toast('Debe indicar un Color para la prenda', 'center', 'short');
+                                                    mui.prompt('Indique el Color de la prenda', promptCallbackColor, 'Atención');
+                                                } else {
+                                                    color = color1.input1;
+                                                    mui.prompt('Indique la Temporada de la prenda', promptCallbackSeason, 'Atención');
+
+                                                    function promptCallbackSeason(season1) {
+                                                        if (season1.buttonIndex == 2) {
+                                                            mui.toast('No se guardo su prenda', 'center', 'short');
+                                                        } else if (season1.buttonIndex == 1) {
+                                                            if (season1.input1 != "Primavera" && season1.input1 != "Verano" && season1.input1 != "Otoño" && season1.input1 != "Invierno") {
+                                                                mui.toast('Debe indicar una estacion existente(Primavera,Verano,Otoño o Invierno)', 'center', 'short');
+                                                                mui.prompt('Indique el Color de la prenda', promptCallbackSeason, 'Atención');
+                                                            } else {
+                                                                season = season1.input1
+                                                                var fotoGenerada = document.getElementById('camera').files[0];
+                                                                updateItem(type, store, color, season, fotoGenerada);
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            });
         }
     });
-
-    /*
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        
-        var player = document.getElementById('player'); 
-        var snapshotCanvas = document.getElementById('snapshot');
-        var captureButton = document.getElementById('capture');
-
-        var handleSuccess = function(stream) {
-            // Attach the video stream to the video element and autoplay.
-            player.srcObject = stream;
-        };
-    
-        captureButton.addEventListener('click', function() {
-            var context = snapshot.getContext('2d');
-            // Draw the video frame to the canvas.
-            context.drawImage(player, 0, 0, snapshotCanvas.width, 
-                snapshotCanvas.height);
-        });
-
-        navigator.mediaDevices.enumerateDevices().then(devices => {
-            let sourceId = null;
-            // enumerate all devices
-            for (var device of devices) {
-            // if there is still no video input, or if this is the rear camera
-            if (device.kind == 'videoinput' &&
-                (!sourceId || device.label.indexOf('back') !== -1)) {
-                sourceId = device.deviceId;
-            }
-            }
-        
-            // we didn't find any video input
-            if (!sourceId) {
-            throw 'no video input';
-            }
-            let constraints = {
-            video: {
-                sourceId: sourceId
-            }
-            };
-    
-           navigator.mediaDevices.getUserMedia(constraints)
-            .then(handleSuccess);});
-    }else{
-        alert('Fail');
-    }
-*/
-    // Start the video stream when the window loads
 }
+
+function updateItem(type, store, color, season, img) {
+    var reader = new FileReader();
+    reader.readAsDataURL(img);
+    reader.onloadend = function () {
+        var image = reader.result;
+        $.ajax({
+            method: 'POST',
+            url: 'http://localhost:3001/item', // poner el url correspondiente
+            crossDomain: true,
+            data: {
+                type: type,
+                store: store,
+                season: season,
+                color: color,
+                image: image,
+            }
+
+        }).done(function (data) {
+            console.log(data);
+            mui.vibrate();
+            mui.toast('Su prenda se guardo exitosamente', 'center', 'short');
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+
+            switch (jqXHR.status) {
+                case 0:
+                    alert('Not Connected: verify your connection')
+                    break;
+                case 500:
+                    alert('Internal server error [500]')
+                    break;
+                default:
+                    switch (textStatus) {
+                        case 'timeout':
+                            alert('Time out error')
+                            break;
+                        case 'parsererror':
+                            alert('Requested JSON parse failed')
+                            break;
+                    }
+                    break;
+
+            }
+        });
+    };
+}
+
 
 function installEvents() {
 
@@ -356,18 +379,18 @@ function saveCollection() {
 
             switch (jqXHR.status) {
                 case 0:
-                    alert('Not Connected: verify your connection')
+                    alert('Not Connected: verify your connection');
                     break;
                 case 500:
-                    alert('Internal server error [500]')
+                    alert('Internal server error [500]');
                     break;
                 default:
                     switch (textStatus) {
                         case 'timeout':
-                            alert('Time out error')
+                            alert('Time out error');
                             break;
                         case 'parsererror':
-                            alert('Requested JSON parse failed')
+                            alert('Requested JSON parse failed');
                             break;
                     }
                     break;
@@ -378,18 +401,18 @@ function saveCollection() {
 
         switch (jqXHR.status) {
             case 0:
-                alert('Not Connected: verify your connection')
+                alert('Not Connected: verify your connection');
                 break;
             case 500:
-                alert('Internal server error [500]')
+                alert('Internal server error [500]');
                 break;
             default:
                 switch (textStatus) {
                     case 'timeout':
-                        alert('Time out error')
+                        alert('Time out error');
                         break;
                     case 'parsererror':
-                        alert('Requested JSON parse failed')
+                        alert('Requested JSON parse failed');
                         break;
                 }
                 break;
@@ -410,12 +433,11 @@ function logVistosRecientes() {
             //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
             for (i = 0; i < data.length; i++) {
                 var post = data[i];
-                console.log(post)
-                var contenedorDetalles = document.createElement("div")
+                var contenedorDetalles = document.createElement("div");
                 contenedorDetalles.setAttribute("class", "details-container");
-                var detalleTitulo = document.createElement("div")
+                var detalleTitulo = document.createElement("div");
                 detalleTitulo.setAttribute("class", "details-title");
-                var detalleTienda = document.createElement("div")
+                var detalleTienda = document.createElement("div");
                 detalleTienda.setAttribute("class", "details-store");
                 var tienda = post.store;
                 var titulo = post.type;
@@ -424,7 +446,7 @@ function logVistosRecientes() {
                 detalleTienda.appendChild(document.createTextNode(tienda));
                 contenedorDetalles.appendChild(detalleTitulo);
                 contenedorDetalles.appendChild(detalleTienda);
-                var modulo = document.createElement("div")
+                var modulo = document.createElement("div");
                 modulo.setAttribute("class", "module");
                 modulo.setAttribute("id", "UltimaVisitada" + i);
                 modulo.appendChild(contenedorDetalles);
@@ -434,7 +456,10 @@ function logVistosRecientes() {
                     crossDomain: true,
                     dataType: 'text'
                 }).done(function (foto) {
-                    modulo.style.backgroundImage = foto;
+                    console.log(foto)
+
+
+                    modulo.style.backgroundImage = 'url('+ foto +')' ;
                     modulo.style.backgroundSize = "contain";
                     modulo.style.backgroundRepeat = "no-repeat";
                 }).fail(function (jqXHR, textStatus, errorThrown) {

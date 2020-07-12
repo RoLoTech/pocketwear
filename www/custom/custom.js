@@ -53,6 +53,7 @@ function prepareCamera() {
         }
     })
     */
+   /*
    $('#camera-trigger').click(function(event){
 
         function onSuccess(imgData){
@@ -78,8 +79,8 @@ function prepareCamera() {
         targetWidth: 300,
         targetHeight: 400
     })
-   })
-   /* 
+   })*/
+   
    let form = document.getElementById('form');
    //get the captured media file
    let input = document.getElementById('camera');
@@ -90,7 +91,7 @@ function prepareCamera() {
            let img = document.getElementById('imagen');
            img.src = window.URL.createObjectURL(input.files[0]);
        }
-    });*/
+    });
 
     /*
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

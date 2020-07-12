@@ -83,15 +83,12 @@ function prepareCamera() {
             snapshotCanvas.height);
       });
 
-      const videoconstraints = {
-          faicingMode: 'environment'
-      };
-      const constraints = {
-          video: videoconstraints,
-          audio: false
-      };
     
-      navigator.mediaDevices.getUserMedia(constraints)
+      navigator.mediaDevices.getUserMedia({video: {
+          facingMode: {
+              exact: 'environment'
+          }
+      }})
           .then(handleSuccess);
     }else{
         alert('Fail');

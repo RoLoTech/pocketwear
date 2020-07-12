@@ -67,29 +67,45 @@ function prepareCamera() {
     });*/
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         
-    var player = document.getElementById('player'); 
-    var snapshotCanvas = document.getElementById('snapshot');
-    var captureButton = document.getElementById('capture');
+        var player = document.getElementById('player'); 
+        var snapshotCanvas = document.getElementById('snapshot');
+        var captureButton = document.getElementById('capture');
 
-    var handleSuccess = function(stream) {
-        // Attach the video stream to the video element and autoplay.
-        player.srcObject = stream;
-      };
+        var handleSuccess = function(stream) {
+            // Attach the video stream to the video element and autoplay.
+            player.srcObject = stream;
+        };
     
-      captureButton.addEventListener('click', function() {
-        var context = snapshot.getContext('2d');
-        // Draw the video frame to the canvas.
-        context.drawImage(player, 0, 0, snapshotCanvas.width, 
-            snapshotCanvas.height);
-      });
+        captureButton.addEventListener('click', function() {
+            var context = snapshot.getContext('2d');
+            // Draw the video frame to the canvas.
+            context.drawImage(player, 0, 0, snapshotCanvas.width, 
+                snapshotCanvas.height);
+        });
 
+        navigator.mediaDevices.enumerateDevices().then(devices => {
+            let sourceId = null;
+            // enumerate all devices
+            for (var device of devices) {
+            // if there is still no video input, or if this is the rear camera
+            if (device.kind == 'videoinput' &&
+                (!sourceId || device.label.indexOf('back') !== -1)) {
+                sourceId = device.deviceId;
+            }
+            }
+        
+            // we didn't find any video input
+            if (!sourceId) {
+            throw 'no video input';
+            }
+            let constraints = {
+            video: {
+                sourceId: sourceId
+            }
+            };
     
-      navigator.mediaDevices.getUserMedia({video: {
-          facingMode: {
-              exact: 'environment'
-          }
-      }})
-          .then(handleSuccess);
+           navigator.mediaDevices.getUserMedia(constraints)
+            .then(handleSuccess);});
     }else{
         alert('Fail');
     }

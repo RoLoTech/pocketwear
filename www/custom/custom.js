@@ -53,7 +53,24 @@ function prepareCamera() {
         }
     })
     */
-    
+   $('#camera-trigger').click(function(event){
+       let opts ={
+           quality: 80,
+           destinationType: Camera.DestinationType.FILE_URI,
+           sourceType: Camera.MediaType.PICTURE,
+           encodingType: Camera.EncodingType.JPEG,
+           cameraDirection: Camera.Direction.BACK,
+           targetWidth: 300,
+           targetHeight: 400
+       };
+
+       navigator.camera.getPicture(function(imgURI){
+           $('#imagen').src= imgURI;
+       }, function(msg){
+           alert(msg);
+       },opts)
+   })
+   /* 
    let form = document.getElementById('form');
    //get the captured media file
    let input = document.getElementById('camera');
@@ -64,7 +81,7 @@ function prepareCamera() {
            let img = document.getElementById('imagen');
            img.src = window.URL.createObjectURL(input.files[0]);
        }
-    });
+    });*/
 
     /*
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

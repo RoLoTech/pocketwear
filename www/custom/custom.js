@@ -66,6 +66,7 @@ function prepareCamera() {
        }
     });*/
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        alert('entro')
     var player = document.getElementById('player'); 
     var snapshotCanvas = document.getElementById('snapshot');
     var captureButton = document.getElementById('capture');

@@ -422,7 +422,8 @@ function saveCollection() {
 }
 
 function logVistosRecientes() {
-    document.querySelector('#spinner1').style.display = "block"
+    document.querySelector('#spinner1').style.display = "block";
+    promises=[]
     $.ajax({
         method: 'GET',
         url: 'http://localhost:3001/item/date', // todo poner el Url Correspondientee
@@ -432,36 +433,17 @@ function logVistosRecientes() {
         .done(function (data) {
             //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
             for (i = 0; i < data.length; i++) {
-                var post = data[i];
-                var contenedorDetalles = document.createElement("div");
-                contenedorDetalles.setAttribute("class", "details-container");
-                var detalleTitulo = document.createElement("div");
-                detalleTitulo.setAttribute("class", "details-title");
-                var detalleTienda = document.createElement("div");
-                detalleTienda.setAttribute("class", "details-store");
-                var tienda = post.store;
-                var titulo = post.type;
+                var postt = data[data.length-1-i];
 
-                detalleTitulo.appendChild(document.createTextNode(titulo));
-                detalleTienda.appendChild(document.createTextNode(tienda));
-                contenedorDetalles.appendChild(detalleTitulo);
-                contenedorDetalles.appendChild(detalleTienda);
-                var modulo = document.createElement("div");
-                modulo.setAttribute("class", "module");
-                modulo.setAttribute("id", "UltimaVisitada" + i);
-                modulo.appendChild(contenedorDetalles);
-                $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
+                var request= $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
                     method: 'GET',
-                    url: 'http://localhost:3001/itemImage/' + post._id,
+                    url: 'http://localhost:3001/itemImage/' + postt._id,
                     crossDomain: true,
                     dataType: 'text'
                 }).done(function (foto) {
-                    console.log(foto)
 
 
-                    modulo.style.backgroundImage = 'url('+ foto +')' ;
-                    modulo.style.backgroundSize = "contain";
-                    modulo.style.backgroundRepeat = "no-repeat";
+
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     switch (jqXHR.status) {
                         case 0:
@@ -484,9 +466,40 @@ function logVistosRecientes() {
                             break;
                     }
                 });
-                document.querySelector('#spinner1').style.display = "none"
-                document.querySelector("#grid-home-page").appendChild(modulo);
+                promises.push(request)
             }
+            Promise.all(promises)
+                .then(responseList => {
+                    for (j=0;j<responseList.length;j++){
+                        console.log(data)
+                        var post = data[j];
+                        var contenedorDetalles = document.createElement("div");
+                        contenedorDetalles.setAttribute("class", "details-container");
+                        var detalleTitulo = document.createElement("div");
+                        detalleTitulo.setAttribute("class", "details-title");
+                        var detalleTienda = document.createElement("div");
+                        detalleTienda.setAttribute("class", "details-store");
+                        var tienda = post.store;
+                        var titulo = post.type;
+
+                        detalleTitulo.appendChild(document.createTextNode(titulo));
+                        detalleTienda.appendChild(document.createTextNode(tienda));
+                        contenedorDetalles.appendChild(detalleTitulo);
+                        contenedorDetalles.appendChild(detalleTienda);
+                        var modulo = document.createElement("div");
+                        modulo.id="modulo"+j;
+                        modulo.setAttribute("class", "module");
+                        modulo.setAttribute("id", "UltimaVisitada" + j);
+                        modulo.appendChild(contenedorDetalles);
+                        modulo.style.backgroundImage = 'url('+ responseList[responseList.length-j-1] +')' ;
+                        modulo.style.backgroundSize = "contain";
+                        modulo.style.backgroundRepeat = "no-repeat";
+                        document.querySelector("#grid-home-page").appendChild(modulo);
+
+                    }
+                });
+            document.querySelector('#spinner1').style.display = "none"
+
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
 

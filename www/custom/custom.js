@@ -54,21 +54,29 @@ function prepareCamera() {
     })
     */
    $('#camera-trigger').click(function(event){
-       let opts ={
-           quality: 80,
-           destinationType: Camera.DestinationType.FILE_URI,
-           sourceType: Camera.MediaType.PICTURE,
-           encodingType: Camera.EncodingType.JPEG,
-           cameraDirection: Camera.Direction.BACK,
-           targetWidth: 300,
-           targetHeight: 400
-       };
 
-       navigator.camera.getPicture(function(imgURI){
-           $('#imagen').src= imgURI;
-       }, function(msg){
-           alert(msg);
-       },opts)
+        function onSuccess(imgData){
+            alert('exito')
+            var imagen = $('#imagen')
+            imagen.src = imgData
+        }
+
+        function onFailure(message){
+            alert(message)
+        }
+        console.log(navigator.camera)
+
+
+       navigator.camera.getPicture(onSuccess, onFailure,
+       {
+        quality: 80,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.MediaType.PICTURE,
+        encodingType: Camera.EncodingType.JPEG,
+        cameraDirection: Camera.Direction.BACK,
+        targetWidth: 300,
+        targetHeight: 400
+    })
    })
    /* 
    let form = document.getElementById('form');

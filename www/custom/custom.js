@@ -45,18 +45,31 @@ function prepareCamera() {
         cameraSensor = document.querySelector("#camera-sensor"),
         cameraTrigger = document.querySelector("#camera-trigger")
     
-    let input = $('#camera')
+    /*let input = $('#camera')
     
     input.change(function(event){
         
         console.dir(event.target.files[0]);
+
         if(event.target.files[0].type.indexOf("image/")>-1){
             let img = $('#imagen');
+            img.src = window.URL.createObjectURL(event.target.files[0])
             console.log(img)
-            img.src = URL.createObjectURL(event.target.files[0])
         }
     })
-    
+    */
+   
+   let form = document.getElementById('form');
+   //get the captured media file
+   let input = document.getElementById('camera');
+   
+   input.addEventListener('change', (ev)=>{
+       console.dir( input.files[0] );
+       if(input.files[0].type.indexOf("image/") > -1){
+           let img = document.getElementById('imagen');
+           img.src = window.URL.createObjectURL(input.files[0]);
+       }
+    });
     // Access the device camera and stream to cameraView
     
    // function cameraStart() {

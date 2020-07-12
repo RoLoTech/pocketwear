@@ -103,7 +103,11 @@
 									<label for ='camera'>Capture Media</label>
 									<!-- Camera view -->
 									<br/>
-									<input type="file" accept="image/*" capture id='camera'>
+									<input type="file" 
+           								id="camera" 
+            							accept="image/*,video/*,audio/*" 
+            							capture 
+            							/>
 
 									<br/>
 									<input type = 'submit' value = 'Process'>
@@ -112,7 +116,7 @@
 								<!--video-- id="camera-view" autoplay playsinline></video-->
 								<!-- Camera output -->
 								<!--<img src="//:0" alt="" id="camera-output"> -->
-								<p><img id = 'imagen' src="" alt = 'from phone' max-width = '90%'> </p>
+								<p><img id = 'imagen' src='' alt = 'from phone' max-width = '50%'> </p>
 								<!-- Camera trigger -->
 								<button id="camera-trigger">Take a picture</button>
 							</div>

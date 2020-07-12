@@ -66,7 +66,7 @@ function prepareCamera() {
        }
     });*/
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        alert('entro')
+        
     var player = document.getElementById('player'); 
     var snapshotCanvas = document.getElementById('snapshot');
     var captureButton = document.getElementById('capture');
@@ -82,8 +82,16 @@ function prepareCamera() {
         context.drawImage(player, 0, 0, snapshotCanvas.width, 
             snapshotCanvas.height);
       });
+
+      const videoconstraints = {
+          faicingMode: 'environment'
+      };
+      const constraints = {
+          video: videoconstraints,
+          audio: false
+      };
     
-      navigator.mediaDevices.getUserMedia({video: true})
+      navigator.mediaDevices.getUserMedia(constraints)
           .then(handleSuccess);
     }else{
         alert('Fail');

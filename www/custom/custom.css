@@ -390,6 +390,8 @@ a {
   
 .module {
 	background: #eaeaea;
+	background-size: contain;
+	max-height: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

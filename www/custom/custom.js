@@ -1,5 +1,7 @@
 //All ready!. Page &  Cordova loaded.
 //Todo listo!. Página & Cordova cargados.
+
+
 function deviceReady() {
     try {
         //Example when Internet connection is needed but not mandatory
@@ -16,6 +18,8 @@ function deviceReady() {
         installEvents();	//Events installation using MobileUI's method.
         //isntallEvents2();	//Example of traditional events installation.
         logVistosRecientes();
+
+
         prepareCamera();
 
         //Hide splash.
@@ -59,8 +63,8 @@ function prepareCamera() {
                     if (tipo.buttonIndex === 2) {
                         mui.toast('No se guardo su prenda', 'center', 'short');
                     } else if (tipo.buttonIndex === 1) {
-                        console.log(tipo.input1 in ["Falda","Remera","Camisa" ,"Buzo" ,"Pantalon" ,"Campera", "Gorro" , "Short"] )
-                        if (tipo.input1 !=="Falda" && tipo.input1 !=="Remera"&&tipo.input1 !=="Camisa" &&tipo.input1 !=="Buzo" &&tipo.input1 !=="Pantalon" &&tipo.input1 !=="Campera"&&tipo.input1 !== "Gorro" &&tipo.input1 !== "Short") {
+                        console.log(tipo.input1 in ["Falda", "Remera", "Camisa", "Buzo", "Pantalon", "Campera", "Gorro", "Short"])
+                        if (tipo.input1 !== "Falda" && tipo.input1 !== "Remera" && tipo.input1 !== "Camisa" && tipo.input1 !== "Buzo" && tipo.input1 !== "Pantalon" && tipo.input1 !== "Campera" && tipo.input1 !== "Gorro" && tipo.input1 !== "Short") {
                             mui.toast('La prenda debe ser una de las siguientes: Falda, Camisa, Remera, Buzo, Pantalon, Campera, Gorro, Short', 'center', 'short');
                             mui.prompt('Indique el Tipo de prenda', promptCallbackTipo, 'Atención');
                         } else {
@@ -285,66 +289,6 @@ function installEvents() {
  * Usar el anterior o este. Elimine el que no use.
  * @returns
  */
-function installEvents2() {
-
-    //It's a good idea to consider what happens when the device is switched on and off the internet.
-    //Es buena idea considerar que pasa cuando el dispositivo se conecta y desconecta a Internet.
-    document.addEventListener("online", function () {
-        //somthing
-    }, false);
-
-    //Back button.
-    $(".mui-backarrow").click(function () {
-        mui.history.back();
-        return false;
-    });
-
-    //Open menu.
-    $(".mui-headmenu").click(function () {
-        mui.screen.showPanel("menu-panel", "SLIDE_LEFT");	//ATTENTION!!! mui.screen instead of mui.viewport
-        return false;
-    });
-
-    $("#tabbar-button1").click(function () {
-        mui.alert("tab 1", "Selected");
-        return false;
-    });
-
-    $("#tabbar-button2").click(function () {
-        mui.alert("tab 1", "Selected");
-        return false;
-    });
-
-    $("#tabbar-button3").click(function () {
-        mui.alert("tab 3", "Selected");
-        return false;
-    });
-
-    $("#tabbar-button4").click(function () {
-        mui.alert("tab 4", "Selected");
-        return false;
-    });
-
-    $("#tabbar-button5").click(function () {
-        mui.alert("tab 5", "Selected");
-        return false;
-    });
-
-    $("#menuoptions").click(function () {
-        return false;
-    });
-
-    /*******************************************************************************/
-    /*Swipe Test --------------------------------------------------------------------*/
-    /*******************************************************************************/
-    //Swipe touch events. Cool for best App user experience!
-    //Evento de desplazamiento tactil. Buenisimo para una óptima experiencia de usuario en App!
-    mui.viewport.on("swiperight", function (currentPageId, originalTarget, event, startX, startY, endX, endY) {
-        if (!mui.viewport.panelIsOpen()) {
-            mui.history.back();
-        }
-    });
-}
 
 function userLogin() {
     $.ajax({
@@ -358,150 +302,85 @@ function classToggle() {
     el.classList.toggle('step-animation');
 }
 
-function saveCollection() {
-    $.ajax({
-        method: 'POST',
-        url: 'http://localhost:3002/getAll', // poner el url correspondiente 
-        crossDomain: true,
-        data: {
-            //ver que atributos poner 
-        }
-    }).done(function (data) {
-        $.ajax({
-            method: 'POST',
-            url: 'http://localhost:3002/getAll', // poner el url correspondiente 
-            crossDomain: true,
-            data: {
-                //ver que poner 
-            }
-        }).done(function (data) {
-            alert('Collection successfully saved')
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-
-            switch (jqXHR.status) {
-                case 0:
-                    alert('Not Connected: verify your connection');
-                    break;
-                case 500:
-                    alert('Internal server error [500]');
-                    break;
-                default:
-                    switch (textStatus) {
-                        case 'timeout':
-                            alert('Time out error');
-                            break;
-                        case 'parsererror':
-                            alert('Requested JSON parse failed');
-                            break;
-                    }
-                    break;
-
-            }
-        })
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-
-        switch (jqXHR.status) {
-            case 0:
-                alert('Not Connected: verify your connection');
-                break;
-            case 500:
-                alert('Internal server error [500]');
-                break;
-            default:
-                switch (textStatus) {
-                    case 'timeout':
-                        alert('Time out error');
-                        break;
-                    case 'parsererror':
-                        alert('Requested JSON parse failed');
-                        break;
-                }
-                break;
-
-        }
-    })
-}
 
 function logVistosRecientes() {
     document.querySelector('#spinner1').style.display = "block";
-    promises=[]
+    promises = []
     $.ajax({
         method: 'GET',
         url: 'http://localhost:3001/item/date', // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
+    }).done(function (data) {
+        //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
+        for (i = 0; i < data.length; i++) {
+            var postt = data[data.length - 1 - i];
+
+            var request = $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
+                method: 'GET',
+                url: 'http://localhost:3001/itemImage/' + postt._id,
+                crossDomain: true,
+                dataType: 'text'
+            }).done(function (foto) {
+
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                switch (jqXHR.status) {
+                    case 0:
+                        alert('Not connect: Verify Network.');
+                        break;
+                    case 404:
+                        alert('Requested page not found [404]')
+                        break;
+                    case 500:
+                        alert('Internal Server Error [500].');
+                        break;
+                    default:
+                        switch (textStatus) {
+                            case 'timeout':
+                                alert('Time out error.');
+                                break;
+                            case 'parsererror':
+                                alert('Requested JSON parse failed.');
+                        }
+                        break;
+                }
+            });
+            promises.push(request)
+        }
+        Promise.all(promises)
+            .then(responseList => {
+                for (j = 0; j < responseList.length; j++) {
+                    var post = data[j];
+                    var contenedorDetalles = document.createElement("div");
+                    contenedorDetalles.setAttribute("class", "details-container");
+                    var detalleTitulo = document.createElement("div");
+                    detalleTitulo.setAttribute("class", "details-title");
+                    var detalleTienda = document.createElement("div");
+                    detalleTienda.setAttribute("class", "details-store");
+                    var tienda = post.store;
+                    var titulo = post.type;
+
+                    detalleTitulo.appendChild(document.createTextNode(titulo));
+                    detalleTienda.appendChild(document.createTextNode(tienda));
+                    contenedorDetalles.appendChild(detalleTitulo);
+                    contenedorDetalles.appendChild(detalleTienda);
+                    var modulo = document.createElement("div");
+                    modulo.id = "modulo" + j;
+                    modulo.setAttribute("class", "module");
+                    modulo.setAttribute("id", "UltimaVisitada" + j);
+                    modulo.appendChild(contenedorDetalles);
+                    modulo.style.backgroundImage = 'url(' + responseList[responseList.length - j - 1] + ')';
+                    modulo.style.backgroundSize = "contain";
+                    modulo.style.backgroundRepeat = "no-repeat";
+                    document.querySelector("#grid-home-page").appendChild(modulo);
+
+                }
+                document.querySelector('#spinner1').style.display = "none"
+            });
+
+
     })
-        .done(function (data) {
-            //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
-            for (i = 0; i < data.length; i++) {
-                var postt = data[data.length-1-i];
-
-                var request= $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
-                    method: 'GET',
-                    url: 'http://localhost:3001/itemImage/' + postt._id,
-                    crossDomain: true,
-                    dataType: 'text'
-                }).done(function (foto) {
-
-
-
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    switch (jqXHR.status) {
-                        case 0:
-                            alert('Not connect: Verify Network.');
-                            break;
-                        case 404:
-                            alert('Requested page not found [404]')
-                            break;
-                        case 500:
-                            alert('Internal Server Error [500].');
-                            break;
-                        default:
-                            switch (textStatus) {
-                                case 'timeout':
-                                    alert('Time out error.');
-                                    break;
-                                case 'parsererror':
-                                    alert('Requested JSON parse failed.');
-                            }
-                            break;
-                    }
-                });
-                promises.push(request)
-            }
-            Promise.all(promises)
-                .then(responseList => {
-                    for (j=0;j<responseList.length;j++){
-                        console.log(data)
-                        var post = data[j];
-                        var contenedorDetalles = document.createElement("div");
-                        contenedorDetalles.setAttribute("class", "details-container");
-                        var detalleTitulo = document.createElement("div");
-                        detalleTitulo.setAttribute("class", "details-title");
-                        var detalleTienda = document.createElement("div");
-                        detalleTienda.setAttribute("class", "details-store");
-                        var tienda = post.store;
-                        var titulo = post.type;
-
-                        detalleTitulo.appendChild(document.createTextNode(titulo));
-                        detalleTienda.appendChild(document.createTextNode(tienda));
-                        contenedorDetalles.appendChild(detalleTitulo);
-                        contenedorDetalles.appendChild(detalleTienda);
-                        var modulo = document.createElement("div");
-                        modulo.id="modulo"+j;
-                        modulo.setAttribute("class", "module");
-                        modulo.setAttribute("id", "UltimaVisitada" + j);
-                        modulo.appendChild(contenedorDetalles);
-                        modulo.style.backgroundImage = 'url('+ responseList[responseList.length-j-1] +')' ;
-                        modulo.style.backgroundSize = "contain";
-                        modulo.style.backgroundRepeat = "no-repeat";
-                        document.querySelector("#grid-home-page").appendChild(modulo);
-
-                    }
-                });
-            document.querySelector('#spinner1').style.display = "none"
-
-        })
         .fail(function (jqXHR, textStatus, errorThrown) {
 
             switch (jqXHR.status) {
@@ -533,124 +412,251 @@ function logVistosRecientes() {
 
 
 function spinner() {
-    var angleRotate = 120
-    var rotate1 = 0
-    var mouse1 = new Array(2);
+    var fotoss = []
+    var pedidoss = []
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:3001/userInventory/', // todo poner el Url Correspondientee
+        crossDomain: true,
+        dataType: 'json'
+    }).done(function (collection) {
+        console.log(collection[2])
+        for (let i = 0; i < collection[2].items.length; i++) {
+            fotoss.push($.ajax({
+                method: 'GET',
+                url: 'http://localhost:3001/itemImage/' + collection[2].items[i], // todo poner el Url Correspondientee
+                crossDomain: true,
+                dataType: 'text'
+            }).done(function (collection) {
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                switch (jqXHR.status) {
+                    case 0:
+                        alert('Not connect: Verify Network.');
+                        break;
+                    case 404:
+                        alert('Requested page not found [404]')
+                        break;
+                    case 500:
+                        alert('Internal Server Error [500].');
+                        break;
+                    default:
+                        switch (textStatus) {
+                            case 'timeout':
+                                alert('Time out error.');
+                                break;
+                            case 'parsererror':
+                                alert('Requested JSON parse failed.');
+                        }
+                        break;
+                }
+            }))
 
-    $('#card-container1').on('touchstart', function(event){
-        mouse1[0] = event.originalEvent.touches[0].pageX
-    })
+            pedidoss.push($.ajax({
+                method: 'GET',
+                url: 'http://localhost:3001/item/data/' + collection[2].items[i], // todo poner el Url Correspondientee
+                crossDomain: true,
+                dataType: 'json'
+            }).done(function (collection) {
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                switch (jqXHR.status) {
+                    case 0:
+                        alert('Not connect: Verify Network.');
+                        break;
+                    case 404:
+                        alert('Requested page not found [404]')
+                        break;
+                    case 500:
+                        alert('Internal Server Error [500].');
+                        break;
+                    default:
+                        switch (textStatus) {
+                            case 'timeout':
+                                alert('Time out error.');
+                                break;
+                            case 'parsererror':
+                                alert('Requested JSON parse failed.');
+                        }
+                        break;
+                }
+            }))
+        }
+        Promise.all(pedidoss)
+            .then(items => {
+                Promise.all(fotoss)
+                    .then(fotos => {
+                        console.log(items)
+                        var arriba = [];
+                        var medio = [];
+                        var abajo = [];
 
-    $('#card-container1').on('touchend', function (event) {
-        mouse1[1] = event.changedTouches[0].pageX
-        switch (event.target.id) {
-            case 'card1':
-                if(mouse1[0] <= mouse1[1]){
-                    rotate1 += angleRotate
-                }else{
-                    rotate1 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
+                        for (let j = 0; j < fotos.length; j++) {
+                            console.log(items[j])
+                            if (items[j].type === "Campera" || items[j].type === "Camisa" || items[j].type === "Remera" || items[j].type === "Buzo") {
+                                medio.push(fotos[j])
+                            } else if (items[j].type === "Gorro") {
+                                arriba.push(fotos[j])
+                            } else if (items[j].type === "Falda" || items[j].type === "Pantalon" || items[j].type === "Short") {
+                                abajo.push(fotos[j])
+                            }
+
+                        }
+                        console.log(abajo)
+                        for (i = 1; i <= 3; i++) {
+                            if (i <= arriba.length) {
+                                document.getElementById("card" + i).style.backgroundImage = 'url('+arriba[i - 1]+')'
+                            }
+                            if (i <= medio.length) {
+                                document.getElementById("card" + (i + 3)).style.backgroundImage = 'url('+medio[i - 1]+')'
+                            }
+                            if (i <= abajo.length) {
+                                document.getElementById("card" + (i + 6)).style.backgroundImage = 'url('+abajo[i - 1]+')'
+                            }
+                        }
+
+                        var angleRotate = 120
+                        var rotate1 = 0
+                        var mouse1 = new Array(2);
+
+                        $('#card-container1').on('touchstart', function (event) {
+                            mouse1[0] = event.originalEvent.touches[0].pageX
+                        })
+
+                        $('#card-container1').on('touchend', function (event) {
+                            mouse1[1] = event.changedTouches[0].pageX
+                            switch (event.target.id) {
+                                case 'card1':
+                                    if (mouse1[0] <= mouse1[1]) {
+                                        rotate1 += angleRotate
+                                    } else {
+                                        rotate1 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
+                                    break;
+                                case 'card2':
+                                    if (mouse1[0] <= mouse1[1]) {
+                                        rotate1 += angleRotate
+                                    } else {
+                                        rotate1 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
+                                    break;
+                                case 'card3':
+                                    if (mouse1[0] <= mouse1[1]) {
+                                        rotate1 += angleRotate
+                                    } else {
+                                        rotate1 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
+                                    break;
+                            }
+                        })
+
+                        var rotate2 = 0
+                        var mouse2 = new Array(2)
+
+                        $('#card-container2').on('touchstart', function (event) {
+                            mouse2[0] = event.originalEvent.touches[0].pageX
+                        })
+
+                        $('#card-container2').on('touchend', function (event) {
+                            mouse2[1] = event.changedTouches[0].pageX
+                            switch (event.target.id) {
+                                case 'card4':
+                                    if (mouse2[0] <= mouse2[1]) {
+                                        rotate2 += angleRotate
+                                    } else {
+                                        rotate2 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
+                                    break;
+                                case 'card5':
+                                    if (mouse2[0] <= mouse2[1]) {
+                                        rotate2 += angleRotate
+                                    } else {
+                                        rotate2 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
+                                    break;
+                                case 'card6':
+                                    if (mouse2[0] <= mouse2[1]) {
+                                        rotate2 += angleRotate
+                                    } else {
+                                        rotate2 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
+                                    break;
+                            }
+                        })
+
+                        var rotate3 = 0
+                        var mouse3 = new Array(2)
+
+                        $('#card-container3').on('touchstart', function (event) {
+                            mouse3[0] = event.originalEvent.touches[0].pageX
+                        })
+
+                        $('#card-container3').on('touchend', function (event) {
+                            mouse3[1] = event.changedTouches[0].pageX
+                            switch (event.target.id) {
+                                case 'card7':
+                                    if (mouse3[0] <= mouse3[1]) {
+                                        rotate3 += angleRotate
+                                    } else {
+                                        rotate3 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                    break;
+                                case 'card8':
+                                    if (mouse3[0] <= mouse3[1]) {
+                                        rotate3 += angleRotate
+                                    } else {
+                                        rotate3 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                    break;
+                                case 'card9':
+                                    if (mouse3[0] <= mouse3[1]) {
+                                        rotate3 += angleRotate
+                                    } else {
+                                        rotate3 -= angleRotate
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                    break;
+                            }
+                        })
+                    })
+            })
+
+
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        switch (jqXHR.status) {
+            case 0:
+                alert('Not connect: Verify Network.');
                 break;
-            case 'card2':
-                if(mouse1[0] <= mouse1[1]){
-                    rotate1 += angleRotate
-                }else{
-                    rotate1 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
+            case 404:
+                alert('Requested page not found [404]')
                 break;
-            case 'card3':
-                if(mouse1[0] <= mouse1[1]){
-                    rotate1 += angleRotate
-                }else{
-                    rotate1 -= angleRotate
+            case 500:
+                alert('Internal Server Error [500].');
+                break;
+            default:
+                switch (textStatus) {
+                    case 'timeout':
+                        alert('Time out error.');
+                        break;
+                    case 'parsererror':
+                        alert('Requested JSON parse failed.');
                 }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
                 break;
         }
-    })
-
-    var rotate2 = 0
-    var mouse2 = new Array(2)
-
-    $('#card-container2').on('touchstart', function(event){
-        mouse2[0] = event.originalEvent.touches[0].pageX
-    })
-
-    $('#card-container2').on('touchend', function (event) {
-        mouse2[1] = event.changedTouches[0].pageX
-        switch (event.target.id) {
-            case 'card4':
-                if(mouse2[0] <= mouse2[1]){
-                    rotate2 += angleRotate
-                }else{
-                    rotate2 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
-                break;
-            case 'card5':
-                if(mouse2[0] <= mouse2[1]){
-                    rotate2 += angleRotate
-                }else{
-                    rotate2 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
-                break;
-            case 'card6':
-                if(mouse2[0] <= mouse2[1]){
-                    rotate2 += angleRotate
-                }else{
-                    rotate2 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
-                break;
-        }
-    })
-
-    var rotate3 = 0
-    var mouse3 = new Array(2)
-
-    $('#card-container3').on('touchstart', function(event){
-        mouse3[0] = event.originalEvent.touches[0].pageX
-    })
-
-    $('#card-container3').on('touchend', function (event) {
-        mouse3[1] = event.changedTouches[0].pageX
-        switch (event.target.id) {
-            case 'card7':
-                if(mouse3[0] <= mouse3[1]){
-                    rotate3 += angleRotate
-                }else{
-                    rotate3 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                break;
-            case 'card8':
-                if(mouse3[0] <= mouse3[1]){
-                    rotate3 += angleRotate
-                }else{
-                    rotate3 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                break;
-            case 'card9':
-                if(mouse3[0] <= mouse3[1]){
-                    rotate3 += angleRotate
-                }else{
-                    rotate3 -= angleRotate
-                }
-                event.target.parentElement.style.transition = 'all 1s '
-                event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                break;
-        }
-    })
-};
+    });
+}

@@ -56,21 +56,22 @@ function prepareCamera() {
                 mui.prompt('Indique el Tipo de prenda es esta', promptCallbackTipo, 'Atención');
 
                 function promptCallbackTipo(tipo) {
-                    if (tipo.buttonIndex == 2) {
+                    if (tipo.buttonIndex === 2) {
                         mui.toast('No se guardo su prenda', 'center', 'short');
-                    } else if (tipo.buttonIndex == 1) {
-                        if (tipo.input1 == "" || tipo.input1 == null) {
-                            mui.toast('Debe indicar un Tipo de prenda', 'center', 'short');
+                    } else if (tipo.buttonIndex === 1) {
+                        console.log(tipo.input1 in ["Falda","Remera","Camisa" ,"Buzo" ,"Pantalon" ,"Campera", "Gorro" , "Short"] )
+                        if (tipo.input1 !=="Falda" && tipo.input1 !=="Remera"&&tipo.input1 !=="Camisa" &&tipo.input1 !=="Buzo" &&tipo.input1 !=="Pantalon" &&tipo.input1 !=="Campera"&&tipo.input1 !== "Gorro" &&tipo.input1 !== "Short") {
+                            mui.toast('La prenda debe ser una de las siguientes: Falda, Camisa, Remera, Buzo, Pantalon, Campera, Gorro, Short', 'center', 'short');
                             mui.prompt('Indique el Tipo de prenda', promptCallbackTipo, 'Atención');
                         } else {
                             type = tipo.input1;
                             mui.prompt('Indique la Tienda de la prenda', promptCallbackTienda, 'Atención');
 
                             function promptCallbackTienda(tienda) {
-                                if (tienda.buttonIndex == 2) {
+                                if (tienda.buttonIndex === 2) {
                                     mui.toast('No se guardo su prenda', 'center', 'short');
-                                } else if (tienda.buttonIndex == 1) {
-                                    if (tienda.input1 == "" || tienda.input1 == null) {
+                                } else if (tienda.buttonIndex === 1) {
+                                    if (tienda.input1 === "" || tienda.input1 == null) {
                                         mui.toast('Debe indicar una Tienda para la prenda', 'center', 'short');
                                         mui.prompt('Indique la Tienda de la prenda', promptCallbackTienda, 'Atención');
                                     } else {
@@ -78,10 +79,10 @@ function prepareCamera() {
                                         mui.prompt('Indique el Color de la prenda', promptCallbackColor, 'Atención');
 
                                         function promptCallbackColor(color1) {
-                                            if (color1.buttonIndex == 2) {
+                                            if (color1.buttonIndex === 2) {
                                                 mui.toast('No se guardo su prenda', 'center', 'short');
-                                            } else if (color1.buttonIndex == 1) {
-                                                if (color1.input1 == "" || color1.input1 == null) {
+                                            } else if (color1.buttonIndex === 1) {
+                                                if (color1.input1 === "" || color1.input1 == null) {
                                                     mui.toast('Debe indicar un Color para la prenda', 'center', 'short');
                                                     mui.prompt('Indique el Color de la prenda', promptCallbackColor, 'Atención');
                                                 } else {
@@ -89,14 +90,14 @@ function prepareCamera() {
                                                     mui.prompt('Indique la Temporada de la prenda', promptCallbackSeason, 'Atención');
 
                                                     function promptCallbackSeason(season1) {
-                                                        if (season1.buttonIndex == 2) {
+                                                        if (season1.buttonIndex === 2) {
                                                             mui.toast('No se guardo su prenda', 'center', 'short');
-                                                        } else if (season1.buttonIndex == 1) {
-                                                            if (season1.input1 != "Primavera" && season1.input1 != "Verano" && season1.input1 != "Otoño" && season1.input1 != "Invierno") {
+                                                        } else if (season1.buttonIndex === 1) {
+                                                            if (season1.input1 !== "Primavera" && season1.input1 !== "Verano" && season1.input1 !== "Otoño" && season1.input1 !== "Invierno") {
                                                                 mui.toast('Debe indicar una estacion existente(Primavera,Verano,Otoño o Invierno)', 'center', 'short');
                                                                 mui.prompt('Indique el Color de la prenda', promptCallbackSeason, 'Atención');
                                                             } else {
-                                                                season = season1.input1
+                                                                season = season1.input1;
                                                                 var fotoGenerada = document.getElementById('camera').files[0];
                                                                 updateItem(type, store, color, season, fotoGenerada);
 

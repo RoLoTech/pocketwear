@@ -501,17 +501,32 @@ function spinner() {
 
                         }
                         console.log(abajo)
+                        var indice1 = 1;
+                        var indice2 = 1;
+                        var indice3 = 1;
+
+
                         for (i = 1; i <= 3; i++) {
-                            if (i <= arriba.length) {
-                                document.getElementById("card" + i).style.backgroundImage = 'url('+arriba[i - 1]+')'
-                            }
-                            if (i <= medio.length) {
-                                document.getElementById("card" + (i + 3)).style.backgroundImage = 'url('+medio[i - 1]+')'
-                            }
-                            if (i <= abajo.length) {
-                                document.getElementById("card" + (i + 6)).style.backgroundImage = 'url('+abajo[i - 1]+')'
+                            if (i < 3) {
+                                if (i <= arriba.length) {
+                                    document.getElementById("card" + i).style.backgroundImage = 'url(' + arriba[i - 1] + ')'
+
+                                }
+                                if (i <= medio.length) {
+                                    document.getElementById("card" + (i + 3)).style.backgroundImage = 'url(' + medio[i - 1] + ')'
+
+                                }
+                                if (i <= abajo.length) {
+
+                                    document.getElementById("card" + (i + 6)).style.backgroundImage = 'url(' + abajo[i - 1] + ')'
+                                }
+                            } else {
+                                document.getElementById("card" + i).style.backgroundImage = 'url(' + arriba[arriba.length - 1] + ')'
+                                document.getElementById("card" + (i + 3)).style.backgroundImage = 'url(' + medio[medio.length - 1] + ')'
+                                document.getElementById("card" + (i + 6)).style.backgroundImage = 'url(' + abajo[abajo.length - 1] + ')'
                             }
                         }
+
 
                         var angleRotate = 120
                         var rotate1 = 0
@@ -527,8 +542,36 @@ function spinner() {
                                 case 'card1':
                                     if (mouse1[0] <= mouse1[1]) {
                                         rotate1 += angleRotate
+                                        //cambia la carta2
+                                        if (arriba.length > 3) {
+                                            if (indice1 - 2 <= 0) {
+                                                if (indice1 === 0) {
+                                                    indice1 = arriba.length - 1
+                                                    document.getElementById("card2").style.backgroundImage = 'url(' + arriba[indice1 - 2] + ')'
+                                                } else {
+                                                    indice1 -= 1
+                                                    document.getElementById("card2").style.backgroundImage = 'url(' + arriba[indice1 - 2 + arriba.length] + ')'
+                                                }
+
+                                            } else {
+                                                indice1 -= 1;
+                                                document.getElementById("card2").style.backgroundImage = 'url(' + arriba[indice1 - 2] + ')'
+                                            }
+
+
+                                        }
                                     } else {
                                         rotate1 -= angleRotate
+                                        if (arriba.length > 3) {
+
+                                            if (indice1 + 1 === arriba.length) {
+                                                indice1 = 0;
+                                            } else {
+                                                indice1 += 1;
+                                            }
+                                            document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1] + ')'
+                                        }
+
                                     }
                                     event.target.parentElement.style.transition = 'all 1s '
                                     event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
@@ -536,8 +579,36 @@ function spinner() {
                                 case 'card2':
                                     if (mouse1[0] <= mouse1[1]) {
                                         rotate1 += angleRotate
+                                        //cambia la carta2
+                                        if (arriba.length > 3) {
+                                            if (indice1 - 2 <= 0) {
+                                                if (indice1 === 0) {
+                                                    indice1 = arriba.length - 1
+                                                    document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1 - 2 ] + ')'
+                                                } else {
+                                                    indice1 -= 1
+                                                    document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1 - 2 + arriba.length] + ')'
+                                                }
+
+                                            } else {
+                                                indice1 -= 1;
+                                                document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1 - 2] + ')'
+                                            }
+
+
+                                        }
                                     } else {
                                         rotate1 -= angleRotate
+                                        if (arriba.length > 3) {
+
+                                            if (indice1 + 1 === arriba.length) {
+                                                indice1 = 0;
+                                            } else {
+                                                indice1 += 1;
+                                            }
+                                            document.getElementById("card1").style.backgroundImage = 'url(' + arriba[indice1] + ')'
+                                        }
+
                                     }
                                     event.target.parentElement.style.transition = 'all 1s '
                                     event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
@@ -545,8 +616,36 @@ function spinner() {
                                 case 'card3':
                                     if (mouse1[0] <= mouse1[1]) {
                                         rotate1 += angleRotate
+
+                                        if (arriba.length > 3) {
+                                            if (indice1 - 2 <= 0) {
+                                                if (indice1 === 0) {
+                                                    indice1 = arriba.length - 1
+                                                    document.getElementById("card1").style.backgroundImage = 'url(' + arriba[indice1 - 2] + ')'
+                                                } else {
+                                                    indice1 -= 1
+                                                    document.getElementById("card1").style.backgroundImage = 'url(' + arriba[indice1 - 2 + arriba.length] + ')'
+                                                }
+
+                                            } else {
+                                                indice1 -= 1;
+                                                document.getElementById("card1").style.backgroundImage = 'url(' + arriba[indice1 - 2] + ')'
+                                            }
+
+
+                                        }
                                     } else {
                                         rotate1 -= angleRotate
+                                        if (arriba.length > 3) {
+
+                                            if (indice1 + 1 === arriba.length) {
+                                                indice1 = 0;
+                                            } else {
+                                                indice1 += 1;
+                                            }
+                                            document.getElementById("card2").style.backgroundImage = 'url(' + arriba[indice1] + ')'
+                                        }
+
                                     }
                                     event.target.parentElement.style.transition = 'all 1s '
                                     event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate1 + 'deg)'
@@ -567,8 +666,31 @@ function spinner() {
                                 case 'card4':
                                     if (mouse2[0] <= mouse2[1]) {
                                         rotate2 += angleRotate
+                                        if (medio.length > 3) {
+                                            if (indice2 - 2 <= 0) {
+                                                if (indice2 === 0) {
+                                                    indice2 = medio.length - 1
+                                                    document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2 - 2 ] + ')'
+                                                } else {
+                                                    indice2 -= 1
+                                                    document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2 - 2 + medio.length] + ')'
+                                                }
+
+                                            } else {
+                                                indice2 -= 1;
+                                                document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2 - 2] + ')'
+                                            }
+                                        }
                                     } else {
                                         rotate2 -= angleRotate
+                                        if (medio.length > 3) {
+                                            if (indice2 + 1 === medio.length) {
+                                                indice2 = 0;
+                                            } else {
+                                                indice2 += 1;
+                                            }
+                                            document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2] + ')'
+                                        }
                                     }
                                     event.target.parentElement.style.transition = 'all 1s '
                                     event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
@@ -576,8 +698,32 @@ function spinner() {
                                 case 'card5':
                                     if (mouse2[0] <= mouse2[1]) {
                                         rotate2 += angleRotate
+                                        if (medio.length > 3) {
+                                            if (indice2 - 2 <= 0) {
+                                                if (indice2 === 0) {
+                                                    indice2 = medio.length - 1
+                                                    document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2 - 2 ] + ')'
+                                                } else {
+                                                    indice2 -= 1
+                                                    document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2 - 2 + medio.length] + ')'
+                                                }
+
+                                            } else {
+                                                indice2 -= 1;
+                                                document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2 - 2] + ')'
+                                            }
+                                        }
                                     } else {
                                         rotate2 -= angleRotate
+                                        if (medio.length > 3) {
+
+                                            if (indice2 + 1 === medio.length) {
+                                                indice2 = 0;
+                                            } else {
+                                                indice2 += 1;
+                                            }
+                                            document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2] + ')'
+                                        }
                                     }
                                     event.target.parentElement.style.transition = 'all 1s '
                                     event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
@@ -585,8 +731,32 @@ function spinner() {
                                 case 'card6':
                                     if (mouse2[0] <= mouse2[1]) {
                                         rotate2 += angleRotate
+                                        if (medio.length > 3) {
+                                            if (indice2 - 2 <= 0) {
+                                                if (indice2 === 0) {
+                                                    indice2 = medio.length - 1
+                                                    document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2 - 2 ] + ')'
+                                                } else {
+                                                    indice2 -= 1
+                                                    document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2 - 2 + medio.length] + ')'
+                                                }
+
+                                            } else {
+                                                indice2 -= 1;
+                                                document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2 - 2] + ')'
+                                            }
+                                        }
                                     } else {
                                         rotate2 -= angleRotate
+                                        if (medio.length > 3) {
+
+                                            if (indice2 + 1 === medio.length) {
+                                                indice2 = 0;
+                                            } else {
+                                                indice2 += 1;
+                                            }
+                                            document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2] + ')'
+                                        }
                                     }
                                     event.target.parentElement.style.transition = 'all 1s '
                                     event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate2 + 'deg)'
@@ -602,37 +772,114 @@ function spinner() {
                         })
 
                         $('#card-container3').on('touchend', function (event) {
-                            mouse3[1] = event.changedTouches[0].pageX
-                            switch (event.target.id) {
-                                case 'card7':
-                                    if (mouse3[0] <= mouse3[1]) {
-                                        rotate3 += angleRotate
-                                    } else {
-                                        rotate3 -= angleRotate
-                                    }
-                                    event.target.parentElement.style.transition = 'all 1s '
-                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                                    break;
-                                case 'card8':
-                                    if (mouse3[0] <= mouse3[1]) {
-                                        rotate3 += angleRotate
-                                    } else {
-                                        rotate3 -= angleRotate
-                                    }
-                                    event.target.parentElement.style.transition = 'all 1s '
-                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                                    break;
-                                case 'card9':
-                                    if (mouse3[0] <= mouse3[1]) {
-                                        rotate3 += angleRotate
-                                    } else {
-                                        rotate3 -= angleRotate
-                                    }
-                                    event.target.parentElement.style.transition = 'all 1s '
-                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                                    break;
+                                mouse3[1] = event.changedTouches[0].pageX
+                                switch (event.target.id) {
+                                    case 'card7':
+                                        if (mouse3[0] <= mouse3[1]) {
+
+                                            rotate3 += angleRotate
+                                            if (abajo.length > 3) {
+                                                if (indice3 - 2 <= 0) {
+                                                    if (indice3 === 0) {
+                                                        indice3 = abajo.length - 1
+                                                        document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
+                                                    } else {
+                                                        indice3 -= 1
+                                                        document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
+                                                    }
+
+                                                } else {
+                                                    indice3 -= 1;
+                                                    document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
+                                                }
+                                            }
+                                        } else {
+                                            rotate3 -= angleRotate
+                                            if (abajo.length > 3) {
+
+                                                if (indice3 + 1 === abajo.length) {
+                                                    indice3 = 0;
+                                                } else {
+                                                    indice3 += 1;
+                                                }
+                                                document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+                                            }
+                                        }
+                                        event.target.parentElement.style.transition = 'all 1s '
+                                        event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                        break;
+                                    case
+                                    'card8':
+                                        if (mouse3[0] <= mouse3[1]) {
+
+                                            rotate3 += angleRotate
+                                            if (abajo.length > 3) {
+                                                if (indice3 - 2 <= 0) {
+                                                    if (indice3 === 0) {
+                                                        indice3 = abajo.length - 1
+                                                        document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
+                                                    } else {
+                                                        indice3 -= 1
+                                                        document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
+                                                    }
+
+                                                } else {
+                                                     indice3-= 1;
+                                                    document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
+                                                }
+                                            }
+                                        } else {
+                                            rotate3 -= angleRotate
+                                            if (abajo.length > 3) {
+
+                                                if (indice3 + 1 === abajo.length) {
+                                                    indice3 = 0;
+                                                } else {
+                                                    indice3 += 1;
+                                                }
+                                                document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+                                            }
+                                        }
+                                        event.target.parentElement.style.transition = 'all 1s '
+                                        event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                        break;
+                                    case'card9':
+                                        if (mouse3[0] <= mouse3[1]) {
+
+                                            rotate3 += angleRotate
+                                            if (abajo.length > 3) {
+                                                if (indice3 - 2 <= 0) {
+                                                    if (indice3 === 0) {
+                                                        indice3 = abajo.length - 1
+                                                        document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
+                                                    } else {
+                                                        indice3 -= 1
+                                                        document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2+ abajo.length] + ')'
+                                                    }
+
+                                                } else {
+                                                    indice3 -= 1;
+                                                    document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
+                                                }
+                                            }
+                                        } else {
+                                            rotate3 -= angleRotate
+                                            if (abajo.length > 3) {
+
+                                                if (indice3 + 1 === abajo.length) {
+                                                    indice3 = 0;
+                                                } else {
+                                                    indice3 += 1;
+                                                }
+                                                document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+                                            }
+                                        }
+                                        event.target.parentElement.style.transition = 'all 1s '
+                                        event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                        break;
+                                }
                             }
-                        })
+                        )
                     })
             })
 

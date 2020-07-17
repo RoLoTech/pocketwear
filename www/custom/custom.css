@@ -723,34 +723,81 @@ a {
 	font-size: x-large;
 }
 
-#login-overlay {
-	width: 80%;
-	margin: 10% auto;
-	height: 80%;
-	border-radius: 13px 13px 13px 13px;
-	-moz-border-radius: 13px 13px 13px 13px;
-	-webkit-border-radius: 13px 13px 13px 13px;
-	border: 0px solid #000000;
-	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+
+#login-logo {
+	height: 40%;
+	text-align: center;
+
+}
+#register-logo {
+	height: 30%;
+	text-align: center;
 }
 
-.login-field {
-	border: none;
-	border-color: transparent;
-	border-radius: 10px;
-	width: 70%;
-	height: 5%;
-	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+#register-panel{
+	height: 10%;
 }
+
+#register-back-button{
+	margin-top: 1%;
+	margin-left: 2%;
+	text-align: center;
+	height: 90%;
+	width: 15%;/*
+	background-image: url("images/back-arrow-icon.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 60%;*/
+}
+
+#login-form {
+	height: 100%;
+	width: 80%;
+	margin-left: 10%;
+}
+
+#register-form {
+	height: 100%;
+	width: 80%;
+	margin-left: 10%;
+}
+#login-overlay {
+	height: 60%;
+}
+
+#register-overlay {
+	height: 60%;
+}
+.login-field {
+	width: 100%;
+	margin-top: 4%;
+	border: 0;
+	border-bottom: 2px solid gray;
+	font-size: 1.3rem;
+	color: grey;
+	padding: 7px 0;
+	background: transparent;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0px;
+}
+
+
 
 .login-field:focus {
+	background: transparent;
 	outline: none;
+	color: #cab675;
+	border-bottom: 2px solid #cab675;
+	cursor: text;
 }
 
+
+
+
+.otros-botones button{
+	height: 100%;
+
+}
 .user-area-button {
 	border-radius: 13px 13px 13px 13px;
 	-moz-border-radius: 13px 13px 13px 13px;
@@ -762,25 +809,48 @@ a {
 }
 
 #login-social-button {
-	margin-top: 20%;
+	margin-top: 10%;
 	height: 10%;
 	width: 70%;
+	border-radius: 30px;
 	font-size: larger;
   	color: #6f6cde;
 }
 
+
+
 #register-social-button {
-	margin-top: 20%;
+
+	margin-top: 15%;
 	height: 10%;
-	width: 60%;
+	width: 70%;
+	border-radius: 30px;
 	font-size: larger;
 	color: #F47956;
 }
 
 .user-area-button:active {
 	box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
-		inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+	inset 8px 8px 16px rgba(0, 0, 0, 0.1);
 	outline: none;
+}
+
+
+#register-button {
+
+	margin-top: 15%;
+	height: 10%;
+	width: 70%;
+	border-radius: 30px;
+	font-size: larger;
+	color: #F47956;
+}
+
+#forget-password-button{
+	margin-top: 5%;
+	outline: none;
+	border: 0px ;
+	background-color: transparent;
 }
 
 .disable-select {
@@ -827,13 +897,11 @@ a {
 	border-radius: 1000px;
 }
 
-#session-title {
-	margin-top: auto;
-    height: 100%;
-    font-size: xx-large;
-}
+
+
 
 #camera-title {
+	text-align: center;
 	margin-top: auto;
     height: 100%;
     font-size: xx-large;

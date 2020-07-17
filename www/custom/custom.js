@@ -34,11 +34,6 @@ function deviceReady() {
     }
 }
 
-/**
- * Example of Install events using MobileUI methods, clicks, resize, online/offline, etc., on differents HTML elements.
- * Ejemplo de instalación de eventos usando métodos de MobileUI, clicks, resize, online/offline, etc., sobre diferentes elementos HTML.
- */
-
 
 function prepareCamera() {
     let form = document.getElementById('form');
@@ -222,6 +217,22 @@ function installEvents() {
                 });
                 return false;
             }
+        }, {
+            id: '#login-social-button',
+            ev: 'click',	//If not, it assumes click
+            fn: () => {
+                userLogin();
+                return false;
+            }
+        }
+        ,
+        {
+            id: '#register-social-button',
+            ev: 'click',	//If not, it assumes click
+            fn: () => {
+                mui.viewport.showPage("register-page", "DEF");
+                return false;
+            }
         },
         {
             id: '#social-button',
@@ -290,11 +301,57 @@ function installEvents() {
  * @returns
  */
 
-function userLogin() {
-    $.ajax({
-        method: 'POST',
-        url: ''
-    })
+function userLogin() { //verifico las credenciales
+    document.querySelector('#password').style.borderBottom= " 2px solid gray";
+    document.querySelector('#user').style.borderBottom=	": 2px solid gray";
+    var user = document.getElementById("user").value;
+    var password = document.getElementById("password").value;
+    if (user !==undefined && user !== null && user !== "" && password!=="" && password !== undefined && password !== null) {    
+        $.ajax({
+            method: 'get',
+            url: 'http://localhost:3001/user/' + user, // todo crear en el server
+            crossDomain: true,
+            dataType: 'json'
+        }).done(function (data) { // Encontro el usuario
+            if (data.password === password) // todo guardar el usuario en global
+            {
+                mui.viewport.showPage("hanger-page", "DEF");
+                document.querySelector('#footer').style.display = "block";
+            } else {
+
+            }
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            switch (jqXHR.status) {
+                case 0:
+                    alert('Not connect: Verify Network.');
+                    break;
+                case 404:
+                    alert('Requested page not found [404]')
+                    break;
+                case 500:
+                    alert('Internal Server Error [500].');
+                    break;
+                default:
+                    switch (textStatus) {
+                        case 'timeout':
+                            alert('Time out error.');
+                            break;
+                        case 'parsererror':
+                            alert('Requested JSON parse failed.');
+                    }
+                    break;
+            }
+        });
+    } else {
+        if (user === undefined || user === null || user ==="") {
+            document.querySelector('#user').style.borderBottom="2px solid red";
+        }
+        if (password === undefined || password === null || password === "") {
+            document.querySelector('#password').style.borderBottom="2px solid red";
+        }
+        mui.toast('Llene todos los campos');
+    }
 }
 
 function classToggle() {
@@ -404,10 +461,6 @@ function logVistosRecientes() {
                     break;
             }
         });
-    // get fotos
-    // get id
-
-
 }
 
 
@@ -584,7 +637,7 @@ function spinner() {
                                             if (indice1 - 2 <= 0) {
                                                 if (indice1 === 0) {
                                                     indice1 = arriba.length - 1
-                                                    document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1 - 2 ] + ')'
+                                                    document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1 - 2] + ')'
                                                 } else {
                                                     indice1 -= 1
                                                     document.getElementById("card3").style.backgroundImage = 'url(' + arriba[indice1 - 2 + arriba.length] + ')'
@@ -670,7 +723,7 @@ function spinner() {
                                             if (indice2 - 2 <= 0) {
                                                 if (indice2 === 0) {
                                                     indice2 = medio.length - 1
-                                                    document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2 - 2 ] + ')'
+                                                    document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2 - 2] + ')'
                                                 } else {
                                                     indice2 -= 1
                                                     document.getElementById("card5").style.backgroundImage = 'url(' + medio[indice2 - 2 + medio.length] + ')'
@@ -702,7 +755,7 @@ function spinner() {
                                             if (indice2 - 2 <= 0) {
                                                 if (indice2 === 0) {
                                                     indice2 = medio.length - 1
-                                                    document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2 - 2 ] + ')'
+                                                    document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2 - 2] + ')'
                                                 } else {
                                                     indice2 -= 1
                                                     document.getElementById("card6").style.backgroundImage = 'url(' + medio[indice2 - 2 + medio.length] + ')'
@@ -735,7 +788,7 @@ function spinner() {
                                             if (indice2 - 2 <= 0) {
                                                 if (indice2 === 0) {
                                                     indice2 = medio.length - 1
-                                                    document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2 - 2 ] + ')'
+                                                    document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2 - 2] + ')'
                                                 } else {
                                                     indice2 -= 1
                                                     document.getElementById("card4").style.backgroundImage = 'url(' + medio[indice2 - 2 + medio.length] + ')'
@@ -824,7 +877,7 @@ function spinner() {
                                                     }
 
                                                 } else {
-                                                     indice3-= 1;
+                                                    indice3 -= 1;
                                                     document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
                                                 }
                                             }
@@ -854,7 +907,7 @@ function spinner() {
                                                         document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
                                                     } else {
                                                         indice3 -= 1
-                                                        document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2+ abajo.length] + ')'
+                                                        document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
                                                     }
 
                                                 } else {

@@ -2,266 +2,294 @@
 <html>
 
 <head>
-	<title>Pocket Wear</title>
-	<meta name="viewport" content="minimal-ui, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="msapplication-tap-highlight" content="no" />
-	<meta name="format-detection" content="telephone=no" />
+    <title>Pocket Wear</title>
+    <meta name="viewport" content="minimal-ui, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="format-detection" content="telephone=no"/>
 
-	<link rel="stylesheet" href="mobileui/mui.min.css" type="text/css">
-	<link rel="stylesheet" href="custom/custom.css" type="text/css">
+    <link rel="stylesheet" href="mobileui/mui.min.css" type="text/css">
+    <link rel="stylesheet" href="custom/custom.css" type="text/css">
 
-	<script src="cordova.js"></script>
+    <script src="cordova.js"></script>
 
-	<script src="vendors/jquery.min.js" type="text/javascript"></script>
-	<script src="vendors/jquery.animate-enhanced.js" type="text/javascript"></script>
-	<script src="vendors/jqwait/jquery.wait.min.js" type="text/javascript"></script>
+    <script src="vendors/jquery.min.js" type="text/javascript"></script>
+    <script src="vendors/jquery.animate-enhanced.js" type="text/javascript"></script>
+    <script src="vendors/jqwait/jquery.wait.min.js" type="text/javascript"></script>
 
-	<script src="mobileui/mui.min.js" type="text/javascript"></script>
-	<script src="custom/custom.js" type="text/javascript"></script>
+    <script src="mobileui/mui.min.js" type="text/javascript"></script>
+    <script src="custom/custom.js" type="text/javascript"></script>
 </head>
 
 <body>
-	<div id="mui-screen" class="mui-viewport">
-		<div id="mui-screen-page" class="mui-page">
-			<div id="mui-viewport" class="mui-viewport">
+<div id="mui-screen" class="mui-viewport">
+    <div id="mui-screen-page" class="mui-page">
+        <div id="mui-viewport" class="mui-viewport">
 
-				<div id='home-page' class="mui-page">
-					<div class="mui-page-header">
-						<div class="mui-page-logo"></div>
-						<a class="mui-headmenu" href="#"></a>
-					</div>
-					<div class="mui-page-body mui-scrollable" id="home-body">
-						<div>
-							<div id="last-seen">
-								<p id="last-seen-header">Vistos recientemente</p>
-							</div>
-							<div id="spinner1" class="loader" style="display: none">Loading...</div>
-							<div class="grid-home-page" id="grid-home-page">
-								<!--Todo make dinamic Gabuarab -->
-							</div>
-							<div id="end-of-recent">
-								¡Utiliza las pestañas de buscar o tu colección para ver más!
-							</div>
-						</div>
-					</div>
-				</div>
+            <div id='login-page' class="mui-page">
+                <div id="login-logo">
+                    <img src="icon.png" alt="Icono de la aplicación" style="margin-top: 15%">
+                </div>
+                <div id="login-overlay">
+                    <div style="height: 10%;">
+                    </div>
+                    <form id="login-form" style="text-align: center" action="">
+                        <input type="text" id="user" placeholder="Usuario" class="login-field">
+                        <input type="password" id="password" placeholder="Contraseña" class="login-field">
+                        <button class="user-area-button user-select" id="login-social-button">Iniciar
+                            Sesión
+                        </button>
+                        <button
+                                id="forget-password-button">Olvide mi contraseña
+                        </button>
+                        <br>
+                        <button class="user-area-button user-select"
+                                id="register-social-button">Registrarse
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div id='register-page' class="mui-page">
+                <div id="register-panel">
+                    <button  id="register-back-button">
+                        <i class="far fa-angle-double-left"></i>
+                    </button>
 
-				<div id='search-page' class="mui-page">
-					<div class="mui-page-header">
-						<div class='mui-page-title'>
-							<div class="search__container">
-								<input class="search__input" type="text" placeholder="Search">
-							</div>
-						</div>
-						<a class="mui-headmenu" href="#"></a>
-					</div>
-					<div class="mui-page-body mui-scrollable" id="second-body">
-						<div>
-							<div style="margin: 50px; text-align: center;">
-								<div class="search-page-container">
-									<div class="search-bar">
-									</div>
-									<div class="grid">
-										<div class="module" id="tienda-1"></div>
-										<div class="module" id="tienda-2"></div>
-										<div class="module" id="tienda-3"></div>
-										<div class="module" id="tienda-4"></div>
-										<div class="module" id="tienda-5"></div>
-										<div class="module" id="tienda-6"></div>
-										<div class="module" id="tienda-7"></div>
-										<div class="module" id="tienda-8"></div>
-										<div class="module" id="tienda-9"></div>
-										<div class="module" id="tienda-10"></div>
-										<div class="module" id="tienda-11"></div>
-										<div class="module" id="tienda-12"></div>
-										<div class="module" id="tienda-13"></div>
-										<div class="module" id="tienda-14"></div>
-										<div class="module" id="tienda-15"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                </div>
+                <div id="register-logo">
+                    Register
+                </div>
+                    <div id="register-overlay">
+                        <form id="register-form" style="text-align: center" action="">
+                            <input type="text" id="user-register" placeholder="Usuario" class="login-field">
+                            <input type="text" id="mail-register" placeholder="Email" class="login-field">
+                            <input type="password" id="password-register" placeholder="Contraseña" class="login-field">
+                            <input type="password" id="password-confirm-register" placeholder="Confirmar contraseña"
+                                   class="login-field">
+                            <br>
+                            <button class="user-area-button user-select"
+                                    id="register-button"
+                            style="margin-top: 10%">Registrarse
+                            </button>
+                        </form>
+                    </div>
 
-				<div id='camera-page' class="mui-page">
-					<div class="mui-page-header">
-						<div class='mui-page-title' id="camera-title">Subir una foto</div>
-						<a class="mui-headmenu" href="#"></a>
-					</div>
-					<div class="mui-page-body mui-scrollable" id="second-body" style="text-align: center;">
-						<div>
-							<div id="camara">
-								<p style="font-size: xx-large;">Selecciona una foto para subir desde tu galería</p>
-								<!-- Camera sensor -->
-								<form action='#' id='form'>
-									<label for='camera'></label>
-									<div style="height: 0px; overflow: hidden;">
-										<input type="file" id="camera" accept="image/*,video/*,audio/*" capture
-											multiple />
-									</div>
-									<br />
-									<br />
-								</form>
-								<!--video-- id="camera-view" autoplay playsinline></video-->
-								<!-- Camera output -->
-								<!--<img src="//:0" alt="" id="camera-output"> -->
+            </div>
 
-								<!-- Camera trigger -->
-								<!--<video id="player" controls autoplay></video>
-								<button id="capture">Capturar</button>
-								<canvas id="snapshot" width=320 height=240></canvas>-->
-								<!-- <button id="camera-trigger">Take a picture</button> -->
-							</div>
-						</div>
-						<div id="camera-image-container">
-							<img id='imagen' src='' alt=''>
-						</div>
-						<button id="shutter" class="user-area-button">+</button>
-						<button id="camera-trigger" style="display: none">Continuar</button>
-					</div>
 
-				</div>
+            <div id='home-page' class="mui-page">
+                <div class="mui-page-header">
+                    <div class="mui-page-logo"></div>
+                </div>
+                <div class="mui-page-body mui-scrollable" id="home-body">
+                    <div>
+                        <div id="last-seen">
+                            <p id="last-seen-header">Vistos recientemente</p>
+                        </div>
+                        <div id="spinner1" class="loader" style="display: none">Loading...</div>
+                        <div class="grid-home-page" id="grid-home-page">
+                            <!--Todo make dinamic Gabuarab -->
+                        </div>
+                        <div id="end-of-recent">
+                            ¡Utiliza las pestañas de buscar o tu colección para ver más!
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-				<div id='hanger-page' class="mui-page">
-					<div class="mui-page-header">
-						<div class='mui-page-title' id="collection-page-title">Tu colección</div>
-						<a class="mui-headmenu" href="#"></a>
-					</div>
-					<div class="mui-page-body mui-scrollable" id="second-body">
-						<div id="filter-section">
-							<div class="select-box">
-								<div class="select-box__current" tabindex="1">
-									<div class="select-box__value"><input class="select-box__input" type="radio" id="0"
-											value="1" name="Ben" checked="checked" />
-										<p class="select-box__input-text">Remeras</p>
-									</div>
-									<div class="select-box__value"><input class="select-box__input" type="radio" id="1"
-											value="2" name="Ben" checked="checked" />
-										<p class="select-box__input-text">Pantalones</p>
-									</div>
-									<div class="select-box__value"><input class="select-box__input" type="radio" id="2"
-											value="3" name="Ben" checked="checked" />
-										<p class="select-box__input-text">Buzos</p>
-									</div>
-									<div class="select-box__value"><input class="select-box__input" type="radio" id="3"
-											value="4" name="Ben" checked="checked" />
-										<p class="select-box__input-text">Faldas</p>
-									</div>
-									<div class="select-box__value"><input class="select-box__input" type="radio" id="4"
-											value="5" name="Ben" checked="checked" />
-										<p class="select-box__input-text">Todas</p>
-									</div><img class="select-box__icon"
-										src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon"
-										aria-hidden="true" />
-								</div>
-								<ul class="select-box__list">
-									<li><label class="select-box__option" for="0"
-											aria-hidden="aria-hidden">Remeras</label></li>
-									<li><label class="select-box__option" for="1"
-											aria-hidden="aria-hidden">Pantalones</label></li>
-									<li><label class="select-box__option" for="2"
-											aria-hidden="aria-hidden">Buzos</label></li>
-									<li><label class="select-box__option" for="3"
-											aria-hidden="aria-hidden">Faldas</label></li>
-									<li><label class="select-box__option" for="4"
-											aria-hidden="aria-hidden">Todas</label></li>
-								</ul>
-							</div>
-						</div>
-						<div>
+            <div id='search-page' class="mui-page">
+                <div class="mui-page-header">
+                    <div class='mui-page-title'>
+                        <div class="search__container">
+                            <input class="search__input" type="text" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="mui-page-body mui-scrollable" id="second-body">
+                    <div>
+                        <div style="margin: 50px; text-align: center;">
+                            <div class="search-page-container">
+                                <div class="search-bar">
+                                </div>
+                                <div class="grid">
+                                    <div class="module" id="tienda-1"></div>
+                                    <div class="module" id="tienda-2"></div>
+                                    <div class="module" id="tienda-3"></div>
+                                    <div class="module" id="tienda-4"></div>
+                                    <div class="module" id="tienda-5"></div>
+                                    <div class="module" id="tienda-6"></div>
+                                    <div class="module" id="tienda-7"></div>
+                                    <div class="module" id="tienda-8"></div>
+                                    <div class="module" id="tienda-9"></div>
+                                    <div class="module" id="tienda-10"></div>
+                                    <div class="module" id="tienda-11"></div>
+                                    <div class="module" id="tienda-12"></div>
+                                    <div class="module" id="tienda-13"></div>
+                                    <div class="module" id="tienda-14"></div>
+                                    <div class="module" id="tienda-15"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-							<div style="margin-top: 30%; text-align: center;">
-								<!--<div id="left-button1" class="movement" style="position: absolute; margin-left:0; width: 50%; height: 20%; z-index: 10;"></div>
-								<div id="right-button1" class="movement" style="position: absolute; margin-left:50%; width: 50%; height: 20%;"></div>-->
-								<figure class="icon-cards mt-3">
-									<div id='card-container1' class="icon-cards__content">
-										<div id='card1'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id='card2'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id='card3'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-									</div>
-								</figure>
+            <div id='camera-page' class="mui-page">
+                <div class="mui-page-header">
+                    <div class='mui-page-title' id="camera-title">Subir una foto</div>
+                </div>
+                <div class="mui-page-body mui-scrollable" id="second-body" style="text-align: center;">
+                    <div>
+                        <div id="camara">
+                            <p style="font-size: xx-large;">Selecciona una foto para subir desde tu galería</p>
+                            <!-- Camera sensor -->
+                            <form action='#' id='form'>
+                                <label for='camera'></label>
+                                <div style="height: 0px; overflow: hidden;">
+                                    <input type="file" id="camera" accept="image/*,video/*,audio/*" capture
+                                           multiple/>
+                                </div>
+                                <br/>
+                                <br/>
+                            </form>
+                            <!--video-- id="camera-view" autoplay playsinline></video-->
+                            <!-- Camera output -->
+                            <!--<img src="//:0" alt="" id="camera-output"> -->
 
-								<!--<div id="left-button2" class="movement" style="position: absolute; margin-left:0; width: 50%; height: 20%;"></div>
-								<div id="right-button2" class="movement" style="position: absolute; margin-left:50%; width: 50%; height: 20%;"></div>-->
-								<figure class="icon-cards mt-3">
-									<div id='card-container2' class="icon-cards__content">
-										<div id='card4'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id='card5'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id='card6'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-									</div>
-								</figure>
+                            <!-- Camera trigger -->
+                            <!--<video id="player" controls autoplay></video>
+                            <button id="capture">Capturar</button>
+                            <canvas id="snapshot" width=320 height=240></canvas>-->
+                            <!-- <button id="camera-trigger">Take a picture</button> -->
+                        </div>
+                    </div>
+                    <div id="camera-image-container">
+                        <img id='imagen' src='' alt=''>
+                    </div>
+                    <button id="shutter" class="user-area-button">+</button>
+                    <button id="camera-trigger" style="display: none">Continuar</button>
+                </div>
 
-								<!--<div id="left-button3" class="movement" style="position: absolute; margin-left:0; width: 50%; height: 20%;"></div>
-								<div id="right-button3" class="movement" style="position: absolute; margin-left:50%; width: 50%; height: 20%;"></div>-->
-								<figure class="icon-cards mt-3">
-									<div id='card-container3' class="icon-cards__content">
-										<div id='card7'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id='card8'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-										<div id='card9'
-											class="icon-cards__item d-flex align-items-center justify-content-center">
-										</div>
-									</div>
-								</figure>
+            </div>
 
-							</div>
-						</div>
-					</div>
-				</div>
+            <div id='hanger-page' class="mui-page">
+                <div class="mui-page-header">
+                    <div class='mui-page-title' id="collection-page-title">Tu colección</div>
+                </div>
+                <div class="mui-page-body mui-scrollable" id="second-body">
+                    <div id="filter-section">
+                        <div class="select-box">
+                            <div class="select-box__current" tabindex="1">
+                                <div class="select-box__value"><input class="select-box__input" type="radio" id="0"
+                                                                      value="1" name="Ben" checked="checked"/>
+                                    <p class="select-box__input-text">Remeras</p>
+                                </div>
+                                <div class="select-box__value"><input class="select-box__input" type="radio" id="1"
+                                                                      value="2" name="Ben" checked="checked"/>
+                                    <p class="select-box__input-text">Pantalones</p>
+                                </div>
+                                <div class="select-box__value"><input class="select-box__input" type="radio" id="2"
+                                                                      value="3" name="Ben" checked="checked"/>
+                                    <p class="select-box__input-text">Buzos</p>
+                                </div>
+                                <div class="select-box__value"><input class="select-box__input" type="radio" id="3"
+                                                                      value="4" name="Ben" checked="checked"/>
+                                    <p class="select-box__input-text">Faldas</p>
+                                </div>
+                                <div class="select-box__value"><input class="select-box__input" type="radio" id="4"
+                                                                      value="5" name="Ben" checked="checked"/>
+                                    <p class="select-box__input-text">Todas</p>
+                                </div>
+                                <img class="select-box__icon"
+                                     src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon"
+                                     aria-hidden="true"/>
+                            </div>
+                            <ul class="select-box__list">
+                                <li><label class="select-box__option" for="0"
+                                           aria-hidden="aria-hidden">Remeras</label></li>
+                                <li><label class="select-box__option" for="1"
+                                           aria-hidden="aria-hidden">Pantalones</label></li>
+                                <li><label class="select-box__option" for="2"
+                                           aria-hidden="aria-hidden">Buzos</label></li>
+                                <li><label class="select-box__option" for="3"
+                                           aria-hidden="aria-hidden">Faldas</label></li>
+                                <li><label class="select-box__option" for="4"
+                                           aria-hidden="aria-hidden">Todas</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
 
-				<div id='social-page' class="mui-page">
-					<div class="mui-page-header">
-						<div class='mui-page-title' id="session-title">Inicia Sesión</div>
-						<a class="mui-headmenu" href="#"></a>
-					</div>
-					<div class="mui-page-body mui-scrollable" id="second-body">
-						<div id="login-screen">
-							<div id="login-overlay">
-								<p style="padding-top: 20%; text-align: left; margin-left: 15%;">Usuario</p>
-								<input type="text" id="user" class="login-field">
-								<p style="text-align: left; margin-left: 15%;">Contraseña</p>
-								<input type="password" id="password" class="login-field">
-								<button class="user-area-button user-select" id="login-social-button">Iniciar
-									Sesión</button>
-								<br>
-								<button class="user-area-button user-select"
-									id="register-social-button">Registrarse</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                        <div style="margin-top: 30%; text-align: center;">
+                            <!--<div id="left-button1" class="movement" style="position: absolute; margin-left:0; width: 50%; height: 20%; z-index: 10;"></div>
+                            <div id="right-button1" class="movement" style="position: absolute; margin-left:50%; width: 50%; height: 20%;"></div>-->
+                            <figure class="icon-cards mt-3">
+                                <div id='card-container1' class="icon-cards__content">
+                                    <div id='card1'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                    <div id='card2'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                    <div id='card3'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                </div>
+                            </figure>
 
-			<div class="mui-tabbar" id="footer">
-				<div class="menu-flex-container">
-					<div class="flex-item" id="home-button"></div>
-					<div class="flex-item" id="search-button"></div>
-					<div class="flex-item" id="camera-button"></div>
-					<div class="flex-item" id="hanger-button"></div>
-					<div class="flex-item" id="social-button"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <!--<div id="left-button2" class="movement" style="position: absolute; margin-left:0; width: 50%; height: 20%;"></div>
+                            <div id="right-button2" class="movement" style="position: absolute; margin-left:50%; width: 50%; height: 20%;"></div>-->
+                            <figure class="icon-cards mt-3">
+                                <div id='card-container2' class="icon-cards__content">
+                                    <div id='card4'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                    <div id='card5'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                    <div id='card6'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <!--<div id="left-button3" class="movement" style="position: absolute; margin-left:0; width: 50%; height: 20%;"></div>
+                            <div id="right-button3" class="movement" style="position: absolute; margin-left:50%; width: 50%; height: 20%;"></div>-->
+                            <figure class="icon-cards mt-3">
+                                <div id='card-container3' class="icon-cards__content">
+                                    <div id='card7'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                    <div id='card8'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                    <div id='card9'
+                                         class="icon-cards__item d-flex align-items-center justify-content-center">
+                                    </div>
+                                </div>
+                            </figure>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="mui-tabbar" id="footer" style="display:none;> <!--todo Cambiar por el tema de que ocupa un espacio en el login y el register,hay que poner otro mui port o no?-->
+				<div class=" menu-flex-container">
+        <div class="flex-item" id="home-button"></div>
+        <div class="flex-item" id="search-button"></div>
+        <div class="flex-item" id="camera-button"></div>
+        <div class="flex-item" id="hanger-button"></div>
+        <!--div class="flex-item" id="social-button"></div-->
+    </div>
+</div>
+</div>
+</div>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ function deviceReady() {
                 mui.alert('We recommend you connect your device to the Internet');
         }
 
-
+        document.querySelector('#footer').style.display = "none";
         //Install events, clicks, resize, online/offline, etc.
         installEvents();	//Events installation using MobileUI's method.
         //isntallEvents2();	//Example of traditional events installation.
@@ -233,6 +233,22 @@ function installEvents() {
                 mui.viewport.showPage("register-page", "DEF");
                 return false;
             }
+        }, {
+            id: '#forget-password-button',
+            ev: 'click',
+            fn: () => {
+                //todo page olvide contraseña para mandar mail
+                return false;
+            }
+        },
+        {
+            id: '#register-button',
+            ev: 'click',
+            fn: () => {
+                registerUser();
+                return false;
+            }
+
         },
         {
             id: '#social-button',
@@ -291,22 +307,81 @@ function installEvents() {
 }
 
 
-/**
- /**
- * Example of traditional event installation, clicks, resize, online/offline, etc., on differents HTML elements.
- * Use the previous or this. Delete the unused one.
- *
- * Ejemplo de instalación de eventos en forma tradicional, clicks, resize, online/offline, etc., sobre diferentes elementos HTML.
- * Usar el anterior o este. Elimine el que no use.
- * @returns
- */
+function registerUser() {
+    var boton =document.getElementById("register-button");
+    boton.disable = true
+    document.querySelector('#password-register').style.borderBottom = " 2px solid gray";
+    document.querySelector('#user-register').style.borderBottom = ": 2px solid gray";
+    document.querySelector('#password-confirm-register').style.borderBottom = " 2px solid gray";
+    document.querySelector('#mail-register').style.borderBottom = ": 2px solid gray";
+    var user = document.getElementById("user-register").value;
+    var password = document.getElementById("password-register").value;
+    var mail = document.getElementById("mail-register").value;
+    var passwordConfirm = document.getElementById("password-confirm-register").value;
+    if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null && mail !== "" && mail !== undefined && mail !== null && passwordConfirm !== "" && passwordConfirm !== undefined && passwordConfirm !== null) {
+        $.ajax({
+            method: 'POST',
+            url: 'http://localhost:3001/user/',
+            crossDomain: true,
+            data: {
+                user: user,
+                email: mail,
+                password: password
+            }
+        }).done(function (data) { // Encontro el usuario
+            mui.toast('Usuario guardado Correctamente');
+             // todo guardar el usuario en global con data
+            mui.viewport.showPage("hanger-page", "DEF");
+            document.querySelector('#footer').style.display = "block";
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            switch (jqXHR.status) {
+                case 0:
+                    alert('Not connect: Verify Network.');
+                    break;
+                case 404:
+                    alert('Requested page not found [404]')
+                    break;
+                case 500:
+                    alert('Internal Server Error [500].');
+                    break;
+                default:
+                    switch (textStatus) {
+                        case 'timeout':
+                            alert('Time out error.');
+                            break;
+                        case 'parsererror':
+                            alert('Requested JSON parse failed.');
+                    }
+                    break;
+            }
+        }).always( boton.disable = true );
+
+
+    } else {
+        if (user === undefined || user === null || user === "") {
+            document.querySelector('#user-register').style.borderBottom = "2px solid red";
+        }
+        if (password === undefined || password === null || password === "") {
+            document.querySelector('#password-register').style.borderBottom = "2px solid red";
+        }
+        if (passwordConfirm === undefined || passwordConfirm === null || passwordConfirm === "") {
+            document.querySelector('#password-confirm-register').style.borderBottom = "2px solid red";
+        }
+        if (mail === undefined || mail === null || mail === "") {
+            document.querySelector('#mail-register').style.borderBottom = "2px solid red";
+        }
+        mui.toast('Llene todos los campos');
+
+    }
+}
+
 
 function userLogin() { //verifico las credenciales
-    document.querySelector('#password').style.borderBottom= " 2px solid gray";
-    document.querySelector('#user').style.borderBottom=	": 2px solid gray";
+    document.querySelector('#password').style.borderBottom = " 2px solid gray";
+    document.querySelector('#user').style.borderBottom = ": 2px solid gray";
     var user = document.getElementById("user").value;
     var password = document.getElementById("password").value;
-    if (user !==undefined && user !== null && user !== "" && password!=="" && password !== undefined && password !== null) {    
+    if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null) {
         $.ajax({
             method: 'get',
             url: 'http://localhost:3001/user/' + user, // todo crear en el server
@@ -318,6 +393,7 @@ function userLogin() { //verifico las credenciales
                 mui.viewport.showPage("hanger-page", "DEF");
                 document.querySelector('#footer').style.display = "block";
             } else {
+                mui.toast('Contraseña incorrecta');
 
             }
 
@@ -344,11 +420,11 @@ function userLogin() { //verifico las credenciales
             }
         });
     } else {
-        if (user === undefined || user === null || user ==="") {
-            document.querySelector('#user').style.borderBottom="2px solid red";
+        if (user === undefined || user === null || user === "") {
+            document.querySelector('#user').style.borderBottom = "2px solid red";
         }
         if (password === undefined || password === null || password === "") {
-            document.querySelector('#password').style.borderBottom="2px solid red";
+            document.querySelector('#password').style.borderBottom = "2px solid red";
         }
         mui.toast('Llene todos los campos');
     }

@@ -125,7 +125,7 @@ function updateItem(type, store, color, season, img) {
         var image = reader.result;
         $.ajax({
             method: 'POST',
-            url: 'http://localhost:3001/item', // poner el url correspondiente
+            url: 'https://servidor-pocket-wear.herokuapp.com:3001/item', // poner el url correspondiente
             crossDomain: true,
             data: {
                 type: type,
@@ -321,7 +321,7 @@ function registerUser() {
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null && mail !== "" && mail !== undefined && mail !== null && passwordConfirm !== "" && passwordConfirm !== undefined && passwordConfirm !== null) {
         $.ajax({
             method: 'POST',
-            url: 'http://localhost:3001/user/',
+            url: 'https://servidor-pocket-wear.herokuapp.com:3001/user/',
             crossDomain: true,
             data: {
                 user: user,
@@ -383,8 +383,8 @@ function userLogin() { //verifico las credenciales
     var password = document.getElementById("password").value;
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null) {
         $.ajax({
-            method: 'get',
-            url: 'http://localhost:3001/user/' + user, // todo crear en el server
+            method: 'GET',
+            url: 'https://servidor-pocket-wear.herokuapp.com/user/' + user, // todo crear en el server
             crossDomain: true,
             dataType: 'json'
         }).done(function (data) { // Encontro el usuario
@@ -441,7 +441,7 @@ function logVistosRecientes() {
     promises = []
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:3001/item/date', // todo poner el Url Correspondientee
+        url: 'https://servidor-pocket-wear.herokuapp.com/item/date', // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
     }).done(function (data) {
@@ -451,7 +451,7 @@ function logVistosRecientes() {
 
             var request = $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
                 method: 'GET',
-                url: 'http://localhost:3001/itemImage/' + postt._id,
+                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + postt._id,
                 crossDomain: true,
                 dataType: 'text'
             }).done(function (foto) {
@@ -545,7 +545,7 @@ function spinner() {
     var pedidoss = []
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:3001/userInventory/', // todo poner el Url Correspondientee
+        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/', // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
     }).done(function (collection) {
@@ -553,7 +553,7 @@ function spinner() {
         for (let i = 0; i < collection[2].items.length; i++) {
             fotoss.push($.ajax({
                 method: 'GET',
-                url: 'http://localhost:3001/itemImage/' + collection[2].items[i], // todo poner el Url Correspondientee
+                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + collection[2].items[i], // todo poner el Url Correspondientee
                 crossDomain: true,
                 dataType: 'text'
             }).done(function (collection) {
@@ -582,7 +582,7 @@ function spinner() {
 
             pedidoss.push($.ajax({
                 method: 'GET',
-                url: 'http://localhost:3001/item/data/' + collection[2].items[i], // todo poner el Url Correspondientee
+                url: 'https://servidor-pocket-wear.herokuapp.com/item/data/' + collection[2].items[i], // todo poner el Url Correspondientee
                 crossDomain: true,
                 dataType: 'json'
             }).done(function (collection) {

@@ -125,7 +125,7 @@ function updateItem(type, store, color, season, img) {
         var image = reader.result;
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com:3001/item', // poner el url correspondiente
+            url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
             crossDomain: true,
             data: {
                 type: type,
@@ -321,7 +321,7 @@ function registerUser() {
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null && mail !== "" && mail !== undefined && mail !== null && passwordConfirm !== "" && passwordConfirm !== undefined && passwordConfirm !== null) {
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com:3001/user/',
+            url: 'https://servidor-pocket-wear.herokuapp.com/user/',
             crossDomain: true,
             data: {
                 user: user,

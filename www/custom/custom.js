@@ -1,6 +1,6 @@
 //All ready!. Page &  Cordova loaded.
 //Todo listo!. Página & Cordova cargados.
-
+const foundUser = null;
 
 function deviceReady() {
     try {
@@ -331,6 +331,7 @@ function registerUser() {
         }).done(function (data) { // Encontro el usuario
             mui.toast('Usuario guardado Correctamente');
              // todo guardar el usuario en global con data
+             foundUser = data
             mui.viewport.showPage("hanger-page", "DEF");
             document.querySelector('#footer').style.display = "block";
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -545,15 +546,15 @@ function spinner() {
     var pedidoss = []
     $.ajax({
         method: 'GET',
-        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/', // todo poner el Url Correspondientee
+        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/'+ foundUser.user, // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
     }).done(function (collection) {
-        console.log(collection[2])
-        for (let i = 0; i < collection[2].items.length; i++) {
+        console.log(collection)
+        for (let i = 0; i < collection.items.length; i++) {
             fotoss.push($.ajax({
                 method: 'GET',
-                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + collection[2].items[i], // todo poner el Url Correspondientee
+                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + collection.items[i], // todo poner el Url Correspondientee
                 crossDomain: true,
                 dataType: 'text'
             }).done(function (collection) {
@@ -582,7 +583,7 @@ function spinner() {
 
             pedidoss.push($.ajax({
                 method: 'GET',
-                url: 'https://servidor-pocket-wear.herokuapp.com/item/data/' + collection[2].items[i], // todo poner el Url Correspondientee
+                url: 'https://servidor-pocket-wear.herokuapp.com/item/data/' + collection.items[i], // todo poner el Url Correspondientee
                 crossDomain: true,
                 dataType: 'json'
             }).done(function (collection) {

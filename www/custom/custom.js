@@ -1,6 +1,6 @@
 //All ready!. Page &  Cordova loaded.
 //Todo listo!. Página & Cordova cargados.
-const foundUser = null;
+let foundUser = null;
 
 function deviceReady() {
     try {
@@ -17,7 +17,7 @@ function deviceReady() {
         //Install events, clicks, resize, online/offline, etc.
         installEvents();	//Events installation using MobileUI's method.
         //isntallEvents2();	//Example of traditional events installation.
-        logVistosRecientes();
+        logVistosRecientes();//LOG Ultimos Agregados
 
 
         prepareCamera();
@@ -133,6 +133,7 @@ function updateItem(type, store, color, season, img) {
                 season: season,
                 color: color,
                 image: image,
+                user:foundUser.user
             }
 
         }).done(function (data) {
@@ -309,7 +310,7 @@ function installEvents() {
 
 function registerUser() {
     var boton =document.getElementById("register-button");
-    boton.disable = true
+    boton.disable = true;
     document.querySelector('#password-register').style.borderBottom = " 2px solid gray";
     document.querySelector('#user-register').style.borderBottom = ": 2px solid gray";
     document.querySelector('#password-confirm-register').style.borderBottom = " 2px solid gray";
@@ -385,12 +386,13 @@ function userLogin() { //verifico las credenciales
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null) {
         $.ajax({
             method: 'GET',
-            url: 'https://servidor-pocket-wear.herokuapp.com/user/' + user, // todo crear en el server
+            url: 'https://servidor-pocket-wear.herokuapp.com/user/' + user,
             crossDomain: true,
             dataType: 'json'
         }).done(function (data) { // Encontro el usuario
-            if (data.password === password) // todo guardar el usuario en global
+            if (data.password === password)
             {
+                foundUser = data;
                 mui.viewport.showPage("hanger-page", "DEF");
                 document.querySelector('#footer').style.display = "block";
             } else {
@@ -509,7 +511,7 @@ function logVistosRecientes() {
                     modulo.style.backgroundRepeat = "no-repeat";
                     document.querySelector("#grid-home-page").appendChild(modulo);
 
-                }
+                }S
                 document.querySelector('#spinner1').style.display = "none"
             });
 
@@ -546,7 +548,7 @@ function spinner() {
     var pedidoss = []
     $.ajax({
         method: 'GET',
-        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/'+ foundUser.user, // todo poner el Url Correspondientee
+        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/'+ foundUser.user,
         crossDomain: true,
         dataType: 'json'
     }).done(function (collection) {
@@ -554,10 +556,11 @@ function spinner() {
         for (let i = 0; i < collection.items.length; i++) {
             fotoss.push($.ajax({
                 method: 'GET',
-                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + collection.items[i], // todo poner el Url Correspondientee
+                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + collection.items[i], // todo hacer en el server
                 crossDomain: true,
                 dataType: 'text'
             }).done(function (collection) {
+
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 switch (jqXHR.status) {
                     case 0:

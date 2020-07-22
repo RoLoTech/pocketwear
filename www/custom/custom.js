@@ -17,7 +17,7 @@ function deviceReady() {
         //Install events, clicks, resize, online/offline, etc.
         installEvents();	//Events installation using MobileUI's method.
         //isntallEvents2();	//Example of traditional events installation.
-        logVistosRecientes();
+        //logVistosRecientes();
 
 
         prepareCamera();
@@ -133,6 +133,7 @@ function updateItem(type, store, color, season, img) {
                 season: season,
                 color: color,
                 image: image,
+                user: foundUser.user
             }
 
         }).done(function (data) {

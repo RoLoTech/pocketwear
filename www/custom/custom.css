@@ -778,6 +778,7 @@ a {
 	padding: 7px 0;
 	background: transparent;
 	-webkit-appearance: none;
+	border-radius: 0px;
 	-webkit-border-radius: 0px;
 }
 

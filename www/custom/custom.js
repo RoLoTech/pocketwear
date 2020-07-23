@@ -1,6 +1,7 @@
 //All ready!. Page &  Cordova loaded.
-//Todo listo!. Página & Cordova cargados.
+//Todo listo!. Página & Cordova cargados. Ahrex
 let foundUser = null;
+let urlImage=null;
 
 function deviceReady() {
     try {
@@ -12,12 +13,12 @@ function deviceReady() {
             else
                 mui.alert('We recommend you connect your device to the Internet');
         }
-
+        document.querySelector('#cloth-form-container').style.display = "none";
         document.querySelector('#footer').style.display = "none";
         //Install events, clicks, resize, online/offline, etc.
         installEvents();	//Events installation using MobileUI's method.
         //isntallEvents2();	//Example of traditional events installation.
-        logVistosRecientes();//LOG Ultimos Agregados
+
 
 
         prepareCamera();
@@ -36,7 +37,6 @@ function deviceReady() {
 
 
 function prepareCamera() {
-    let form = document.getElementById('form');
     //get the captured media file
     let input = document.getElementById('camera');
     let botonContinuar = document.getElementById('camera-trigger');
@@ -49,70 +49,20 @@ function prepareCamera() {
         console.dir(input.files[0]);
         if (input.files[0].type.indexOf("image/") > -1) {
             let img = document.getElementById('imagen');
+            urlImage=img.src;
             img.src = window.URL.createObjectURL(input.files[0]);
             botonContinuar.style.display = "block";
             $("#camera-trigger").on("click", function (e) {
-                mui.prompt('Indique el Tipo de prenda es esta', promptCallbackTipo, 'Atención');
+                document.querySelector('#cloth-form-container').style.display = "block";
+                $("#confirm-cloth-data").on("click", function (e) {
 
-                function promptCallbackTipo(tipo) {
-                    if (tipo.buttonIndex === 2) {
-                        mui.toast('No se guardo su prenda', 'center', 'short');
-                    } else if (tipo.buttonIndex === 1) {
-                        console.log(tipo.input1 in ["Falda", "Remera", "Camisa", "Buzo", "Pantalon", "Campera", "Gorro", "Short"])
-                        if (tipo.input1 !== "Falda" && tipo.input1 !== "Remera" && tipo.input1 !== "Camisa" && tipo.input1 !== "Buzo" && tipo.input1 !== "Pantalon" && tipo.input1 !== "Campera" && tipo.input1 !== "Gorro" && tipo.input1 !== "Short") {
-                            mui.toast('La prenda debe ser una de las siguientes: Falda, Camisa, Remera, Buzo, Pantalon, Campera, Gorro, Short', 'center', 'short');
-                            mui.prompt('Indique el Tipo de prenda', promptCallbackTipo, 'Atención');
-                        } else {
-                            type = tipo.input1;
-                            mui.prompt('Indique la Tienda de la prenda', promptCallbackTienda, 'Atención');
-
-                            function promptCallbackTienda(tienda) {
-                                if (tienda.buttonIndex === 2) {
-                                    mui.toast('No se guardo su prenda', 'center', 'short');
-                                } else if (tienda.buttonIndex === 1) {
-                                    if (tienda.input1 === "" || tienda.input1 == null) {
-                                        mui.toast('Debe indicar una Tienda para la prenda', 'center', 'short');
-                                        mui.prompt('Indique la Tienda de la prenda', promptCallbackTienda, 'Atención');
-                                    } else {
-                                        store = tienda.input1;
-                                        mui.prompt('Indique el Color de la prenda', promptCallbackColor, 'Atención');
-
-                                        function promptCallbackColor(color1) {
-                                            if (color1.buttonIndex === 2) {
-                                                mui.toast('No se guardo su prenda', 'center', 'short');
-                                            } else if (color1.buttonIndex === 1) {
-                                                if (color1.input1 === "" || color1.input1 == null) {
-                                                    mui.toast('Debe indicar un Color para la prenda', 'center', 'short');
-                                                    mui.prompt('Indique el Color de la prenda', promptCallbackColor, 'Atención');
-                                                } else {
-                                                    color = color1.input1;
-                                                    mui.prompt('Indique la Temporada de la prenda', promptCallbackSeason, 'Atención');
-
-                                                    function promptCallbackSeason(season1) {
-                                                        if (season1.buttonIndex === 2) {
-                                                            mui.toast('No se guardo su prenda', 'center', 'short');
-                                                        } else if (season1.buttonIndex === 1) {
-                                                            if (season1.input1 !== "Primavera" && season1.input1 !== "Verano" && season1.input1 !== "Otoño" && season1.input1 !== "Invierno") {
-                                                                mui.toast('Debe indicar una estacion existente(Primavera,Verano,Otoño o Invierno)', 'center', 'short');
-                                                                mui.prompt('Indique el Color de la prenda', promptCallbackSeason, 'Atención');
-                                                            } else {
-                                                                season = season1.input1;
-                                                                var fotoGenerada = document.getElementById('camera').files[0];
-                                                                updateItem(type, store, color, season, fotoGenerada);
-
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
+                    var type = document.getElementById("type-selector").value;
+                    var store = document.getElementById("store-selector").value;
+                    var color = document.getElementById("color-selector").value;
+                    var season = document.getElementById("season-selector").value;
+                    var fotoGenerada = document.getElementById('camera').files[0];
+                    updateItem(type, store, color, season, fotoGenerada);
+                });
             });
         }
     });
@@ -133,12 +83,17 @@ function updateItem(type, store, color, season, img) {
                 season: season,
                 color: color,
                 image: image,
-                user:foundUser.user
+                user: foundUser.user
             }
 
         }).done(function (data) {
-            console.log(data);
+
+            document.querySelector('#cloth-form-container').style.display = "none";
+            var aux= document.getElementById('imagen');
+            aux.src=urlImage;
+            document.querySelector('#camera-trigger').style.display = "none";
             mui.vibrate();
+
             mui.toast('Su prenda se guardo exitosamente', 'center', 'short');
         }).fail(function (jqXHR, textStatus, errorThrown) {
 
@@ -188,7 +143,9 @@ function installEvents() {
             id: '#home-button',
             ev: 'click',	//If not, it assumes click
             fn: () => {
+                document.getElementById("grid-home-page").innerHTML="";
                 mui.viewport.showPage("home-page", "DEF");
+                logVistosRecientes();//LOG Ultimos Agregados
                 return false;
             }
         },
@@ -263,7 +220,7 @@ function installEvents() {
         //MobileUI viewport specific event.
         {
             vp: mui.viewport,
-            ev: 'swiperight', // todo Gabuarab pa mi se parte con este
+            ev: 'swiperight',
             fn: () => {
                 if (!mui.viewport.panelIsOpen()) {
                     mui.history.back();
@@ -309,7 +266,7 @@ function installEvents() {
 
 
 function registerUser() {
-    var boton =document.getElementById("register-button");
+    var boton = document.getElementById("register-button");
     boton.disable = true;
     document.querySelector('#password-register').style.borderBottom = " 2px solid gray";
     document.querySelector('#user-register').style.borderBottom = ": 2px solid gray";
@@ -331,8 +288,8 @@ function registerUser() {
             }
         }).done(function (data) { // Encontro el usuario
             mui.toast('Usuario guardado Correctamente');
-             // todo guardar el usuario en global con data
-             foundUser = data
+            // todo guardar el usuario en global con data
+            foundUser = data
             mui.viewport.showPage("hanger-page", "DEF");
             document.querySelector('#footer').style.display = "block";
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -356,7 +313,7 @@ function registerUser() {
                     }
                     break;
             }
-        }).always( boton.disable = true );
+        }).always(boton.disable = true);
 
 
     } else {
@@ -390,8 +347,7 @@ function userLogin() { //verifico las credenciales
             crossDomain: true,
             dataType: 'json'
         }).done(function (data) { // Encontro el usuario
-            if (data.password === password)
-            {
+            if (data.password === password) {
                 foundUser = data;
                 mui.viewport.showPage("hanger-page", "DEF");
                 document.querySelector('#footer').style.display = "block";
@@ -444,49 +400,12 @@ function logVistosRecientes() {
     promises = []
     $.ajax({
         method: 'GET',
-        url: 'https://servidor-pocket-wear.herokuapp.com/item/date', // todo poner el Url Correspondientee
+        url: 'https://servidor-pocket-wear.herokuapp.com/ultimos', // todo poner el Url Correspondientee
         crossDomain: true,
         dataType: 'json'
     }).done(function (data) {
         //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
-        for (i = 0; i < data.length; i++) {
-            var postt = data[data.length - 1 - i];
-
-            var request = $.ajax({ //pa sacar lA FOTO DE ALEJANdRA(CASSANDRA)
-                method: 'GET',
-                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + postt._id,
-                crossDomain: true,
-                dataType: 'text'
-            }).done(function (foto) {
-
-
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                switch (jqXHR.status) {
-                    case 0:
-                        alert('Not connect: Verify Network.');
-                        break;
-                    case 404:
-                        alert('Requested page not found [404]')
-                        break;
-                    case 500:
-                        alert('Internal Server Error [500].');
-                        break;
-                    default:
-                        switch (textStatus) {
-                            case 'timeout':
-                                alert('Time out error.');
-                                break;
-                            case 'parsererror':
-                                alert('Requested JSON parse failed.');
-                        }
-                        break;
-                }
-            });
-            promises.push(request)
-        }
-        Promise.all(promises)
-            .then(responseList => {
-                for (j = 0; j < responseList.length; j++) {
+        for (j = 0; j < data.length; j++) {
                     var post = data[j];
                     var contenedorDetalles = document.createElement("div");
                     contenedorDetalles.setAttribute("class", "details-container");
@@ -506,17 +425,15 @@ function logVistosRecientes() {
                     modulo.setAttribute("class", "module");
                     modulo.setAttribute("id", "UltimaVisitada" + j);
                     modulo.appendChild(contenedorDetalles);
-                    modulo.style.backgroundImage = 'url(' + responseList[responseList.length - j - 1] + ')';
+                    modulo.style.backgroundImage = 'url(' +post.img + ')';
                     modulo.style.backgroundSize = "contain";
                     modulo.style.backgroundRepeat = "no-repeat";
                     document.querySelector("#grid-home-page").appendChild(modulo);
 
-                }S
+                }
+
                 document.querySelector('#spinner1').style.display = "none"
-            });
-
-
-    })
+          })
         .fail(function (jqXHR, textStatus, errorThrown) {
 
             switch (jqXHR.status) {
@@ -548,11 +465,11 @@ function spinner() {
     var pedidoss = []
     $.ajax({
         method: 'GET',
-        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/'+ foundUser.user,
+        url: 'https://servidor-pocket-wear.herokuapp.com/userInventory/' + foundUser.user,
         crossDomain: true,
         dataType: 'json'
     }).done(function (collection) {
-        console.log(collection)
+
         for (let i = 0; i < collection.items.length; i++) {
             fotoss.push($.ajax({
                 method: 'GET',
@@ -617,13 +534,11 @@ function spinner() {
             .then(items => {
                 Promise.all(fotoss)
                     .then(fotos => {
-                        console.log(items)
                         var arriba = [];
                         var medio = [];
                         var abajo = [];
 
                         for (let j = 0; j < fotos.length; j++) {
-                            console.log(items[j])
                             if (items[j].type === "Campera" || items[j].type === "Camisa" || items[j].type === "Remera" || items[j].type === "Buzo") {
                                 medio.push(fotos[j])
                             } else if (items[j].type === "Gorro") {
@@ -633,7 +548,6 @@ function spinner() {
                             }
 
                         }
-                        console.log(abajo)
                         var indice1 = 1;
                         var indice2 = 1;
                         var indice3 = 1;

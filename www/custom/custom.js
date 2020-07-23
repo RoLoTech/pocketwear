@@ -410,13 +410,15 @@ function logVistosRecientes() {
                     var contenedorDetalles = document.createElement("div");
                     contenedorDetalles.setAttribute("class", "details-container");
                     var detalleTitulo = document.createElement("div");
-                    detalleTitulo.setAttribute("class", "details-title");
+                    detalleTitulo.setAttribute("class", "details-store");
                     var detalleTienda = document.createElement("div");
                     detalleTienda.setAttribute("class", "details-store");
                     var tienda = post.store;
                     var titulo = post.type;
 
-                    detalleTitulo.appendChild(document.createTextNode(titulo));
+                    detalleTitulo.appendChild(document.createTextNode(""));
+                    detalleTienda.appendChild(document.createTextNode(titulo));
+                    detalleTienda.appendChild(document.createElement("br"));
                     detalleTienda.appendChild(document.createTextNode(tienda));
                     contenedorDetalles.appendChild(detalleTitulo);
                     contenedorDetalles.appendChild(detalleTienda);

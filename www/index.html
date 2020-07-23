@@ -106,11 +106,50 @@
                     </div>
                     <div class="mui-page-body mui-scrollable" id="second-body">
                         <div>
-                            <div style="margin: 50px; text-align: center;">
+                            <div style="text-align: center;">
                                 <div class="search-page-container">
                                     <div class="search-bar">
                                     </div>
-                                    <div class="grid">
+                                    <div>
+                                        <div id="cloth-form-container-2">
+                                            <div id="popup-dialog-2">
+                                                <label for="types">Tipo:</label>
+                                                <select name="types" id="search-type-selector" class="form-selector">
+                                                    <option value="Falda">Falda</option>
+                                                    <option value="Camisa">Camisa</option>
+                                                    <option value="Remera">Remera</option>
+                                                    <option value="Buzo">Buzo</option>
+                                                    <option value="Pantalón">Pantalón</option>
+                                                    <option value="Campera">Campera</option>
+                                                    <option value="Gorro">Gorro</option>
+                                                    <option value="Short">Short</option>
+                                                </select>
+                                                <br>
+                                                <label for="stores">Tienda:</label>
+                                                <select name="stores" id="search-store-selector" class="form-selector">
+                                                    <option value="">        </option>
+                                                </select>
+                                                <br>
+                                                <label for="colors">Color:</label>
+                                                <select name="colors" type="text" id="search-color-selector" class="form-selector">
+                                                    <option value="">        </option>
+                                                </select>
+                                                <br>
+                                                <label for="seasons">Temporada:</label>
+                                                <select name="seasons" id="search-season-selector"
+                                                    class="form-selector">
+                                                    <option value="Verano">Verano</option>
+                                                    <option value="Otoño">Otoño</option>
+                                                    <option value="Invierno">Invierno</option>
+                                                    <option value="Primavera">Primavera</option>
+                                                </select>
+                                                <br>
+                                                <button id="confirm-cloth-data"
+                                                    class="user-area-button">Confirmar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="grid">
                                         <div class="module" id="tienda-1"></div>
                                         <div class="module" id="tienda-2"></div>
                                         <div class="module" id="tienda-3"></div>
@@ -126,7 +165,7 @@
                                         <div class="module" id="tienda-13"></div>
                                         <div class="module" id="tienda-14"></div>
                                         <div class="module" id="tienda-15"></div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -153,7 +192,7 @@
                                 </select>
                                 <br>
                                 <label for="stores">Tienda:</label>
-                                <input name="stores" type="text" id="store-selector" >
+                                <input name="stores" type="text" id="store-selector">
                                 <br>
                                 <label for="colors">Color:</label>
                                 <input name="colors" type="text" id="color-selector">

@@ -75,7 +75,7 @@ function updateItem(type, store, color, season, img) {
         var image = reader.result;
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
+                url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
             crossDomain: true,
             data: {
                 type: type,

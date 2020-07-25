@@ -52,21 +52,22 @@ function prepareCamera() {
             urlImage=img.src;
             img.src = window.URL.createObjectURL(input.files[0]);
             botonContinuar.style.display = "block";
-            $("#camera-trigger").on("click", function (e) {
-                document.querySelector('#cloth-form-container').style.display = "block";
-                $("#confirm-cloth-data").on("click", function (e) {
-
-                    var type = document.getElementById("type-selector").value;
-                    var store = document.getElementById("store-selector").value;
-                    var color = document.getElementById("color-selector").value;
-                    var season = document.getElementById("season-selector").value;
-                    var fotoGenerada = document.getElementById('camera').files[0];
-                    updateItem(type, store, color, season, fotoGenerada);
-                });
-            });
         }
     });
 }
+
+document.querySelector("#camera-trigger").on("click", function (e) {
+    document.querySelector('#cloth-form-container').style.display = "block";
+    $("#confirm-cloth-data").on("click", function (e) {
+
+        var type = document.getElementById("type-selector").value;
+        var store = document.getElementById("store-selector").value;
+        var color = document.getElementById("color-selector").value;
+        var season = document.getElementById("season-selector").value;
+        var fotoGenerada = document.getElementById('camera').files[0];
+        updateItem(type, store, color, season, fotoGenerada);
+    });
+});
 
 function updateItem(type, store, color, season, img) {
     var reader = new FileReader();
@@ -75,7 +76,7 @@ function updateItem(type, store, color, season, img) {
         var image = reader.result;
         $.ajax({
             method: 'POST',
-                url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
+            url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
             crossDomain: true,
             data: {
                 type: type,
@@ -279,7 +280,7 @@ function registerUser() {
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null && mail !== "" && mail !== undefined && mail !== null && passwordConfirm !== "" && passwordConfirm !== undefined && passwordConfirm !== null) {
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com/user/',
+            url: 'https://servidor-pocket-wear.herokuapp.com/user/'+user,
             crossDomain: true,
             data: {
                 user: user,

@@ -45,28 +45,38 @@ function prepareCamera() {
     var store = "";
     var season = "Otoño";
     var color = "";
+
+    document.getElementById("confirm-cloth-data").addEventListener("click", function (e) {
+        console.log('2')
+    
+        var type = document.getElementById("type-selector").value;
+        var store = document.getElementById("store-selector").value;
+        var color = document.getElementById("color-selector").value;
+        var season = document.getElementById("season-selector").value;
+        var fotoGenerada = document.getElementById('camera').files[0];
+        updateItem(type, store, color, season, fotoGenerada);
+    });
+
+    document.getElementById("camera-trigger").addEventListener("click", function (e) {
+        console.log('1')
+        document.querySelector('#cloth-form-container').style.display = "block";
+       
+    });
+
     input.addEventListener('change', (ev) => {
         console.dir(input.files[0]);
+        console.log('0')
         if (input.files[0].type.indexOf("image/") > -1) {
             let img = document.getElementById('imagen');
             urlImage = img.src;
             img.src = window.URL.createObjectURL(input.files[0]);
             botonContinuar.style.display = "block";
-            $("#camera-trigger").on("click", function (e) {
-                document.querySelector('#cloth-form-container').style.display = "block";
-                $("#confirm-cloth-data").on("click", function (e) {
-
-                    var type = document.getElementById("type-selector").value;
-                    var store = document.getElementById("store-selector").value;
-                    var color = document.getElementById("color-selector").value;
-                    var season = document.getElementById("season-selector").value;
-                    var fotoGenerada = document.getElementById('camera').files[0];
-                    updateItem(type, store, color, season, fotoGenerada);
-                });
-            });
+           
         }
     });
 }
+
+
 
 function updateItem(type, store, color, season, img) {
     var reader = new FileReader();
@@ -75,7 +85,7 @@ function updateItem(type, store, color, season, img) {
         var image = reader.result;
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
+                url: 'https://servidor-pocket-wear.herokuapp.com/item', // poner el url correspondiente
             crossDomain: true,
             data: {
                 type: type,
@@ -279,7 +289,7 @@ function registerUser() {
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null && mail !== "" && mail !== undefined && mail !== null && passwordConfirm !== "" && passwordConfirm !== undefined && passwordConfirm !== null) {
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com/user/',
+            url: 'https://servidor-pocket-wear.herokuapp.com/user/'+ user,
             crossDomain: true,
             data: {
                 user: user,
@@ -473,84 +483,25 @@ function spinner() {
         dataType: 'json'
     }).done(function (collection) {
 
-        for (let i = 0; i < collection.items.length; i++) {
-            fotoss.push($.ajax({
-                method: 'GET',
-                url: 'https://servidor-pocket-wear.herokuapp.com/itemImage/' + collection.items[i], // todo hacer en el server
-                crossDomain: true,
-                dataType: 'text'
-            }).done(function (collection) {
-
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                switch (jqXHR.status) {
-                    case 0:
-                        alert('Not connect: Verify Network.');
-                        break;
-                    case 404:
-                        alert('Requested page not found [404]')
-                        break;
-                    case 500:
-                        alert('Internal Server Error [500].');
-                        break;
-                    default:
-                        switch (textStatus) {
-                            case 'timeout':
-                                alert('Time out error.');
-                                break;
-                            case 'parsererror':
-                                alert('Requested JSON parse failed.');
-                        }
-                        break;
-                }
-            }))
-
-            pedidoss.push($.ajax({
-                method: 'GET',
-                url: 'https://servidor-pocket-wear.herokuapp.com/item/data/' + collection.items[i], // todo poner el Url Correspondientee
-                crossDomain: true,
-                dataType: 'json'
-            }).done(function (collection) {
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                switch (jqXHR.status) {
-                    case 0:
-                        alert('Not connect: Verify Network.');
-                        break;
-                    case 404:
-                        alert('Requested page not found [404]')
-                        break;
-                    case 500:
-                        alert('Internal Server Error [500].');
-                        break;
-                    default:
-                        switch (textStatus) {
-                            case 'timeout':
-                                alert('Time out error.');
-                                break;
-                            case 'parsererror':
-                                alert('Requested JSON parse failed.');
-                        }
-                        break;
-                }
-            }))
-        }
-        Promise.all(pedidoss)
-            .then(items => {
-                Promise.all(fotoss)
-                    .then(fotos => {
+        
                         var arriba = [];
                         var medio = [];
                         var abajo = [];
 
-                        for (let j = 0; j < fotos.length; j++) {
-                            if (items[j].type === "Campera" || items[j].type === "Camisa" || items[j].type === "Remera" || items[j].type === "Buzo") {
-                                medio.push(fotos[j])
-                            } else if (items[j].type === "Gorro") {
-                                arriba.push(fotos[j])
-                            } else if (items[j].type === "Falda" || items[j].type === "Pantalon" || items[j].type === "Short") {
-                                abajo.push(fotos[j])
+                        for (let j = 0; j < collection.length; j++) {
+                            if (collection[j].type === "Campera" || collection[j].type === "Camisa" || collection[j].type === "Remera" || collection[j].type === "Buzo") {
+                                medio.push(collection[j].img)
+                            } else if (collection[j].type === "Gorro") {
+                                arriba.push(collection[j].img)
+                            } else if (collection[j].type === "Falda" || collection[j].type === "Pantalón" || collection[j].type === "Short") {
+                                abajo.push(collection[j].img)
                             }
 
                         }
+                        console.log(collection)
+                        console.log(arriba)
+                        console.log(medio)
+                        console.log(abajo)
                         var indice1 = 1;
                         var indice2 = 1;
                         var indice3 = 1;
@@ -558,27 +509,36 @@ function spinner() {
 
                         for (i = 1; i <= 3; i++) {
                             if (i < 3) {
-                                if (i <= arriba.length) {
+                                if (i <= arriba.length && arriba.length > 0) {
                                     document.getElementById("card" + i).style.backgroundImage = 'url(' + arriba[i - 1] + ')'
 
                                 }
-                                if (i <= medio.length) {
+                                if (i <= medio.length && medio.length > 0) {
                                     document.getElementById("card" + (i + 3)).style.backgroundImage = 'url(' + medio[i - 1] + ')'
 
                                 }
-                                if (i <= abajo.length) {
+                                if (i <= abajo.length && abajo.length > 0) {
 
                                     document.getElementById("card" + (i + 6)).style.backgroundImage = 'url(' + abajo[i - 1] + ')'
                                 }
                             } else {
-                                document.getElementById("card" + i).style.backgroundImage = 'url(' + arriba[arriba.length - 1] + ')'
-                                document.getElementById("card" + (i + 3)).style.backgroundImage = 'url(' + medio[medio.length - 1] + ')'
-                                document.getElementById("card" + (i + 6)).style.backgroundImage = 'url(' + abajo[abajo.length - 1] + ')'
+                                if(arriba.length > 0 && arriba.length >= 3){
+                                    document.getElementById("card" + i).style.backgroundImage = 'url(' + arriba[arriba.length - 1] + ')'
+                                }
+                                
+                                if(medio.length > 0 && medio.length >= 3){
+                                    document.getElementById("card" + (i + 3)).style.backgroundImage = 'url(' + medio[medio.length - 1] + ')'
+                                }
+                                
+                                if(abajo.length >0 && abajo.length >= 3){
+                                   document.getElementById("card" + (i + 6)).style.backgroundImage = 'url(' + abajo[abajo.length - 1] + ')'
+                                }
                             }
                         }
-
+                   
 
                         var angleRotate = 120
+                        
                         var rotate1 = 0
                         var mouse1 = new Array(2);
 
@@ -930,10 +890,7 @@ function spinner() {
                             }
                         }
                         )
-                    })
-            })
-
-
+                    
     }).fail(function (jqXHR, textStatus, errorThrown) {
         switch (jqXHR.status) {
             case 0:

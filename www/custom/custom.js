@@ -1087,8 +1087,9 @@ function spinner() {
         }
     });
 }
-
-
-function disableButtons() { //todo German
+function disableButtons() {
+    
+}
+function enableButtons() {
 
 }

@@ -536,6 +536,7 @@ function userLogin() { //verifico las credenciales
             if (data.password === password) {
                 foundUser = data;
                 mui.viewport.showPage("hanger-page", "DEF");
+                mui.history.reset()
                 document.querySelector('#footer').style.display = "block";
             } else {
                 mui.toast('Contraseña incorrecta');

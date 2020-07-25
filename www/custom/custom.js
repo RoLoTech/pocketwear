@@ -279,7 +279,7 @@ function registerUser() {
     if (user !== undefined && user !== null && user !== "" && password !== "" && password !== undefined && password !== null && mail !== "" && mail !== undefined && mail !== null && passwordConfirm !== "" && passwordConfirm !== undefined && passwordConfirm !== null) {
         $.ajax({
             method: 'POST',
-            url: 'https://servidor-pocket-wear.herokuapp.com/user/',
+            url: 'https://servidor-pocket-wear.herokuapp.com/user/'+ user,
             crossDomain: true,
             data: {
                 user: user,

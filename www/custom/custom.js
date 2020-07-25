@@ -336,6 +336,7 @@ function installEvents() {
             id: '#search-button',
             ev: 'click',
             fn: async () => {
+                document.querySelector("#search-color-selector").innerHTML="";
                 disableButtons();
                 borrarInputs();
                 await cargarInputs();

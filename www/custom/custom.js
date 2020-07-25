@@ -1,7 +1,7 @@
 //All ready!. Page &  Cordova loaded.
 //Todo listo!. Página & Cordova cargados. Ahrex
 let foundUser = null;
-let urlImage=null;
+let urlImage = null;
 
 function deviceReady() {
     try {
@@ -49,7 +49,7 @@ function prepareCamera() {
         console.dir(input.files[0]);
         if (input.files[0].type.indexOf("image/") > -1) {
             let img = document.getElementById('imagen');
-            urlImage=img.src;
+            urlImage = img.src;
             img.src = window.URL.createObjectURL(input.files[0]);
             botonContinuar.style.display = "block";
             $("#camera-trigger").on("click", function (e) {
@@ -89,8 +89,8 @@ function updateItem(type, store, color, season, img) {
         }).done(function (data) {
 
             document.querySelector('#cloth-form-container').style.display = "none";
-            var aux= document.getElementById('imagen');
-            aux.src=urlImage;
+            var aux = document.getElementById('imagen');
+            aux.src = urlImage;
             document.querySelector('#camera-trigger').style.display = "none";
             mui.vibrate();
 
@@ -143,7 +143,7 @@ function installEvents() {
             id: '#home-button',
             ev: 'click',	//If not, it assumes click
             fn: () => {
-                document.getElementById("grid-home-page").innerHTML="";
+                document.getElementById("grid-home-page").innerHTML = "";
                 mui.viewport.showPage("home-page", "DEF");
                 logVistosRecientes();//LOG Ultimos Agregados
                 return false;
@@ -350,6 +350,7 @@ function userLogin() { //verifico las credenciales
             if (data.password === password) {
                 foundUser = data;
                 mui.viewport.showPage("hanger-page", "DEF");
+                mui.history.reset()
                 document.querySelector('#footer').style.display = "block";
             } else {
                 mui.toast('Contraseña incorrecta');
@@ -406,36 +407,36 @@ function logVistosRecientes() {
     }).done(function (data) {
         //  data deberia ser una lista con los articulos (id,tipo,tienda,...)
         for (j = 0; j < data.length; j++) {
-                    var post = data[j];
-                    var contenedorDetalles = document.createElement("div");
-                    contenedorDetalles.setAttribute("class", "details-container");
-                    var detalleTitulo = document.createElement("div");
-                    detalleTitulo.setAttribute("class", "details-store");
-                    var detalleTienda = document.createElement("div");
-                    detalleTienda.setAttribute("class", "details-store");
-                    var tienda = post.store;
-                    var titulo = post.type;
+            var post = data[j];
+            var contenedorDetalles = document.createElement("div");
+            contenedorDetalles.setAttribute("class", "details-container");
+            var detalleTitulo = document.createElement("div");
+            detalleTitulo.setAttribute("class", "details-store");
+            var detalleTienda = document.createElement("div");
+            detalleTienda.setAttribute("class", "details-store");
+            var tienda = post.store;
+            var titulo = post.type;
 
-                    detalleTitulo.appendChild(document.createTextNode(""));
-                    detalleTienda.appendChild(document.createTextNode(titulo));
-                    detalleTienda.appendChild(document.createElement("br"));
-                    detalleTienda.appendChild(document.createTextNode(tienda));
-                    contenedorDetalles.appendChild(detalleTitulo);
-                    contenedorDetalles.appendChild(detalleTienda);
-                    var modulo = document.createElement("div");
-                    modulo.id = "modulo" + j;
-                    modulo.setAttribute("class", "module");
-                    modulo.setAttribute("id", "UltimaVisitada" + j);
-                    modulo.appendChild(contenedorDetalles);
-                    modulo.style.backgroundImage = 'url(' +post.img + ')';
-                    modulo.style.backgroundSize = "contain";
-                    modulo.style.backgroundRepeat = "no-repeat";
-                    document.querySelector("#grid-home-page").appendChild(modulo);
+            detalleTitulo.appendChild(document.createTextNode(""));
+            detalleTienda.appendChild(document.createTextNode(titulo));
+            detalleTienda.appendChild(document.createElement("br"));
+            detalleTienda.appendChild(document.createTextNode(tienda));
+            contenedorDetalles.appendChild(detalleTitulo);
+            contenedorDetalles.appendChild(detalleTienda);
+            var modulo = document.createElement("div");
+            modulo.id = "modulo" + j;
+            modulo.setAttribute("class", "module");
+            modulo.setAttribute("id", "UltimaVisitada" + j);
+            modulo.appendChild(contenedorDetalles);
+            modulo.style.backgroundImage = 'url(' + post.img + ')';
+            modulo.style.backgroundSize = "contain";
+            modulo.style.backgroundRepeat = "no-repeat";
+            document.querySelector("#grid-home-page").appendChild(modulo);
 
-                }
+        }
 
-                document.querySelector('#spinner1').style.display = "none"
-          })
+        document.querySelector('#spinner1').style.display = "none"
+    })
         .fail(function (jqXHR, textStatus, errorThrown) {
 
             switch (jqXHR.status) {
@@ -821,113 +822,113 @@ function spinner() {
                         })
 
                         $('#card-container3').on('touchend', function (event) {
-                                mouse3[1] = event.changedTouches[0].pageX
-                                switch (event.target.id) {
-                                    case 'card7':
-                                        if (mouse3[0] <= mouse3[1]) {
+                            mouse3[1] = event.changedTouches[0].pageX
+                            switch (event.target.id) {
+                                case 'card7':
+                                    if (mouse3[0] <= mouse3[1]) {
 
-                                            rotate3 += angleRotate
-                                            if (abajo.length > 3) {
-                                                if (indice3 - 2 <= 0) {
-                                                    if (indice3 === 0) {
-                                                        indice3 = abajo.length - 1
-                                                        document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
-                                                    } else {
-                                                        indice3 -= 1
-                                                        document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
-                                                    }
-
-                                                } else {
-                                                    indice3 -= 1;
+                                        rotate3 += angleRotate
+                                        if (abajo.length > 3) {
+                                            if (indice3 - 2 <= 0) {
+                                                if (indice3 === 0) {
+                                                    indice3 = abajo.length - 1
                                                     document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
-                                                }
-                                            }
-                                        } else {
-                                            rotate3 -= angleRotate
-                                            if (abajo.length > 3) {
-
-                                                if (indice3 + 1 === abajo.length) {
-                                                    indice3 = 0;
                                                 } else {
-                                                    indice3 += 1;
+                                                    indice3 -= 1
+                                                    document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
                                                 }
-                                                document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+
+                                            } else {
+                                                indice3 -= 1;
+                                                document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
                                             }
                                         }
-                                        event.target.parentElement.style.transition = 'all 1s '
-                                        event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                                        break;
-                                    case
+                                    } else {
+                                        rotate3 -= angleRotate
+                                        if (abajo.length > 3) {
+
+                                            if (indice3 + 1 === abajo.length) {
+                                                indice3 = 0;
+                                            } else {
+                                                indice3 += 1;
+                                            }
+                                            document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+                                        }
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                    break;
+                                case
                                     'card8':
-                                        if (mouse3[0] <= mouse3[1]) {
+                                    if (mouse3[0] <= mouse3[1]) {
 
-                                            rotate3 += angleRotate
-                                            if (abajo.length > 3) {
-                                                if (indice3 - 2 <= 0) {
-                                                    if (indice3 === 0) {
-                                                        indice3 = abajo.length - 1
-                                                        document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
-                                                    } else {
-                                                        indice3 -= 1
-                                                        document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
-                                                    }
-
-                                                } else {
-                                                    indice3 -= 1;
+                                        rotate3 += angleRotate
+                                        if (abajo.length > 3) {
+                                            if (indice3 - 2 <= 0) {
+                                                if (indice3 === 0) {
+                                                    indice3 = abajo.length - 1
                                                     document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
-                                                }
-                                            }
-                                        } else {
-                                            rotate3 -= angleRotate
-                                            if (abajo.length > 3) {
-
-                                                if (indice3 + 1 === abajo.length) {
-                                                    indice3 = 0;
                                                 } else {
-                                                    indice3 += 1;
+                                                    indice3 -= 1
+                                                    document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
                                                 }
-                                                document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+
+                                            } else {
+                                                indice3 -= 1;
+                                                document.getElementById("card9").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
                                             }
                                         }
-                                        event.target.parentElement.style.transition = 'all 1s '
-                                        event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                                        break;
-                                    case'card9':
-                                        if (mouse3[0] <= mouse3[1]) {
+                                    } else {
+                                        rotate3 -= angleRotate
+                                        if (abajo.length > 3) {
 
-                                            rotate3 += angleRotate
-                                            if (abajo.length > 3) {
-                                                if (indice3 - 2 <= 0) {
-                                                    if (indice3 === 0) {
-                                                        indice3 = abajo.length - 1
-                                                        document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
-                                                    } else {
-                                                        indice3 -= 1
-                                                        document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
-                                                    }
+                                            if (indice3 + 1 === abajo.length) {
+                                                indice3 = 0;
+                                            } else {
+                                                indice3 += 1;
+                                            }
+                                            document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+                                        }
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                    break;
+                                case 'card9':
+                                    if (mouse3[0] <= mouse3[1]) {
 
-                                                } else {
-                                                    indice3 -= 1;
+                                        rotate3 += angleRotate
+                                        if (abajo.length > 3) {
+                                            if (indice3 - 2 <= 0) {
+                                                if (indice3 === 0) {
+                                                    indice3 = abajo.length - 1
                                                     document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
-                                                }
-                                            }
-                                        } else {
-                                            rotate3 -= angleRotate
-                                            if (abajo.length > 3) {
-
-                                                if (indice3 + 1 === abajo.length) {
-                                                    indice3 = 0;
                                                 } else {
-                                                    indice3 += 1;
+                                                    indice3 -= 1
+                                                    document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2 + abajo.length] + ')'
                                                 }
-                                                document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+
+                                            } else {
+                                                indice3 -= 1;
+                                                document.getElementById("card7").style.backgroundImage = 'url(' + abajo[indice3 - 2] + ')'
                                             }
                                         }
-                                        event.target.parentElement.style.transition = 'all 1s '
-                                        event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
-                                        break;
-                                }
+                                    } else {
+                                        rotate3 -= angleRotate
+                                        if (abajo.length > 3) {
+
+                                            if (indice3 + 1 === abajo.length) {
+                                                indice3 = 0;
+                                            } else {
+                                                indice3 += 1;
+                                            }
+                                            document.getElementById("card8").style.backgroundImage = 'url(' + abajo[indice3] + ')'
+                                        }
+                                    }
+                                    event.target.parentElement.style.transition = 'all 1s '
+                                    event.target.parentElement.style.transform = 'translateZ(-35vw) rotateY(' + rotate3 + 'deg)'
+                                    break;
                             }
+                        }
                         )
                     })
             })

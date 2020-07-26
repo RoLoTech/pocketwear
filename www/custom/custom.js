@@ -39,6 +39,7 @@ function buscar() {
 
 
     document.getElementById("confirm-cloth-search").addEventListener("click", function (e) {
+        document.querySelector("#grid-search-page").innerHTML="";
         var type = document.getElementById("search-type-selector").value;
         var store = document.getElementById("search-store-selector").value;
         var color = document.getElementById("search-color-selector").value;
@@ -85,7 +86,7 @@ function buscar() {
                 var modulo = document.createElement("div");
                 modulo.id = "modulo" + j;
                 modulo.setAttribute("class", "module");
-                modulo.setAttribute("id", "UltimaVisitada" + j);
+                modulo.setAttribute("id", "Buscado" + j);
                 modulo.appendChild(contenedorDetalles);
                 modulo.style.backgroundImage = 'url(' + post.img + ')';
                 modulo.style.backgroundSize = "contain";
@@ -336,7 +337,7 @@ function installEvents() {
             id: '#search-button',
             ev: 'click',
             fn: async () => {
-                document.querySelector("#search-color-selector").innerHTML="";
+
                 disableButtons();
                 borrarInputs();
                 await cargarInputs();

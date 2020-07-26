@@ -804,6 +804,17 @@ a {
 	outline: none;
 }
 
+.search_button{
+	border-radius: 13px 13px 13px 13px;
+	-moz-border-radius: 13px 13px 13px 13px;
+	-webkit-border-radius: 13px 13px 13px 13px;
+	border: 0px solid #000000;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+	6px 6px 10px rgba(0, 0, 0, 0.2);
+	outline: none;
+	margin-top: 5%
+}
+
 #login-social-button {
 	margin-top: 10%;
 	height: 10%;
@@ -1011,6 +1022,10 @@ a {
 }*/
 
 #confirm-cloth-data {
+	margin-top: 10%;
+}
+
+#cancel-cloth-data{
 	margin-top: 10%;
 }
 

@@ -138,10 +138,19 @@ function prepareCamera() {
         var color = document.getElementById("color-selector").value;
         var season = document.getElementById("season-selector").value;
         var fotoGenerada = document.getElementById('camera').files[0];
+        botonContinuar.disabled = false;
         updateItem(type, store, color, season, fotoGenerada);
     });
 
+    document.getElementById("cancel-cloth-data").addEventListener("click", function(e){
+        botonContinuar.disabled = false;
+        document.querySelector('#cloth-form-container').style.display = "none";
+        document.getElementById('imagen').src= urlImage
+        botonContinuar.style.display= "none";
+    });
+
     document.getElementById("camera-trigger").addEventListener("click", function (e) {
+        botonContinuar.disabled = true;
         document.querySelector('#cloth-form-container').style.display = "block";
 
     });
@@ -478,7 +487,8 @@ function registerUser() {
             mui.toast('Usuario guardado Correctamente');
             // todo guardar el usuario en global con data
             foundUser = data
-            mui.viewport.showPage("hanger-page", "DEF");
+            mui.viewport.showPage("home-page", "DEF");
+            logVistosRecientes()
             document.querySelector('#footer').style.display = "block";
         }).fail(function (jqXHR, textStatus, errorThrown) {
             switch (jqXHR.status) {
@@ -537,7 +547,8 @@ function userLogin() { //verifico las credenciales
         }).done(function (data) { // Encontro el usuario
             if (data.password === password) {
                 foundUser = data;
-                mui.viewport.showPage("hanger-page", "DEF");
+                mui.viewport.showPage("home-page", "DEF");
+                logVistosRecientes()
                 mui.history.reset()
                 document.querySelector('#footer').style.display = "block";
             } else {

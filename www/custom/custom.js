@@ -36,9 +36,10 @@ function deviceReady() {
 
 
 function buscar() {
+    confirmar = document.getElementById('confirm-cloth-search');
 
-
-    document.getElementById("confirm-cloth-search").addEventListener("click", function (e) {
+    confirmar.addEventListener("click", function (e) {
+        confirmar.disabled = true;
         document.querySelector("#grid-search-page").innerHTML="";
         var type = document.getElementById("search-type-selector").value;
         var store = document.getElementById("search-store-selector").value;
@@ -63,7 +64,6 @@ function buscar() {
             crossDomain: true,
             data: data
         }).done(function (data) { // data es un vector con items
-
             data=JSON.parse(data)
             document.querySelector("#cloth-form-container-2").style.display = "none";
             for (let j = 0; j < data.length; j++) {
@@ -329,6 +329,7 @@ function installEvents() {
             id: '#buscar',
             ev: 'click',
             fn: () => {
+                document.getElementById('confirm-cloth-search').disabled = false;
                 document.querySelector("#cloth-form-container-2").style.display = "block";
             }
         },

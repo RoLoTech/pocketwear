@@ -884,6 +884,18 @@ a {
 	box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.75);
 }
 
+#buscar{
+	font-size: 125%;
+	background: transparent;
+	outline: none;
+	border: none #546c84;
+	border-bottom: 1px solid #546c84;
+}
+
+#buscar :active{
+	background: rgba(254, 254, 254, .4);
+}
+
 #imagen {
 	height: 90%;
 	padding-top: 5%;

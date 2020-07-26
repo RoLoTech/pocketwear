@@ -39,7 +39,8 @@ function buscar() {
 
 
     document.getElementById("confirm-cloth-search").addEventListener("click", function (e) {
-        document.querySelector("#grid-search-page").innerHTML="";
+        document.querySelector("#confirm-cloth-search").disable = true;
+        document.querySelector("#grid-search-page").innerHTML = "";
         var type = document.getElementById("search-type-selector").value;
         var store = document.getElementById("search-store-selector").value;
         var color = document.getElementById("search-color-selector").value;
@@ -64,7 +65,7 @@ function buscar() {
             data: data
         }).done(function (data) { // data es un vector con items
 
-            data=JSON.parse(data)
+            data = JSON.parse(data)
             document.querySelector("#cloth-form-container-2").style.display = "none";
             for (let j = 0; j < data.length; j++) {
                 var post = data[j];
@@ -104,6 +105,9 @@ function buscar() {
                 case 500:
                     alert('Internal server error [500]')
                     break;
+                case 404:
+                    alert('No se encontro ninguna prenda con estas especificaciones')
+                    break;
                 default:
                     switch (textStatus) {
                         case 'timeout':
@@ -116,6 +120,8 @@ function buscar() {
                     break;
 
             }
+        }).always(function (data) {
+            document.querySelector("#confirm-cloth-search").disable = false;
         });
 
     });
@@ -142,11 +148,11 @@ function prepareCamera() {
         updateItem(type, store, color, season, fotoGenerada);
     });
 
-    document.getElementById("cancel-cloth-data").addEventListener("click", function(e){
+    document.getElementById("cancel-cloth-data").addEventListener("click", function (e) {
         botonContinuar.disabled = false;
         document.querySelector('#cloth-form-container').style.display = "none";
-        document.getElementById('imagen').src= urlImage
-        botonContinuar.style.display= "none";
+        document.getElementById('imagen').src = urlImage
+        botonContinuar.style.display = "none";
     });
 
     document.getElementById("camera-trigger").addEventListener("click", function (e) {
@@ -297,8 +303,8 @@ function cargarInputs() {
 }
 
 function borrarInputs() {
-    document.querySelector("#search-store-selector").innerHTML="";
-    document.querySelector("#search-color-selector").innerHTML="";
+    document.querySelector("#search-store-selector").innerHTML = "";
+    document.querySelector("#search-color-selector").innerHTML = "";
     var opcionVacia = document.createElement("option");
     opcionVacia.setAttribute("value", "");
     var opcionVacia2 = document.createElement("option");
@@ -336,6 +342,7 @@ function installEvents() {
             id: '#home-button',
             ev: 'click',	//If not, it assumes click
             fn: () => {
+                document.querySelector("#home-button").disable = true;
                 document.getElementById("grid-home-page").innerHTML = "";
                 mui.viewport.showPage("home-page", "DEF");
                 logVistosRecientes();//LOG Ultimos Agregados
@@ -346,8 +353,6 @@ function installEvents() {
             id: '#search-button',
             ev: 'click',
             fn: async () => {
-
-                disableButtons();
                 borrarInputs();
                 await cargarInputs();
                 mui.viewport.showPage("search-page", "DEF");
@@ -660,6 +665,8 @@ function logVistosRecientes() {
                     }
                     break;
             }
+            document.querySelector("#home-button").disable=false;
+
         });
 }
 
@@ -1101,9 +1108,19 @@ function spinner() {
         }
     });
 }
-function disableButtons() {
-    
-}
-function enableButtons() {
 
+function disableButtons() {
+    document.getElementById("home-button").disable = true;
+    document.getElementById("search-button").disable = true;
+    document.getElementById("camera-button").disable = true;
+    document.getElementById("hanger-button").disable = true;
+
+
+}
+
+function enableButtons() {
+    document.getElementById("home-button").disable = false;
+    document.getElementById("search-button").disable = false;
+    document.getElementById("camera-button").disable = false;
+    document.getElementById("hanger-button").disable = false;
 }

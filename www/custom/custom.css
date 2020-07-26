@@ -795,7 +795,6 @@ a {
 
 }
 .user-area-button {
-
 	border-radius: 13px 13px 13px 13px;
 	-moz-border-radius: 13px 13px 13px 13px;
 	-webkit-border-radius: 13px 13px 13px 13px;
@@ -804,9 +803,7 @@ a {
 	6px 6px 10px rgba(0, 0, 0, 0.2);
 	outline: none;
 }
-.confirm-button{
-	margin-top: 10px;
-}
+
 #login-social-button {
 	margin-top: 10%;
 	height: 10%;

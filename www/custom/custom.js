@@ -488,6 +488,7 @@ function registerUser() {
             // todo guardar el usuario en global con data
             foundUser = data
             mui.viewport.showPage("home-page", "DEF");
+            mui.history.reset()
             logVistosRecientes()
             document.querySelector('#footer').style.display = "block";
         }).fail(function (jqXHR, textStatus, errorThrown) {

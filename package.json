@@ -23,7 +23,7 @@
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-x-toast": "^2.7.2",
     "express": "^4.17.1",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "pgb-api": "^1.1.2"
   }
 }
